@@ -1,15 +1,23 @@
-import React from 'react';
-import { useRecoilState } from 'recoil';
-import { userState } from '../RecoilState';
+import React from "react";
+import { useRecoilState } from "recoil";
+import { userState } from "../../RecoilState";
+import axios from "axios";
 
 const LoginForm = () => {
   const [user, setUser] = useRecoilState(userState);
-  const [username, setUsername] = React.useState('');
-  const [password, setPassword] = React.useState('');
+  const [username, setUsername] = React.useState("");
+  const [password, setPassword] = React.useState("");
 
-  const handleLogin = () => {
+  const handleLogin = async () => {
     /* */
-    setUser({ username });
+    // console.log(username, password);
+    await axios
+      .post("http://localhost:8080/user/login", {
+        account: username,
+        password: password,
+      })
+      .then((response) => console.log(response))
+      .catch((error) => console.log(error));
   };
 
   return (
