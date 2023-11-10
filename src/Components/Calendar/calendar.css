@@ -1,0 +1,96 @@
+.calendar {
+  width: 300px;
+  font-family: Arial, sans-serif;
+}
+
+.header_row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #0074b4;
+  color: white;
+  padding: 10px;
+}
+
+.text_month {
+  font-size: 20px;
+}
+
+.prevMonth,
+.nextMonth {
+  background-color: transparent;
+  border: none;
+  font-size: 20px;
+  color: white;
+  cursor: pointer;
+}
+
+/* Calendar days */
+.days_row {
+  display: flex;
+  background-color: #f2f2f2;
+  padding: 10px;
+}
+
+.col {
+  flex: 1;
+  text-align: center;
+  padding: 5px;
+}
+
+/* Calendar cells */
+.body {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #ccc;
+}
+
+.row {
+  display: flex;
+}
+
+.col-cell-valid {
+  flex: 1;
+  text-align: center;
+  padding: 10px;
+  cursor: pointer;
+  border: 1px solid #ccc;
+  background-color: white;
+}
+
+.col-cell-valid:hover {
+  background-color: #f2f2f2;
+}
+
+.col-cell-selected {
+  flex: 1;
+  text-align: center;
+  padding: 10px;
+  cursor: pointer;
+  border: 1px solid #0074b4;
+  background-color: #0074b4;
+  color: white;
+}
+
+.col-cell-not-valid {
+  flex: 1;
+  text-align: center;
+  padding: 10px;
+  cursor: not-allowed;
+  border: 1px solid #ccc;
+  background-color: #f2f2f2;
+}
+
+/* Disabled days */
+.col-cell-disabled {
+  flex: 1;
+  text-align: center;
+  padding: 10px;
+  cursor: not-allowed;
+  border: 1px solid #ccc;
+  background-color: #eee;
+}
+
+.text.not-valid {
+  color: #ccc;
+}
