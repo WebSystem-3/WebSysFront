@@ -1,6 +1,7 @@
 import React from 'react';
 import { useRecoilState } from 'recoil';
 import { userState } from '../RecoilState';
+import './LoginForm.css';
 
 const LoginForm = () => {
   const [user, setUser] = useRecoilState(userState);
