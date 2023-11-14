@@ -1,16 +1,17 @@
 import React from 'react';
 import {useState} from 'react';
-
 function SignUp(props) {
     const [id, setId] = useState("");
     const [password, setPassword] = useState("");
     const [password2, setPassword2] = useState("");
+    const [name, setName] = useState("");
 
     const handleSignup = () => {
         const userData={
           userId: id,
           userPassword: password,
           userPassword2: password2,
+          userName: name,
         };
         fetch("http://localhost:8080/user/signup",{
           method: "post",
@@ -28,18 +29,34 @@ function SignUp(props) {
             else{
                 alert(json.isSuccess);
             }
-          })
+            })
+    }
+
+    const handleValidation = () => {
+        const userData={
+        userId: id,
+        };
+        fetch("http://localhost:8080/user/validation",{
+        method: "post",
+        headers:{
+            "content-type": "application/json",
+        }, body: JSON.stringify(userData),
+        })
+        /**/
         };
 
     return(
         <div>
-        <p>
-            <input 
+        <label>
+        <input 
             type="text"
             placeholder="ID"
             onChange={(event) => setId(event.target.value)}
             />
-        </p>
+        </label>
+        <button type='button' onClick={handleValidation}>
+            중복확인
+          </button>
         <p>
             <input
             type="password"
@@ -52,6 +69,13 @@ function SignUp(props) {
             type="password"
             placeholder="비밀번호 확인"
             onChange={(event) => setPassword2(event.target.value)}
+            />
+        </p>
+        <p>
+            <input 
+            type="text"
+            placeholder="이름"
+            onChange={(event) => setName(event.target.value)}
             />
         </p>
         <br />
