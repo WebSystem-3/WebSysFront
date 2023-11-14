@@ -1,6 +1,7 @@
 import { RecoilRoot } from 'recoil';
 import Calendar from './Components/Calendar/Calender';
 import LoginForm from './Components/Login/LoginForm';
+import SignUp from './Components/SignUp/SignUp';
 import Timer from './Components/Timer/Timer';
 
 function App() {
@@ -9,6 +10,7 @@ function App() {
       <Timer />
       <Calendar />
       <LoginForm />
+      <SignUp />
     </RecoilRoot>
   );
 }
