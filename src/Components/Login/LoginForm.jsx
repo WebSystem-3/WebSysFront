@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
-import { useRecoilState } from 'recoil';
+//import { useRecoilState } from 'recoil';
 import './LoginForm.css';
 //import { userState } from '../../RecoilState';
 //import axios from 'axios';
@@ -22,8 +22,16 @@ const LoginForm = () => {
         "content-type": "application/json",
       }, body: JSON.stringify(userData),
     })
-      .then((response) => console.log(response))
-      .catch((error) => console.log(error));
+    .then((response) => console.log(response))
+    .then((data) => {
+      if(data.statusCode === 200){
+        setLoggedIn(true);
+        alert(data.message);
+      } else {
+        alert(data.errorMessage);
+      }
+    })
+    .catch((error) => console.log(error));
   };
 
   return (
@@ -53,9 +61,7 @@ const LoginForm = () => {
             />
           </p>
           <br />
-          <button type='button' onClick={handleLogin}>
-            로그인
-          </button>
+          <button type='button' onClick={handleLogin}>로그인</button>
         </form>
       )}
     </div>

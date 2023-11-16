@@ -6,19 +6,29 @@ function UserEdit(props) {
     const [name, setName] = useState("");
 
     const handleEdit = () => {
-        const userData={
-          userPassword: password,
-          userPassword2: password2,
-          userName: name,
-        };
-        fetch("http://localhost:8080/user/edit/:{user_id}",{
-          method: "patch",
-          headers:{
-            "content-type": "application/json",
-          }, body: JSON.stringify(userData),
-        })
-          .then((response) => console.log(response))
-          .catch((error) => console.log(error));
+      if (password !== password2) {
+        alert("비밀번호가 일치하지 않습니다.");
+        return;
+      }
+      const userData={
+        userPassword: password,
+        userName: name,
+      };
+      fetch("http://localhost:8080/user/edit/${user_id}",{
+        method: "patch",
+        headers:{
+          "content-type": "application/json",
+        }, body: JSON.stringify(userData),
+      })
+      .then((response) => console.log(response))
+      .then((data)=>{
+        if(data.statusCode === 200){ 
+            alert(data.message);
+        } else{
+            alert(data.errorMessage);
+        }
+      })
+      .catch((error) => console.log(error));
     }
 
     return(
@@ -45,9 +55,7 @@ function UserEdit(props) {
             />
         </p>
         <br />
-        <button type='button' onClick={handleEdit}>
-            수정하기
-          </button>
+        <button type='button' onClick={handleEdit}>수정하기</button>
         </div>
     );
 };

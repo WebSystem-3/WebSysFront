@@ -7,46 +7,59 @@ function SignUp(props) {
     const [name, setName] = useState("");
 
     const handleSignup = () => {
-        const userData={
-          userId: id,
-          userPassword: password,
-          userPassword2: password2,
-          userName: name,
-        };
-        fetch("http://localhost:8080/user/signup",{
-          method: "post",
-          headers:{
-            "content-type": "application/json",
-          }, body: JSON.stringify(userData),
+      if (password !== password2) {
+        alert("비밀번호가 일치하지 않습니다.");
+        return;
+      }
+      const userData={
+        userId: id,
+        userPassword: password,
+        userName: name,
+      };
+      fetch("http://localhost:8080/user/signup",{
+        method: "post",
+        headers:{
+          "content-type": "application/json",
+        }, body: JSON.stringify(userData),
+      })
+        //.then((response) => console.log(response))
+        //.catch((error) => console.log(error));
+        .then((response) => console.log(response))
+        .then((data)=>{
+          if(data.statusCode === 200){ 
+              alert(data.message);
+          } else{
+              alert(data.errorMessage);
+          }
         })
-          //.then((response) => console.log(response))
-          //.catch((error) => console.log(error));
-          .then((response) => response.json())
-          .then((json)=>{
-            if(json.isSuccess==="True"){
-                alert("회원가입이 완료되었습니다.");
-            }
-            else{
-                alert(json.isSuccess);
-            }
-            })
+        .catch((error) => console.log(error));
     }
 
     const handleValidation = () => {
-        const userData={
-        userId: id,
-        };
-        fetch("http://localhost:8080/user/validation",{
+      const userData={
+      userId: id,
+      };
+      fetch("http://localhost:8080/user/validation",{
         method: "post",
         headers:{
-            "content-type": "application/json",
+          "content-type": "application/json",
         }, body: JSON.stringify(userData),
-        })
-        /**/
-        };
+      })
+      .then((response) => console.log(response))
+      .then((data)=>{
+        if(data.statusCode === 200){ 
+            alert(data.message);
+        } else{
+            alert(data.errorMessage);
+        }
+      })
+      .catch((error) => console.log(error));
+    };
 
     return(
         <div>
+        <h>회원가입</h>
+        <br />
         <label>
         <input 
             type="text"
@@ -54,9 +67,7 @@ function SignUp(props) {
             onChange={(event) => setId(event.target.value)}
             />
         </label>
-        <button type='button' onClick={handleValidation}>
-            중복확인
-          </button>
+        <button type='button' onClick={handleValidation}>중복확인</button>
         <p>
             <input
             type="password"
@@ -79,9 +90,7 @@ function SignUp(props) {
             />
         </p>
         <br />
-        <button type='button' onClick={handleSignup}>
-            회원가입
-          </button>
+        <button type='button' onClick={handleSignup}>회원가입</button>
         </div>
     );
 };

@@ -1,17 +1,38 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
+//버튼 누르면 화면 옮기기 추가해야함
 
 function UserInfo() {
   const [userData, setUserData] = useState(null);
 
   useEffect(() => {
-    fetch('http://localhost:8080/user/info/:{user_id}')
+    fetch('http://localhost:8080/user/info/${user_id}')
       .then((response) => response.json())
       .then((data) => {
-        setUserData(data); 
-      })
+          if(data.statusCode === 200){ 
+            setUserData(data); 
+          } else{
+            alert(data.errorMessage);
+          }
+        })
       .catch((error) => console.error(error));
-  }, []); // The empty dependency array ensures that this effect runs once when the component mounts
+  }, []); 
+
+  const handleDelete = () => {
+    fetch("http://localhost:8080/user/delete/${user_id}",{
+      method: "DELETE",
+    })
+      .then((response) => console.log(response))
+      .then((data)=>{
+        if(data.statusCode===200){
+            alert(data.message);
+        }
+        else{
+            alert(data.errorMessage);
+        }
+        })
+      .catch((error) => console.error(error))
+}
 
   return (
     <div>
@@ -21,8 +42,10 @@ function UserInfo() {
           <p>{userData.userId}</p>
         </div>
       ) : (
-        <p>Loading user information...</p>
+        <p>로딩중</p>
       )}
+      <br />
+        <button type='button' onClick={handleDelete}>회원탈퇴</button>
     </div>
   );
 }
