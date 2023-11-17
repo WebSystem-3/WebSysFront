@@ -1,12 +1,16 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
+import { useRecoilState } from 'recoil';
+import { useRecoilValue } from 'recoil';
+import { userState } from '../../RecoilState';
 //버튼 누르면 화면 옮기기 추가해야함
 
 function UserInfo() {
   const [userData, setUserData] = useState(null);
+  const user_id = useRecoilValue(userState);
 
   useEffect(() => {
-    fetch('http://localhost:8080/user/info/${user_id}')
+    fetch(`http://localhost:8080/user/info/${user_id}`)
       .then((response) => response.json())
       .then((data) => {
           if(data.statusCode === 200){ 
@@ -19,7 +23,7 @@ function UserInfo() {
   }, []); 
 
   const handleDelete = () => {
-    fetch("http://localhost:8080/user/delete/${user_id}",{
+    fetch(`http://localhost:8080/user/delete/${user_id}`,{
       method: "DELETE",
     })
       .then((response) => console.log(response))

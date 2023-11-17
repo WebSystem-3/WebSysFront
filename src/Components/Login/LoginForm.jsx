@@ -1,8 +1,8 @@
 import React from 'react';
 import { useState } from 'react';
-//import { useRecoilState } from 'recoil';
 import './LoginForm.css';
-//import { userState } from '../../RecoilState';
+import { useRecoilState } from 'recoil';
+import { userState } from '../../RecoilState';
 //import axios from 'axios';
 
 
@@ -10,6 +10,7 @@ const LoginForm = () => {
   const [id, setId] = useState("");
   const [password, setPassword] = useState("");
   const [loggedIn, setLoggedIn] = useState(false);
+  const [user_id, setUser_id] = useRecoilState(userState);
 
   const handleLogin = () => {
     const userData={
@@ -27,6 +28,8 @@ const LoginForm = () => {
       if(data.statusCode === 200){
         setLoggedIn(true);
         alert(data.message);
+        setUser_id(data.account);
+        console.log(user_id);
       } else {
         alert(data.errorMessage);
       }

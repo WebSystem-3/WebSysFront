@@ -1,9 +1,13 @@
 import React from 'react';
 import {useState} from 'react';
+import { useRecoilState } from 'recoil';
+import { useRecoilValue } from 'recoil';
+import { userState } from '../../RecoilState';
 function UserEdit(props) {
     const [password, setPassword] = useState("");
     const [password2, setPassword2] = useState("");
     const [name, setName] = useState("");
+    const user_id = useRecoilValue(userState);
 
     const handleEdit = () => {
       if (password !== password2) {
@@ -13,8 +17,8 @@ function UserEdit(props) {
       const userData={
         password: password,
         name: name,
-      };
-      fetch("http://localhost:8080/user/edit/${user_id}",{
+      }; 
+      fetch(`http://localhost:8080/user/edit/${user_id}`,{
         method: "patch",
         headers:{
           "content-type": "application/json",
