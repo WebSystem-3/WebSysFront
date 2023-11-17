@@ -19,6 +19,8 @@ function App() {
 
       <TodoListModule />
 
+      <TodoListModule />
+
       <SignUp />
       <UserEdit />
       <UserInfo />
