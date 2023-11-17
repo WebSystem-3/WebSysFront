@@ -6,6 +6,8 @@ const Timer = () => {
   const [seconds, setSeconds] = useState(0);
   const [isActive, setIsActive] = useState(false);
   const [editing, setEditing] = useState(false);
+  const [editingMin, setEditingMin] = useState(true);
+  const [editingSec, setEditingSec] = useState(true);
 
   useEffect(() => {
     let timer;
@@ -86,20 +88,55 @@ const Timer = () => {
     setEditing(!editing);
   };
 
+  const toggleEditingMin = () => {
+    setEditingMin(!editingMin);
+  };
+  const toggleEditingSec = () => {
+    setEditingSec(!editingSec);
+  };
+
   return (
     <div className='timer'>
       <h3>Timer</h3>
       {editing ? (
         <div className='timer-controller'>
-          <label>Minutes:</label>
-          <button onClick={incrementMinute}>+</button>
-          <input type='text' value={minutes} onChange={handleMinuteChange} />
-          <button onClick={decrementMinute}>-</button>
+          {editingMin ? (
+            <div
+              className='timer-display-min'
+              onClick={toggleEditingMin}
+              onChange={handleMinuteChange}
+            >
+              {minutes < 10 ? '0' + minutes : minutes} :{' '}
+              <button onClick={incrementMinute}>+</button>
+              <button onClick={decrementMinute}>-</button>
+            </div>
+          ) : (
+            <input
+              type='text'
+              value={minutes}
+              onChange={handleMinuteChange}
+              onFocus={toggleEditingMin}
+            />
+          )}
 
-          <label>Seconds:</label>
-          <button onClick={incrementSecond}>+</button>
-          <input type='text' value={seconds} onChange={handleSecondChange} />
-          <button onClick={decrementSecond}>-</button>
+          {editingSec ? (
+            <div
+              className='timer-display-sec'
+              onClick={toggleEditingSec}
+              onChange={handleSecondChange}
+            >
+              {seconds < 10 ? '0' + seconds : seconds}
+              <button onClick={incrementSecond}>+</button>
+              <button onClick={decrementSecond}>-</button>
+            </div>
+          ) : (
+            <input
+              type='text'
+              value={seconds}
+              onChange={handleSecondChange}
+              onFocus={toggleEditingSec}
+            />
+          )}
 
           <button onClick={setTimer}>Set</button>
         </div>

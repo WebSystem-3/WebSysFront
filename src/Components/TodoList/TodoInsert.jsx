@@ -27,13 +27,7 @@ const TodoInsert = ({ onInsert }) => {
         value={value}
         onChange={onChange}
       />
-      <CgAdd
-        className='addbox'
-        onClick={onSubmit}
-        size='30'
-        stroke='black'
-        stroke-linejoin='round'
-      />
+      <CgAdd className='addbox' onClick={onSubmit} />
     </form>
   );
 };

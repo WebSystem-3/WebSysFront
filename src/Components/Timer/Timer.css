@@ -13,17 +13,24 @@
   margin: 0;
 }
 
-/* 수정: display와 form에 동일한 스타일 적용 */
-.timer-display,
-.timer-controller {
+.timer-display {
   font-size: 2em;
   margin: 20px 0;
+  cursor: pointer; /* 추가: 클릭 가능하도록 cursor 설정 */
+}
+.timer-display-min {
+  font-size: 2em;
+  margin: 20px 0;
+  cursor: pointer;
+}
+.timer-display-sec {
+  font-size: 2em;
+  margin: 20px 0;
+  cursor: pointer;
 }
 
-/* 수정: display의 호버 효과를 form에도 적용 */
-.timer-display:hover,
-.timer-controller .editing {
-  text-decoration: underline;
+.timer-display:hover {
+  text-decoration: underline; /* 추가: 호버 시에 밑줄 표시 */
 }
 
 .timer-controller {
