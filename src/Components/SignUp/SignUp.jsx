@@ -24,12 +24,11 @@ function SignUp(props) {
       })
         //.then((response) => console.log(response))
         //.catch((error) => console.log(error));
-        .then((response) => console.log(response))
-        .then((data)=>{
-          if(data.statusCode === 200){ 
-              alert(data.message);
+        .then((response) => {
+          if(response.status === 200){ 
+              alert(response.message);
           } else{
-              alert(data.errorMessage);
+              alert(response.errorMessage);
           }
         })
         .catch((error) => console.log(error));
@@ -45,12 +44,11 @@ function SignUp(props) {
           "content-type": "application/json",
         }, body: JSON.stringify(userData),
       })
-      .then((response) => console.log(response))
-      .then((data)=>{
-        if(data.statusCode === 200){ 
-            alert(data.message);
+      .then((response) => {
+        if(response.status === 200){ 
+            alert(response.message);
         } else{
-            alert(data.errorMessage);
+            alert(response.errorMessage);
         }
       })
       .catch((error) => console.log(error));

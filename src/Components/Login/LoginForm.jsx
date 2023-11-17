@@ -3,6 +3,7 @@ import { useState } from 'react';
 import './LoginForm.css';
 import { useRecoilState } from 'recoil';
 import { userState } from '../../RecoilState';
+import { GoPerson } from "react-icons/go";
 //import axios from 'axios';
 
 
@@ -23,15 +24,14 @@ const LoginForm = () => {
         "content-type": "application/json",
       }, body: JSON.stringify(userData),
     })
-    .then((response) => console.log(response))
-    .then((data) => {
-      if(data.statusCode === 200){
+    .then((response) => {
+      if(response.status === 200){
         setLoggedIn(true);
-        alert(data.message);
-        setUser_id(data.account);
+        alert(response.message);
+        setUser_id(response.account);
         console.log(user_id);
       } else {
-        alert(data.errorMessage);
+        alert(response.errorMessage);
       }
     })
     .catch((error) => console.log(error));
@@ -46,6 +46,7 @@ const LoginForm = () => {
       ) : (
         <form>
           <p>
+          <GoPerson />
             <input
               className="login"
               type="text"
