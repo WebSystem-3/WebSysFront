@@ -106,19 +106,37 @@ const Timer = () => {
               onClick={toggleEditingMin}
               onChange={handleMinuteChange}
             >
-              {minutes < 10 ? '0' + minutes : minutes} :{' '}
-              <button onClick={incrementMinute}>+</button>
-              <button onClick={decrementMinute}>-</button>
+              {minutes < 10 ? '0' + minutes : minutes}
+
+              <button
+                className='incrementMin'
+                onClick={(e) => {
+                  e.stopPropagation();
+                  incrementMinute();
+                }}
+              >
+                +
+              </button>
+              <button
+                className='decrementMin'
+                onClick={(e) => {
+                  e.stopPropagation();
+                  decrementMinute();
+                }}
+              >
+                -
+              </button>
             </div>
           ) : (
             <input
               type='text'
               value={minutes}
               onChange={handleMinuteChange}
-              onFocus={toggleEditingMin}
+              onClick={toggleEditingMin}
+              autoFocus
             />
           )}
-
+          <div className='between'>: </div>
           {editingSec ? (
             <div
               className='timer-display-sec'
@@ -126,19 +144,42 @@ const Timer = () => {
               onChange={handleSecondChange}
             >
               {seconds < 10 ? '0' + seconds : seconds}
-              <button onClick={incrementSecond}>+</button>
-              <button onClick={decrementSecond}>-</button>
+              <button
+                className='incrementSec'
+                onClick={(e) => {
+                  e.stopPropagation();
+                  incrementSecond();
+                }}
+              >
+                +
+              </button>
+              <button
+                className='decrementSec'
+                onClick={(e) => {
+                  e.stopPropagation();
+                  decrementSecond();
+                }}
+              >
+                -
+              </button>
             </div>
           ) : (
             <input
               type='text'
               value={seconds}
               onChange={handleSecondChange}
-              onFocus={toggleEditingSec}
+              onClick={toggleEditingSec}
+              autoFocus
             />
           )}
-
-          <button onClick={setTimer}>Set</button>
+          <button
+            onClick={() => {
+              startTimer();
+              setTimer();
+            }}
+          >
+            Start
+          </button>
         </div>
       ) : (
         <div className='timer-display' onClick={toggleEditing}>
@@ -146,12 +187,6 @@ const Timer = () => {
           {seconds < 10 ? '0' + seconds : seconds}
         </div>
       )}
-
-      <div className='timer-controller'>
-        <button onClick={startTimer}>Start</button>
-        <button onClick={stopTimer}>Stop</button>
-        <button onClick={resetTimer}>Reset</button>
-      </div>
     </div>
   );
 };

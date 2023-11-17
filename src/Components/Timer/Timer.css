@@ -16,17 +16,60 @@
 .timer-display {
   font-size: 2em;
   margin: 20px 0;
-  cursor: pointer; /* 추가: 클릭 가능하도록 cursor 설정 */
+  cursor: pointer;
+  /* 추가: 클릭 가능하도록 cursor 설정 */
 }
+
+/* .timer-display button {
+  font-size: 1px;
+  padding: 5px 10px;
+  margin: 0 5px; 
+  border: none;
+  border-radius: 5px;
+  background-color: #007bff;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s;
+} */
+
+.between {
+  font-size: 2em;
+  margin: 20px 0;
+  display: flex;
+  align-items: center;
+}
+
 .timer-display-min {
   font-size: 2em;
   margin: 20px 0;
   cursor: pointer;
+  display: flex; /* 추가: flex를 사용하여 컴포넌트를 가로로 정렬 */
+  flex-direction: column;
+  align-items: center; /* 추가: 세로로 가운데 정렬 */
 }
+.timer-display-min:hover {
+  border: black 2px solid;
+}
+.incrementMin,
+.incrementSec {
+  order: -1;
+}
+
+.decrementMin,
+.decrementSec {
+  order: 1;
+}
+
 .timer-display-sec {
   font-size: 2em;
   margin: 20px 0;
   cursor: pointer;
+  display: flex; /* 추가: flex를 사용하여 컴포넌트를 가로로 정렬 */
+  flex-direction: column;
+  align-items: center; /* 추가: 세로로 가운데 정렬 */
+}
+.timer-display-sec:hover {
+  border: black 2px solid;
 }
 
 .timer-display:hover {
@@ -60,4 +103,8 @@
   border: 1px solid #ccc;
   padding: 15px;
   border-radius: 5px;
+}
+
+.editingMin {
+  background-color: #0056b3;
 }
