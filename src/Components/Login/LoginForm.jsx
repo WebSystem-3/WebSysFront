@@ -1,11 +1,10 @@
-import React from 'react';
-import { useState } from 'react';
-import './LoginForm.css';
-import { useRecoilState } from 'recoil';
-import { userState } from '../../RecoilState';
+import React from "react";
+import { useState } from "react";
+import "./LoginForm.css";
+import { useRecoilState } from "recoil";
+import { userState } from "../../RecoilState";
 import { GoPerson } from "react-icons/go";
 //import axios from 'axios';
-
 
 const LoginForm = () => {
   const [id, setId] = useState("");
@@ -14,27 +13,29 @@ const LoginForm = () => {
   const [user_id, setUser_id] = useRecoilState(userState);
 
   const handleLogin = () => {
-    const userData={
+    const userData = {
       account: id,
       password: password,
     };
-    fetch("http://localhost:8080/user/login",{
+    fetch("http://localhost:8080/user/login", {
       method: "post",
-      headers:{
+      headers: {
         "content-type": "application/json",
-      }, body: JSON.stringify(userData),
+      },
+      body: JSON.stringify(userData),
     })
-    .then((response) => {
-      if(response.status === 200){
-        setLoggedIn(true);
-        alert(response.message);
-        setUser_id(response.account);
-        console.log(user_id);
-      } else {
-        alert(response.errorMessage);
-      }
-    })
-    .catch((error) => console.log(error));
+      .then((response) => {
+        response.json().then((data) => {
+          if (response.status === 200){
+            setLoggedIn(true);
+            setUser_id(data.user_id);
+            alert(data.message);
+          } else {
+            alert(data.errorMessage);
+          }
+        }); 
+      })
+      .catch((error) => console.log(error));
   };
 
   return (
@@ -46,7 +47,7 @@ const LoginForm = () => {
       ) : (
         <form>
           <p>
-          <GoPerson />
+            <GoPerson />
             <input
               className="login"
               type="text"
@@ -65,7 +66,9 @@ const LoginForm = () => {
             />
           </p>
           <br />
-          <button type='button' onClick={handleLogin}>로그인</button>
+          <button type="button" onClick={handleLogin}>
+            로그인
+          </button>
         </form>
       )}
     </div>

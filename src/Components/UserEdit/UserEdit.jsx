@@ -24,12 +24,15 @@ function UserEdit(props) {
           "content-type": "application/json",
         }, body: JSON.stringify(userData),
       })
+
       .then((response) => {
-        if(response.status === 200){ 
-            alert(response.message);
-        } else{
-            alert(response.errorMessage);
-        }
+        response.json().then((data) => {
+          if (response.status === 200){
+            alert(data.message);
+          } else {
+            alert(data.errorMessage);
+          }
+        }); 
       })
       .catch((error) => console.log(error));
     }

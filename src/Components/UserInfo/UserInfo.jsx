@@ -11,29 +11,32 @@ function UserInfo() {
 
   useEffect(() => {
     fetch(`http://localhost:8080/user/info/${user_id}`)
-      .then((response) => {
-        if(response.status === 200){ 
-          setUserData(response); 
-        } else{
-          alert(response.errorMessage);
+    .then((response) => {
+      response.json().then((data) => {
+        if (response.status === 200){
+          setUserData(data);
+        } else {
+          alert(data.errorMessage);
         }
-      })
-      .catch((error) => console.error(error));
+      }); 
+    })
+    .catch((error) => console.error(error));
   }, []); 
 
   const handleDelete = () => {
     fetch(`http://localhost:8080/user/delete/${user_id}`,{
       method: "DELETE",
     })
-      .then((response) => {
-        if(response.status===200){
-            alert(response.message);
+    .then((response) => {
+      response.json().then((data) => {
+        if (response.status === 200){
+          alert(data.message);
+        } else {
+          alert(data.errorMessage);
         }
-        else{
-            alert(response.errorMessage);
-        }
-        })
-      .catch((error) => console.error(error))
+      }); 
+    })
+    .catch((error) => console.error(error))
 }
 
   return (

@@ -22,16 +22,16 @@ function SignUp(props) {
           "content-type": "application/json",
         }, body: JSON.stringify(userData),
       })
-        //.then((response) => console.log(response))
-        //.catch((error) => console.log(error));
-        .then((response) => {
-          if(response.status === 200){ 
-              alert(response.message);
-          } else{
-              alert(response.errorMessage);
+      .then((response) => {
+        response.json().then((data) => {
+          if (response.status === 200){
+            alert(data.message);
+          } else {
+            alert(data.errorMessage);
           }
-        })
-        .catch((error) => console.log(error));
+        }); 
+      })
+      .catch((error) => console.log(error));
     }
 
     const handleValidation = () => {
@@ -45,11 +45,13 @@ function SignUp(props) {
         }, body: JSON.stringify(userData),
       })
       .then((response) => {
-        if(response.status === 200){ 
-            alert(response.message);
-        } else{
-            alert(response.errorMessage);
-        }
+        response.json().then((data) => {
+          if (response.status === 200){
+            alert(data.message);
+          } else {
+            alert(data.errorMessage);
+          }
+        }); 
       })
       .catch((error) => console.log(error));
     };
