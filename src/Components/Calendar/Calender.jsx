@@ -26,7 +26,7 @@ const RenderHeader = ({ currentMonth, prevMonth, nextMonth }) => {
 };
 const RenderDays = () => {
   const days = [];
-  const weekdays = ['Sun', 'Mon', 'Thu', 'Wed', 'Thur', 'Fri', 'Sat'];
+  const weekdays = ['Sun', 'Mon', 'Thu', 'Wed', 'Thr', 'Fri', 'Sat'];
   for (let i = 0; i < 7; i++) {
     days.push(
       <div className='col' key={i}>
@@ -68,7 +68,7 @@ const RenderCells = ({ currentMonth, selectedDate, onDateClick }) => {
           onClick={() => {
             onDateClick(parse(cloneDay, 'yyyy-MM-dd', new Date()));
             cloneDays.push(cloneDay);
-            console.log(cloneDay);
+            //console.log(cloneDay);
           }}
         >
           <span
@@ -97,7 +97,6 @@ const RenderCells = ({ currentMonth, selectedDate, onDateClick }) => {
 const Calendar = () => {
   const [currentMonth, setCurrentMonth] = useState(new Date());
   const [selectedDate, setSelectedDate] = useState(new Date());
-
 
   const prevMonth = () => {
     setCurrentMonth(subMonths(currentMonth, 1));

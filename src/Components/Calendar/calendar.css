@@ -1,14 +1,17 @@
 .calendar {
-  width: 300px;
+  width: fit-content;
   font-family: Arial, sans-serif;
+  display: grid;
+  border-radius: 10px;
+  overflow: hidden;
 }
 
 .header_row {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #0074b4;
-  color: white;
+  background-color: #ffcaca;
+  color: black;
   padding: 10px;
 }
 
@@ -21,24 +24,27 @@
   background-color: transparent;
   border: none;
   font-size: 20px;
-  color: white;
+  color: black;
   cursor: pointer;
 }
-
-/* Calendar days */
+.col-end {
+  display: flex;
+}
+/* 요일 표시 */
 .days_row {
   display: flex;
   background-color: #f2f2f2;
-  padding: 10px;
+  padding: 10px 0;
 }
 
 .col {
   flex: 1;
   text-align: center;
-  padding: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+  width: 30px;
 }
 
-/* Calendar cells */
 .body {
   display: flex;
   flex-direction: column;
@@ -58,10 +64,6 @@
   background-color: white;
 }
 
-.col-cell-valid:hover {
-  background-color: #f2f2f2;
-}
-
 .col-cell-selected {
   flex: 1;
   text-align: center;
@@ -73,7 +75,7 @@
 }
 
 .col-cell-not-valid {
-  flex: 1;
+  display: flex;
   text-align: center;
   padding: 10px;
   cursor: not-allowed;
@@ -81,7 +83,6 @@
   background-color: #f2f2f2;
 }
 
-/* Disabled days */
 .col-cell-disabled {
   flex: 1;
   text-align: center;
@@ -92,5 +93,6 @@
 }
 
 .text.not-valid {
+  flex: 1;
   color: #ccc;
 }
