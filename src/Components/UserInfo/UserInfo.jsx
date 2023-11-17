@@ -13,7 +13,7 @@ function UserInfo() {
     fetch(`http://localhost:8080/user/info/${user_id}`)
       .then((response) => {
         if(response.status === 200){ 
-          setUserData(data); 
+          setUserData(response); 
         } else{
           alert(response.errorMessage);
         }
