@@ -11,8 +11,8 @@ function UserEdit(props) {
         return;
       }
       const userData={
-        userPassword: password,
-        userName: name,
+        password: password,
+        name: name,
       };
       fetch("http://localhost:8080/user/edit/${user_id}",{
         method: "patch",

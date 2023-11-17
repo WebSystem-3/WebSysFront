@@ -12,9 +12,9 @@ function SignUp(props) {
         return;
       }
       const userData={
-        userId: id,
-        userPassword: password,
-        userName: name,
+        account: id,
+        password: password,
+        name: name,
       };
       fetch("http://localhost:8080/user/signup",{
         method: "post",
@@ -37,7 +37,7 @@ function SignUp(props) {
 
     const handleValidation = () => {
       const userData={
-      userId: id,
+      account: id,
       };
       fetch("http://localhost:8080/user/validation",{
         method: "post",

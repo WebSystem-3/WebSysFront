@@ -13,8 +13,8 @@ const LoginForm = () => {
 
   const handleLogin = () => {
     const userData={
-      userId: id,
-      userPassword: password,
+      account: id,
+      password: password,
     };
     fetch("http://localhost:8080/user/login",{
       method: "post",

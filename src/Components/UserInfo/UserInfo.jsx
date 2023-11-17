@@ -38,8 +38,8 @@ function UserInfo() {
     <div>
       {userData ? (
         <div>
-          <p>{userData.userName} 님,</p>
-          <p>{userData.userId}</p>
+          <p>{userData.name} 님,</p>
+          <p>{userData.account}</p>
         </div>
       ) : (
         <p>로딩중</p>
