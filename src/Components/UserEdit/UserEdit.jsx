@@ -19,7 +19,7 @@ function UserEdit(props) {
         name: name,
       }; 
       fetch(`http://localhost:8080/user/edit/${user_id}`,{
-        method: "patch",
+        method: "PATCH",
         headers:{
           "content-type": "application/json",
         }, body: JSON.stringify(userData),
