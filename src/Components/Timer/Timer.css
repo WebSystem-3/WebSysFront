@@ -13,9 +13,22 @@
   margin: 0;
 }
 
-.timer-display {
+/* 수정: display와 form에 동일한 스타일 적용 */
+.timer-display,
+.timer-controller {
   font-size: 2em;
   margin: 20px 0;
+}
+
+/* 수정: display의 호버 효과를 form에도 적용 */
+.timer-display:hover,
+.timer-controller .editing {
+  text-decoration: underline;
+}
+
+.timer-controller {
+  display: flex;
+  justify-content: center;
 }
 
 .timer-controller button {
@@ -32,4 +45,12 @@
 
 .timer-controller button:hover {
   background-color: #0056b3;
+}
+
+/* 추가: 편집 상태일 때 form의 스타일 */
+.timer-controller .editing {
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  padding: 15px;
+  border-radius: 5px;
 }

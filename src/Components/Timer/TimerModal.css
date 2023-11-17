@@ -1,0 +1,11 @@
+.openbtn {
+  position: relative;
+  border: 0;
+  border-radius: 20px;
+  padding: 15px 25px;
+  display: inline-block;
+  text-align: center;
+  font-weight: bold;
+  color: black;
+  background-color: lightgray;
+}

@@ -5,6 +5,7 @@ const Timer = () => {
   const [minutes, setMinutes] = useState(0);
   const [seconds, setSeconds] = useState(0);
   const [isActive, setIsActive] = useState(false);
+  const [editing, setEditing] = useState(false);
 
   useEffect(() => {
     let timer;
@@ -31,12 +32,14 @@ const Timer = () => {
   const setTimer = () => {
     if (isActive) stopTimer();
 
-    const num1 = parseInt(prompt('분을 입력하시오'));
-    const num2 = parseInt(prompt('초를 입력하시오'));
+    const num1 = parseInt(minutes, 10);
+    const num2 = parseInt(seconds, 10);
 
     setMinutes(num1);
     setSeconds(num2);
     const timeAmount = num1 * 60 + num2;
+    console.log(timeAmount);
+    toggleEditing();
   };
 
   const startTimer = () => {
@@ -53,15 +56,61 @@ const Timer = () => {
     setSeconds(0);
   };
 
+  const handleMinuteChange = (e) => {
+    const value = parseInt(e.target.value, 10);
+    setMinutes(value >= 0 ? value : 0);
+  };
+
+  const handleSecondChange = (e) => {
+    const value = parseInt(e.target.value, 10);
+    setSeconds(value >= 0 && value < 60 ? value : 0);
+  };
+
+  const incrementMinute = () => {
+    setMinutes(minutes + 1);
+  };
+
+  const decrementMinute = () => {
+    setMinutes(minutes > 0 ? minutes - 1 : 0);
+  };
+
+  const incrementSecond = () => {
+    setSeconds(seconds >= 0 && seconds < 60 ? seconds + 1 : 0);
+  };
+
+  const decrementSecond = () => {
+    setSeconds(seconds > 0 ? seconds - 1 : 0);
+  };
+
+  const toggleEditing = () => {
+    setEditing(!editing);
+  };
+
   return (
     <div className='timer'>
       <h3>Timer</h3>
-      <div className='timer-display'>
-        {minutes < 10 ? '0' + minutes : minutes} :{' '}
-        {seconds < 10 ? '0' + seconds : seconds}
-      </div>
+      {editing ? (
+        <div className='timer-controller'>
+          <label>Minutes:</label>
+          <button onClick={incrementMinute}>+</button>
+          <input type='text' value={minutes} onChange={handleMinuteChange} />
+          <button onClick={decrementMinute}>-</button>
+
+          <label>Seconds:</label>
+          <button onClick={incrementSecond}>+</button>
+          <input type='text' value={seconds} onChange={handleSecondChange} />
+          <button onClick={decrementSecond}>-</button>
+
+          <button onClick={setTimer}>Set</button>
+        </div>
+      ) : (
+        <div className='timer-display' onClick={toggleEditing}>
+          {minutes < 10 ? '0' + minutes : minutes} :{' '}
+          {seconds < 10 ? '0' + seconds : seconds}
+        </div>
+      )}
+
       <div className='timer-controller'>
-        <button onClick={setTimer}>Set</button>
         <button onClick={startTimer}>Start</button>
         <button onClick={stopTimer}>Stop</button>
         <button onClick={resetTimer}>Reset</button>
