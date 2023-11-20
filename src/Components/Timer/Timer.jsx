@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { IoIosArrowDown, IoIosArrowUp, IoIosArrowup } from 'react-icons/io';
 import './Timer.css';
 
 const Timer = () => {
@@ -107,28 +108,24 @@ const Timer = () => {
               onChange={handleMinuteChange}
             >
               {minutes < 10 ? '0' + minutes : minutes}
-
-              <button
+              <IoIosArrowUp
                 className='incrementMin'
                 onClick={(e) => {
                   e.stopPropagation();
                   incrementMinute();
                 }}
-              >
-                +
-              </button>
-              <button
+              />
+              <IoIosArrowDown
                 className='decrementMin'
                 onClick={(e) => {
                   e.stopPropagation();
                   decrementMinute();
                 }}
-              >
-                -
-              </button>
+              />
             </div>
           ) : (
             <input
+              className='editingMin'
               type='text'
               value={minutes}
               onChange={handleMinuteChange}
@@ -144,27 +141,24 @@ const Timer = () => {
               onChange={handleSecondChange}
             >
               {seconds < 10 ? '0' + seconds : seconds}
-              <button
+              <IoIosArrowUp
                 className='incrementSec'
                 onClick={(e) => {
                   e.stopPropagation();
                   incrementSecond();
                 }}
-              >
-                +
-              </button>
-              <button
+              />
+              <IoIosArrowDown
                 className='decrementSec'
                 onClick={(e) => {
                   e.stopPropagation();
                   decrementSecond();
                 }}
-              >
-                -
-              </button>
+              />
             </div>
           ) : (
             <input
+              className='editingSec'
               type='text'
               value={seconds}
               onChange={handleSecondChange}

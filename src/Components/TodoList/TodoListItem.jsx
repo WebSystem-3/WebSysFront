@@ -13,10 +13,10 @@ const TodoListItem = ({ todo, onRemove, onToggle }) => {
         {checked ? <MdCheckBox /> : <MdCheckBoxOutlineBlank />}
         <div className='text'>{text}</div>
       </div>
+      <TimerModal className='SetTimer' />
       <div className='remove' onClick={() => onRemove(id)}>
         <MdDelete className='deleteBtn' />
       </div>
-      <TimerModal />
     </div>
   );
 };

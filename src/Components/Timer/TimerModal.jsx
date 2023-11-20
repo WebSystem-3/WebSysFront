@@ -17,7 +17,7 @@ const TimerModal = () => {
   return (
     <div>
       <button onClick={openModal} className='openbtn'>
-        Open Timer
+        Set Timer
       </button>
 
       <Modal

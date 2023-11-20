@@ -14,23 +14,18 @@
 }
 
 .timer-display {
+  display: flex;
   font-size: 2em;
-  margin: 20px 0;
+  margin: 20px auto;
+  padding: 0 4px;
   cursor: pointer;
-  /* 추가: 클릭 가능하도록 cursor 설정 */
+  justify-content: center;
+  align-items: center;
+  width: fit-content;
 }
-
-/* .timer-display button {
-  font-size: 1px;
-  padding: 5px 10px;
-  margin: 0 5px; 
-  border: none;
-  border-radius: 5px;
-  background-color: #007bff;
-  color: #fff;
-  cursor: pointer;
-  transition: background-color 0.3s;
-} */
+.timer-display:hover {
+  text-decoration: underline; /* 추가: 호버 시에 밑줄 표시 */
+}
 
 .between {
   font-size: 2em;
@@ -43,42 +38,37 @@
   font-size: 2em;
   margin: 20px 0;
   cursor: pointer;
-  display: flex; /* 추가: flex를 사용하여 컴포넌트를 가로로 정렬 */
+  display: flex;
   flex-direction: column;
-  align-items: center; /* 추가: 세로로 가운데 정렬 */
 }
 .timer-display-min:hover {
   border: black 2px solid;
-}
-.incrementMin,
-.incrementSec {
-  order: -1;
-}
-
-.decrementMin,
-.decrementSec {
-  order: 1;
 }
 
 .timer-display-sec {
   font-size: 2em;
   margin: 20px 0;
   cursor: pointer;
-  display: flex; /* 추가: flex를 사용하여 컴포넌트를 가로로 정렬 */
+  display: flex;
   flex-direction: column;
-  align-items: center; /* 추가: 세로로 가운데 정렬 */
 }
 .timer-display-sec:hover {
   border: black 2px solid;
 }
 
-.timer-display:hover {
-  text-decoration: underline; /* 추가: 호버 시에 밑줄 표시 */
+.incrementMin,
+.incrementSec {
+  order: -1;
+}
+.decrementMin,
+.decrementSec {
+  order: 1;
 }
 
 .timer-controller {
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 
 .timer-controller button {
@@ -98,13 +88,13 @@
 }
 
 /* 추가: 편집 상태일 때 form의 스타일 */
-.timer-controller .editing {
+.timer-controller .editingMin,
+.editingSec {
   background-color: #f0f0f0;
   border: 1px solid #ccc;
   padding: 15px;
   border-radius: 5px;
-}
-
-.editingMin {
-  background-color: #0056b3;
+  height: 50px;
+  width: 50px;
+  font-size: 30px;
 }
