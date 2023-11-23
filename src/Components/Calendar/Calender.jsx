@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { format, addMonths, subMonths } from 'date-fns';
 import { startOfMonth, endOfMonth, startOfWeek, endOfWeek } from 'date-fns';
 import { isSameMonth, isSameDay, addDays, parse } from 'date-fns';
 import colorDiff from '../Utils/colorDiff';
+import { useRecoilState } from "recoil";
+import { dateState } from "../../RecoilState";
 import './calendar.css';
 
 const RenderHeader = ({ currentMonth, prevMonth, nextMonth }) => {
@@ -52,7 +54,7 @@ const RenderCells = ({ currentMonth, selectedDate, onDateClick }) => {
     for (let i = 0; i < 7; i++) {
       dateFormat = format(day, 'd');
       const cloneDay = day;
-      const cloneDays = [];
+      //const cloneDays = [];
       days.push(
         <div
           className={`col-cell-${
@@ -66,9 +68,11 @@ const RenderCells = ({ currentMonth, selectedDate, onDateClick }) => {
           }`}
           key={day}
           onClick={() => {
-            onDateClick(parse(cloneDay, 'yyyy-MM-dd', new Date()));
-            cloneDays.push(cloneDay);
-            //console.log(cloneDay);
+            onDateClick(cloneDay);
+            //onDateClick(parse(cloneDay, 'yyyy-MM-dd', new Date()));
+            //cloneDays.push(cloneDay);
+            //console.log(`${cloneDay.getFullYear()}-${cloneDay.getMonth()+1}-${cloneDay.getDate()}`);
+            
           }}
         >
           <span
@@ -97,6 +101,7 @@ const RenderCells = ({ currentMonth, selectedDate, onDateClick }) => {
 const Calendar = () => {
   const [currentMonth, setCurrentMonth] = useState(new Date());
   const [selectedDate, setSelectedDate] = useState(new Date());
+  const [handle_date, setHandle_date] = useRecoilState(dateState);
 
   const prevMonth = () => {
     setCurrentMonth(subMonths(currentMonth, 1));
@@ -104,10 +109,16 @@ const Calendar = () => {
   const nextMonth = () => {
     setCurrentMonth(addMonths(currentMonth, 1));
   };
-  const onDateClick = (day) => {
-    setSelectedDate(day);
+  const onDateClick = (cloneDay) => {
+    setSelectedDate(cloneDay);
+    setHandle_date(`${cloneDay.getFullYear()}-${cloneDay.getMonth()+1}-${cloneDay.getDate()}`);
+    //console.log(handle_date);
     //console.log(setSelectedDate);
   };
+  useEffect(() => {
+    console.log(handle_date);
+  }, [handle_date]);
+  
   return (
     <div className='calendar'>
       <RenderHeader

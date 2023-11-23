@@ -10,6 +10,8 @@ import Timer from './Components/Timer/Timer';
 import UserEdit from './Components/UserEdit/UserEdit';
 import UserInfo from './Components/UserInfo/UserInfo';
 
+import Friends from './Components/Friends/Friends';
+
 function App() {
   return (
     <RecoilRoot>
@@ -22,6 +24,7 @@ function App() {
       <SignUp />
       <UserEdit />
       <UserInfo />
+      <Friends />
     </RecoilRoot>
   );
 }

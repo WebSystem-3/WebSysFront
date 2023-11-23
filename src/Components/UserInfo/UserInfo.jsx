@@ -7,7 +7,7 @@ import { userState } from '../../RecoilState';
 
 function UserInfo() {
   const [userData, setUserData] = useState(null);
-  const user_id = useRecoilValue(userState);
+  const [user_id, setUser_id] = useRecoilState(userState);
 
   useEffect(() => {
     fetch(`http://localhost:8080/user/info/${user_id}`)
@@ -38,6 +38,9 @@ function UserInfo() {
     })
     .catch((error) => console.error(error))
 }
+const handleLogout = () => {
+  setUser_id(null);
+}
 
   return (
     <div>
@@ -50,7 +53,9 @@ function UserInfo() {
         <p>로딩중</p>
       )}
       <br />
-        <button type='button' onClick={handleDelete}>회원탈퇴</button>
+      <button type='button' onClick={handleDelete}>회원탈퇴</button>
+      <br />
+      <button type='button' onClick={handleLogout}>로그아웃</button>
     </div>
   );
 }
