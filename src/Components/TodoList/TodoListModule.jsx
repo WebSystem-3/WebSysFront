@@ -24,6 +24,7 @@ const TodoListModule = () => {
     today.getMonth() + 1
   }-${today.getDate()}`;
 
+  /*
   //캘린더에서 handle_date 가져오기
   const showTheDateList = () => {
     fetch(`http://localhost:8080/${user_id}/task`, {
@@ -41,7 +42,7 @@ const TodoListModule = () => {
 
   useEffect(() => {
     showTheDateList();
-  }, [showTheDateList]);
+  }, [showTheDateList]);*/
 
   const onInsert = useCallback(
     (task_name) => {
@@ -100,7 +101,7 @@ const TodoListModule = () => {
     },
     [setTodos, setEditingId]
   );
-
+/*
   //task 시간수정 이상함
   const EditTime = (task_id) => {
     fetch(`http://localhost:8080/${user_id}/task/${task_id}/timer`, {
@@ -120,7 +121,7 @@ const TodoListModule = () => {
         });
       })
       .catch((error) => console.log(error));
-  };
+  };*/
 
   const onRemove = useCallback(
     // (id) => {
