@@ -54,11 +54,10 @@ const TodoListModule = () => {
       };
 
       fetch(`http://localhost:8080/${user_id}/task`, {
-        method: 'post',
+        method: "POST",
         headers: {
           'content-type': 'application/json',
-        },
-        body: JSON.stringify(todo),
+        }, body: JSON.stringify(todo),
       })
         .then((response) => {
           response.json().then((data) => {
