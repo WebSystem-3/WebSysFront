@@ -1,9 +1,13 @@
 .TodoInsert {
   display: flex;
+  width: 512px;
+  margin-top: 20px;
 }
 .writeTodo {
   flex-grow: 1;
   height: 30px;
+  border-radius: 20px;
+  border: #ffcaca 2px solid;
 }
 .addbox {
   width: 36px;

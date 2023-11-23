@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { IoIosArrowDown, IoIosArrowUp, IoIosArrowup } from 'react-icons/io';
+import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
 import './Timer.css';
 
 const Timer = () => {
@@ -7,8 +7,8 @@ const Timer = () => {
   const [seconds, setSeconds] = useState(0);
   const [isActive, setIsActive] = useState(false);
   const [editing, setEditing] = useState(false);
-  const [editingMin, setEditingMin] = useState(true);
-  const [editingSec, setEditingSec] = useState(true);
+  const [editingMin, setEditingMin] = useState(false);
+  const [editingSec, setEditingSec] = useState(false);
 
   useEffect(() => {
     let timer;
@@ -101,7 +101,7 @@ const Timer = () => {
       <h3>Timer</h3>
       {editing ? (
         <div className='timer-controller'>
-          {editingMin ? (
+          {!editingMin ? (
             <div
               className='timer-display-min'
               onClick={toggleEditingMin}
@@ -134,7 +134,7 @@ const Timer = () => {
             />
           )}
           <div className='between'>: </div>
-          {editingSec ? (
+          {!editingSec ? (
             <div
               className='timer-display-sec'
               onClick={toggleEditingSec}

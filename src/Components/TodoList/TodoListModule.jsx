@@ -3,9 +3,11 @@ import TodoTemplate from './TodoTemplate';
 import TodoInsert from './TodoInsert';
 import TodoList from './TodoList';
 import { useEffect } from 'react';
+import TodoListItem from './TodoListItem';
 
 const TodoListModule = () => {
   const [todos, setTodos] = useState([]);
+  const [editingId, setEditingId] = useState(-1);
   const nextId = useRef(0);
 
   const onInsert = useCallback(
@@ -24,14 +26,37 @@ const TodoListModule = () => {
       setTodos((prevTodos) => [...prevTodos, todo]);
       nextId.current += 1;
     },
-    [todos]
+    [nextId, setTodos]
+  );
+  const onEditStart = (id) => {
+    setEditingId(id);
+    console.log('수정: ' + id);
+  };
+  // const onEditStart = useCallback(
+  //   (id) => {
+  //     setEditingId(id);
+  //   },
+  //   [setEditingId]
+  // );
+
+  const onEditSave = useCallback(
+    (id, newText) => {
+      setTodos((prevTodos) =>
+        prevTodos.map((todo) =>
+          todo.id === id ? { ...todo, text: newText } : todo
+        )
+      );
+      setEditingId(null);
+    },
+    [setTodos, setEditingId]
   );
 
   const onRemove = useCallback(
     (id) => {
       setTodos((prevTodos) => prevTodos.filter((todo) => todo.id !== id));
+      setEditingId(null);
     },
-    [todos]
+    [setTodos, setEditingId]
   );
 
   const onToggle = useCallback(
@@ -42,14 +67,27 @@ const TodoListModule = () => {
         )
       );
     },
-    [todos]
+    [setTodos]
   );
 
+  useEffect(() => {
+    console.log('수정된거: ' + editingId);
+  }, [editingId]);
+
   return (
-    <TodoTemplate className='TodoTemp'>
-      <TodoList todos={todos} onRemove={onRemove} onToggle={onToggle} />
-      <TodoInsert onInsert={onInsert} />
-    </TodoTemplate>
+    <>
+      <TodoTemplate className='TodoTemp'>
+        <TodoList
+          todos={todos}
+          editingId={editingId}
+          onRemove={onRemove}
+          onToggle={onToggle}
+          onEditStart={onEditStart}
+          onEditSave={onEditSave}
+        />
+      </TodoTemplate>
+      <TodoInsert className='TodoInsert' onInsert={onInsert} />
+    </>
   );
 };
 
