@@ -23,6 +23,12 @@ const TodoListItem = ({
   };
 
   const handleEditSave = () => {
+    fetch(`http://localhost:8080/${user_id}/task/${task_id}`, {
+      method: "PATCH",
+      headers: {
+        "content-type": "application/json",
+        }, body: JSON.stringify(edittingText),
+    })
     onEditSave(id, edittingText);
   };
 
