@@ -49,7 +49,7 @@ const LoginForm = () => {
           <p>
             <GoPerson />
             <input
-              className="login"
+              class="inputLogin"
               type="text"
               name="username"
               placeholder="ID"
@@ -57,8 +57,9 @@ const LoginForm = () => {
             />
           </p>
           <p>
+          <GoPerson />
             <input
-              className="login"
+              class="inputLogin"
               type="password"
               name="pwd"
               placeholder="비밀번호"

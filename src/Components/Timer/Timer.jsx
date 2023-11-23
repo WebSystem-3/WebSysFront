@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { IoIosArrowDown, IoIosArrowUp, IoIosArrowup } from 'react-icons/io';
+import { useRecoilValue } from 'recoil';
+import { timeState } from '../../RecoilState';
 import './Timer.css';
 
 const Timer = () => {
@@ -9,6 +11,7 @@ const Timer = () => {
   const [editing, setEditing] = useState(false);
   const [editingMin, setEditingMin] = useState(true);
   const [editingSec, setEditingSec] = useState(true);
+  const [handle_time, setHandle_time] = useRecoilValue(timeState);
 
   useEffect(() => {
     let timer;
@@ -41,7 +44,8 @@ const Timer = () => {
     setMinutes(num1);
     setSeconds(num2);
     const timeAmount = num1 * 60 + num2;
-    console.log(timeAmount);
+    setHandle_time(timeAmount);
+    console.log(handle_time);
     toggleEditing();
   };
 
