@@ -1,27 +1,29 @@
 import TodoListItem from './TodoListItem.jsx';
-import TodoListModule from './TodoListModule.jsx';
 import './TodoList.css';
+import React from 'react';
 
 const TodoList = ({
-  todos,
+  tasks,
   onRemove,
   onToggle,
   editingId,
   onEditStart,
-  onEditCancel,
   onEditSave,
 }) => {
   return (
     <div className='TodoList'>
-      {todos.map((todo) => (
+      {tasks.map((task) => (
         <TodoListItem
-          todo={todo}
-          key={todo.id}
-          onRemove={onRemove}
-          onToggle={onToggle}
-          editing={editingId === todo.id}
-          onEditStart={onEditStart}
-          onEditCancel={onEditCancel}
+          key={task.task_id}
+          task={{
+            id: task.task_id,
+            text: task.task_name,
+            checked: task.isChecked || false,
+          }}
+          onRemove={() => onRemove(task.task_id)}
+          onToggle={() => onToggle(task.task_id)}
+          editing={editingId === task.task_id}
+          onEditStart={() => onEditStart(task.task_id)}
           onEditSave={onEditSave}
         />
       ))}

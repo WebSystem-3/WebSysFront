@@ -4,37 +4,37 @@ import { MdCheckBox, MdCheckBoxOutlineBlank, MdDelete } from 'react-icons/md';
 import TimerModal from '../Timer/TimerModal';
 
 const TodoListItem = ({
-  todo,
+  task,
   editing,
   onEditStart,
   onEditSave,
   onRemove,
   onToggle,
 }) => {
-  const { id, text, checked } = todo;
-  const [edittingText, setEditText] = useState(text);
+  const { task_id, task_name, isChecked } = task;
+  const [edittingText, setEditText] = useState(task_name);
 
   useEffect(() => {
-    setEditText(text);
-  }, [editing, id, text]);
+    setEditText(task_name);
+  }, [editing, task_id, task_name]);
 
   const handleChange = (e) => {
     setEditText(e.target.value);
   };
 
   const handleEditSave = () => {
-    onEditSave(id, edittingText);
+    onEditSave(task_id, edittingText);
   };
 
   return (
-    <div className={`TodoListItem ${checked ? 'checked' : ''}`}>
-      <div className='checkbox' onClick={() => onToggle(id)}>
-        {checked ? <MdCheckBox /> : <MdCheckBoxOutlineBlank />}
+    <div className={`TodoListItem ${isChecked ? 'checked' : ''}`}>
+      <div className='checkbox' onClick={() => onToggle(task_id)}>
+        {isChecked ? <MdCheckBox /> : <MdCheckBoxOutlineBlank />}
       </div>
       {editing ? (
         <input type='text' value={edittingText} onChange={handleChange} />
       ) : (
-        <div className='text'>{text}</div>
+        <div className='text'>{task_name}</div>
       )}
       <div>
         {editing ? (
@@ -45,7 +45,7 @@ const TodoListItem = ({
           <button
             className='editTask'
             onClick={() => {
-              onEditStart(id);
+              onEditStart(task_id);
             }}
           >
             수정
@@ -53,7 +53,7 @@ const TodoListItem = ({
         )}
       </div>
       <TimerModal className='SetTimer' />
-      <div className='remove' onClick={() => onRemove(id)}>
+      <div className='remove' onClick={() => onRemove(task_id)}>
         <MdDelete className='deleteBtn' />
       </div>
     </div>

@@ -3,8 +3,8 @@ import { format, addMonths, subMonths } from 'date-fns';
 import { startOfMonth, endOfMonth, startOfWeek, endOfWeek } from 'date-fns';
 import { isSameMonth, isSameDay, addDays, parse } from 'date-fns';
 import colorDiff from '../Utils/colorDiff';
-import { useRecoilState } from "recoil";
-import { dateState } from "../../RecoilState";
+import { useRecoilState } from 'recoil';
+import { dateState } from '../../RecoilState';
 import './calendar.css';
 
 const RenderHeader = ({ currentMonth, prevMonth, nextMonth }) => {
@@ -72,7 +72,6 @@ const RenderCells = ({ currentMonth, selectedDate, onDateClick }) => {
             //onDateClick(parse(cloneDay, 'yyyy-MM-dd', new Date()));
             //cloneDays.push(cloneDay);
             //console.log(`${cloneDay.getFullYear()}-${cloneDay.getMonth()+1}-${cloneDay.getDate()}`);
-            
           }}
         >
           <span
@@ -111,14 +110,18 @@ const Calendar = () => {
   };
   const onDateClick = (cloneDay) => {
     setSelectedDate(cloneDay);
-    setHandle_date(`${cloneDay.getFullYear()}-${cloneDay.getMonth()+1}-${cloneDay.getDate()}`);
+    setHandle_date(
+      `${cloneDay.getFullYear()}-${
+        cloneDay.getMonth() + 1
+      }-${cloneDay.getDate()}`
+    );
     //console.log(handle_date);
     //console.log(setSelectedDate);
   };
   useEffect(() => {
-    console.log(handle_date);
+    // console.log(handle_date);
   }, [handle_date]);
-  
+
   return (
     <div className='calendar'>
       <RenderHeader

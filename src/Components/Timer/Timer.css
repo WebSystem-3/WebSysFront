@@ -22,8 +22,8 @@
   justify-content: center;
   align-items: center;
   width: fit-content;
+  flex-direction: column;
 }
-.timer-display:hover,
 .timer-display-min:hover,
 .timer-display-sec:hover {
   border: black 2px solid;
@@ -61,8 +61,9 @@
   align-items: center;
 }
 
+.timer-display-toggle,
 .timer-controller button {
-  font-size: 1em;
+  font-size: 20px;
   padding: 5px 10px;
   margin: 10px;
   border: none;
@@ -73,7 +74,7 @@
   transition: background-color 0.3s;
   height: 50px;
 }
-
+.timer-display-toggle:hover,
 .timer-controller button:hover {
   background-color: #0056b3;
 }

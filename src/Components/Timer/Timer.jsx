@@ -14,7 +14,7 @@ const Timer = () => {
   const [editingMin, setEditingMin] = useState(false);
   const [editingSec, setEditingSec] = useState(false);
 
-  const [handle_time, setHandle_time] = useRecoilValue(timeState);
+  //const [handle_time, setHandle_time] = useRecoilValue(timeState);
 
   useEffect(() => {
     let timer;
@@ -47,8 +47,8 @@ const Timer = () => {
     setMinutes(num1);
     setSeconds(num2);
     const timeAmount = num1 * 60 + num2;
-    setHandle_time(timeAmount);
-    console.log(handle_time);
+    //setHandle_time(timeAmount);
+    //console.log(handle_time);
     toggleEditing();
   };
 
@@ -183,9 +183,12 @@ const Timer = () => {
           </button>
         </div>
       ) : (
-        <div className='timer-display' onClick={toggleEditing}>
+        <div className='timer-display'>
           {minutes < 10 ? '0' + minutes : minutes} :{' '}
           {seconds < 10 ? '0' + seconds : seconds}
+          <button className='timer-display-toggle' onClick={toggleEditing}>
+            Set time
+          </button>
         </div>
       )}
     </div>
