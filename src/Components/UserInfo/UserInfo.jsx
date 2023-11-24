@@ -10,7 +10,7 @@ function UserInfo() {
   const [user_id, setUser_id] = useRecoilState(userState);
 
   useEffect(() => {
-    fetch(`http://localhost:8080/user/info/${user_id}`)
+    fetch(`http://localhost:8080/user/${user_id}`)
     .then((response) => {
       response.json().then((data) => {
         if (response.status === 200){
@@ -24,7 +24,7 @@ function UserInfo() {
   }, []); 
 
   const handleDelete = () => {
-    fetch(`http://localhost:8080/user/delete/${user_id}`,{
+    fetch(`http://localhost:8080/user/${user_id}`,{
       method: "DELETE",
     })
     .then((response) => {
