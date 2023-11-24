@@ -24,7 +24,7 @@ const TodoListModule = () => {
     today.getMonth() + 1
   }-${today.getDate()}`;
 
-  /*
+  
   //캘린더에서 handle_date 가져오기
   const showTheDateList = () => {
     fetch(`http://localhost:8080/${user_id}/task`, {
@@ -42,7 +42,7 @@ const TodoListModule = () => {
 
   useEffect(() => {
     showTheDateList();
-  }, [showTheDateList]);*/
+  }, [showTheDateList]);
 
   const onInsert = useCallback(
     (task_name) => {
