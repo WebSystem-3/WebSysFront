@@ -7,11 +7,12 @@ export const userState = atom({
 
 export const dateState = atom({
   key: 'task_date',
-  default: null,
+  default: `${new Date().getFullYear()}-${
+    new Date().getMonth() + 1
+  }-${new Date().getDate()}`,
 });
 
 export const timeState = atom({
   key: 'task_time',
   default: null,
 });
-

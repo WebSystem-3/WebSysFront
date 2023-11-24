@@ -14,51 +14,36 @@ const TodoListModule = () => {
   const [editingId, setEditingId] = useState(-1);
   //const nextId = useRef(0);
   const user_id = useRecoilValue(userState);
-  const handle_date = useRecoilValue(dateState);
+  const task_date = useRecoilValue(dateState);
   const handle_time = useRecoilValue(timeState);
   const today = new Date();
   const formattedDate = `${today.getFullYear()}-${
     today.getMonth() + 1
   }-${today.getDate()}`;
 
-<<<<<<< HEAD
   useEffect(() => {
     const showTheDateList = () => {
-      fetch(`http://localhost:8080/${user_id}/task`, {
-        body: JSON.stringify({ task_date: handle_date }),
-      }).then((response) => {
-        response.json().then((data) => {
-          if (response.status === 200) {
-            setTasks(
-              data.map((task) => ({
-                task_id: task.task_id,
-                task_name: task.task_name,
-                task_date: task.task_date,
-                isChecked: task.isChecked || false,
-              }))
-            );
-          } else {
-            alert(data.errorMessage);
-          }
-        });
-=======
-  /*
-  //캘린더에서 handle_date 가져오기
-  const showTheDateList = () => {
-    fetch(`http://localhost:8080/${user_id}/task`, {
-      body: JSON.stringify({ task_date: handle_date }),
-    }).then((response) => {
-      response.json().then((data) => {
-        if (response.status === 200) {
-          setTodos(data);
-        } else {
-          alert(data.errorMessage);
+      fetch(`http://localhost:8080/${user_id}/task/${task_date}`, {}).then(
+        (response) => {
+          response.json().then((data) => {
+            if (response.status === 200) {
+              setTasks(
+                data.map((task) => ({
+                  task_id: task.task_id,
+                  task_name: task.task_name,
+                  task_date: task.task_date,
+                  isChecked: task.isChecked || false,
+                }))
+              );
+            } else {
+              alert(data.errorMessage);
+            }
+          });
         }
->>>>>>> d10d34e931ee306797d931f79db5fdd74d959565
-      });
+      );
     };
     showTheDateList();
-  }, [user_id, handle_date, setTasks]);
+  }, [user_id, task_date, setTasks]);
   //캘린더에서 handle_date 가져오기
 
   const onInsert = (task_name) => {
@@ -94,53 +79,9 @@ const TodoListModule = () => {
     //nextId.current += 1;
   };
 
-<<<<<<< HEAD
   const onEditStart = (task_id) => {
     setEditingId(task_id);
-    console.log('수정: ' + task_id);
-=======
-  useEffect(() => {
-    showTheDateList();
-  }, [showTheDateList]);*/
-
-  const onInsert = useCallback(
-    (task_name) => {
-      const todo = {
-        //task_id: nextId.current,
-        task_name,
-        task_date: formattedDate,
-        isChecked: false,
-      };
-
-      fetch(`http://localhost:8080/${user_id}/task`, {
-        method: "POST",
-        headers: {
-          'content-type': 'application/json',
-        }, body: JSON.stringify(todo),
-      })
-        .then((response) => {
-          response.json().then((data) => {
-            if (response.status === 200) {
-              setTodos((prevTodos) => [
-                ...prevTodos,
-                { ...todo, task_id: data.task_id },
-              ]);
-              alert(data.message);
-            } else {
-              alert(data.errorMessage);
-            }
-          });
-        })
-        .catch((error) => console.log(error));
-      //setTodos((prevTodos) => [...prevTodos, todo]);
-      //nextId.current += 1;
-    },
-    [nextId, setTodos]
-  );
-  const onEditStart = (id) => {
-    setEditingId(id);
-    console.log('수정: ' + id);
->>>>>>> d10d34e931ee306797d931f79db5fdd74d959565
+    //console.log('수정: ' + task_id);
   };
   // const onEditStart = useCallback(
   //   (id) => {
@@ -149,7 +90,6 @@ const TodoListModule = () => {
   //   [setEditingId]
   // );
 
-<<<<<<< HEAD
   const onEditSave = (task_id, newTask) => {
     setTasks((prevTasks) =>
       prevTasks.map((task) =>
@@ -159,20 +99,6 @@ const TodoListModule = () => {
     setEditingId(null);
   };
 
-=======
-  const onEditSave = useCallback(
-    (id, newText) => {
-      setTodos((prevTodos) =>
-        prevTodos.map((todo) =>
-          todo.id === id ? { ...todo, text: newText } : todo
-        )
-      );
-      setEditingId(null);
-    },
-    [setTodos, setEditingId]
-  );
-/*
->>>>>>> d10d34e931ee306797d931f79db5fdd74d959565
   //task 시간수정 이상함
   const EditTime = (task_id) => {
     fetch(`http://localhost:8080/${user_id}/task/${task_id}/timer`, {
@@ -192,7 +118,7 @@ const TodoListModule = () => {
         });
       })
       .catch((error) => console.log(error));
-  };*/
+  };
 
   const onRemove =
     // (id) => {
@@ -235,7 +161,7 @@ const TodoListModule = () => {
 
   return (
     <>
-      <div className='show-time'>{handle_date}</div>
+      <div className='show-time'>{task_date}</div>
       <TodoTemplate className='TodoTemp'>
         <TodoList
           tasks={tasks}
