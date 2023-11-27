@@ -11,10 +11,14 @@ const TodoListItem = ({
   onRemove,
   onToggle,
 }) => {
-  const { task_id, task_name, isChecked } = task;
-  const [edittingText, setEditText] = useState(task_name);
+  const { task_id, task_name, isChecked, task_date } = task;
+  const [editingText, setEditText] = useState(task_name);
+  const today = `${new Date().getFullYear()}-${
+    new Date().getMonth() + 1
+  }-${new Date().getDate()}`;
 
   useEffect(() => {
+    console.log('Task Name', task_name);
     setEditText(task_name);
   }, [editing, task_id, task_name]);
 
@@ -23,14 +27,7 @@ const TodoListItem = ({
   };
 
   const handleEditSave = () => {
-    onEditSave(task_id, edittingText);
-
-    /*fetch(`http://localhost:8080/${user_id}/task/${task_id}`, {
-      method: "PATCH",
-      headers: {
-        "content-type": "application/json",
-        }, body: JSON.stringify(edittingText),
-    })*/
+    onEditSave(task_id, editingText);
   };
 
   return (
@@ -38,31 +35,41 @@ const TodoListItem = ({
       <div className='checkbox' onClick={() => onToggle(task_id)}>
         {isChecked ? <MdCheckBox /> : <MdCheckBoxOutlineBlank />}
       </div>
-      {editing ? (
-        <input type='text' value={edittingText} onChange={handleChange} />
+      {task_date === today ? (
+        <>
+          {editing ? (
+            <input type='text' value={editingText} onChange={handleChange} />
+          ) : (
+            <div className='text'>{task_name}</div>
+          )}
+          <div>
+            {editing ? (
+              <button className='saveTask' onClick={handleEditSave}>
+                저장
+              </button>
+            ) : (
+              <>
+                <button
+                  className='editTask'
+                  onClick={() => {
+                    onEditStart(task_id);
+                  }}
+                >
+                  수정
+                </button>
+                <TimerModal className='SetTimer' />
+                <div className='remove' onClick={() => onRemove(task_id)}>
+                  <MdDelete className='deleteBtn' />
+                </div>
+              </>
+            )}
+          </div>
+        </>
       ) : (
-        <div className='text'>{task_name}</div>
+        <>
+          <div className='text'>{task_name}</div>
+        </>
       )}
-      <div>
-        {editing ? (
-          <button className='saveTask' onClick={handleEditSave}>
-            저장
-          </button>
-        ) : (
-          <button
-            className='editTask'
-            onClick={() => {
-              onEditStart(task_id);
-            }}
-          >
-            수정
-          </button>
-        )}
-      </div>
-      <TimerModal className='SetTimer' />
-      <div className='remove' onClick={() => onRemove(task_id)}>
-        <MdDelete className='deleteBtn' />
-      </div>
     </div>
   );
 };

@@ -16,9 +16,10 @@ const TodoList = ({
         <TodoListItem
           key={task.task_id}
           task={{
-            id: task.task_id,
-            text: task.task_name,
-            checked: task.isChecked || false,
+            task_id: task.task_id,
+            task_name: task.task_name,
+            task_date: task.task_date,
+            isChecked: task.isChecked || false,
           }}
           onRemove={() => onRemove(task.task_id)}
           onToggle={() => onToggle(task.task_id)}
