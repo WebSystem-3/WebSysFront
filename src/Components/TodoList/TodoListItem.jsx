@@ -19,12 +19,13 @@ const TodoListItem = ({
     new Date().getMonth() + 1
   }-${new Date().getDate()}`;
 
-  const taksChecked = useRecoilValue(taskState);
+  const taskChecked = useRecoilValue(taskState);
+
   useEffect(() => {
     if (taskState === true) {
       onToggle(task_id, isChecked);
     }
-  }, [taksChecked]);
+  }, [task_id, isChecked]);
 
   useEffect(() => {
     console.log('Task Name', task_name);
@@ -42,7 +43,7 @@ const TodoListItem = ({
   return (
     <div className={`TodoListItem ${isChecked ? 'checked' : ''}`}>
       <div className='checkbox' onClick={() => onToggle(task_id, isChecked)}>
-        {taksChecked ? <MdCheckBox /> : <MdCheckBoxOutlineBlank />}
+        {isChecked ? <MdCheckBox /> : <MdCheckBoxOutlineBlank />}
       </div>
       {task_date === today ? (
         <>
