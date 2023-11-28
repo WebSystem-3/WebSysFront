@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
 import { useRecoilValue } from 'recoil';
 import { timeState } from '../../RecoilState';
-
+import { useSetRecoilState } from 'recoil';
+import { taskState } from '../../RecoilState';
 import './Timer.css';
 
 const Timer = () => {
@@ -13,8 +14,9 @@ const Timer = () => {
 
   const [editingMin, setEditingMin] = useState(false);
   const [editingSec, setEditingSec] = useState(false);
+  const setTaskState = useSetRecoilState(taskState);
 
-  //const [handle_time, setHandle_time] = useRecoilValue(timeState);
+  const [handle_time, setHandle_time] = useRecoilValue(timeState);
 
   useEffect(() => {
     let timer;
@@ -25,6 +27,8 @@ const Timer = () => {
           if (minutes === 0) {
             clearInterval(timer);
             setIsActive(false);
+            alert('timer done');
+            stopTimer();
           } else {
             setMinutes(minutes - 1);
             setSeconds(59);
@@ -46,7 +50,7 @@ const Timer = () => {
 
     setMinutes(num1);
     setSeconds(num2);
-    const timeAmount = num1 * 60 + num2;
+    //const timeAmount = num1 * 60 + num2;
     //setHandle_time(timeAmount);
     //console.log(handle_time);
     toggleEditing();
@@ -58,6 +62,9 @@ const Timer = () => {
 
   const stopTimer = () => {
     setIsActive(false);
+    const timeAmount = minutes * 60 + seconds;
+    setHandle_time(timeAmount);
+    setTaskState(true);
   };
 
   const resetTimer = () => {
