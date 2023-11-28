@@ -1,5 +1,5 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./LoginForm.css";
 import { useRecoilState } from "recoil";
 import { userState } from "../../RecoilState";
@@ -12,13 +12,13 @@ const LoginForm = () => {
   const [loggedIn, setLoggedIn] = useState(false);
   const [user_id, setUser_id] = useRecoilState(userState);
   const navigate = useNavigate();
-
-  const handleLogin = () => {
+  
+  const handleLogin = async () => {
     const userData = {
       account: id,
       password: password,
     };
-    fetch("http://43.201.197.131:8080/user/login", {
+    await fetch("http://43.201.197.131:8080/user/login", {
       method: "post",
       headers: {
         "content-type": "application/json",
@@ -32,14 +32,17 @@ const LoginForm = () => {
             setUser_id(data.user_id);
             alert(data.message);
             navigate('/main');
+            
           } else {
             alert(data.errorMessage);
           }
         }); 
       })
       .catch((error) => console.log(error));
+      
   };
 
+  
 
   return (
     <div>
