@@ -2,13 +2,22 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import { useRecoilValue } from "recoil";
 import { userState } from "../../RecoilState";
+import Modal from 'react-modal';
+import FriendSearch from './FriendSearch';
+import { useNavigate } from "react-router-dom";
 
 const Friends = () => {
-    const [friends, setFriends] = useState({friend:[]});
+    const [friends, setFriends] = useState([]);
     const user_id = useRecoilValue(userState);
+    const [searchIsOpen, setSearchIsOpen] = useState(false);
+    const navigate = useNavigate();
 
     useEffect(() => {
-        fetch(`http://localhost:8080/${user_id}/friend`)
+        getFriends();
+    },[setFriends]);
+
+    const getFriends = () => {
+      fetch(`http://localhost:8080/${user_id}/friend`)
         .then((response) => {
             response.json().then((data) => {
                 if(response.status === 200){
@@ -16,31 +25,18 @@ const Friends = () => {
                 } 
             })
         })
-    },[]);
-/*
-    const handleAddFr = () => {
-        fetch(`http://localhost:8080/${user_id}/friend/${user_id1}`, {
-            method: "post",
-            headers: {
-              "content-type": "application/json",
-            },
-            //body: JSON.stringify(userData),
-          })
-            .then((response) => {
-              response.json().then((data) => {
-                if (response.status === 200){
-                  //친구추가메서드
-                  alert(data.message);
-                } else {
-                  alert(data.errorMessage);
-                }
-              }); 
-            })
-            .catch((error) => console.log(error));
     }
 
-    const handleDeleteFr = () => {
-        fetch(`http://localhost:8080/${user_id}/friend/${user_id2}`,{
+    const openSearchFr = () =>{
+      setSearchIsOpen(true);
+    }
+
+    const closeSearchFr = () =>{
+      setSearchIsOpen(false);
+    }
+/*
+    const handleDeleteFr = (user_id1) => {
+        fetch(`http://localhost:8080/${user_id}/friend/${user_id1}`,{
       method: "DELETE",
     })
     .then((response) => {
@@ -55,8 +51,8 @@ const Friends = () => {
     .catch((error) => console.error(error));
     }
 
-    const showFrTask = () => {
-        fetch(`http://localhost:8080/${user_id}/friend/${user_id3}/task`)
+    const showFrTask = (user_id1) => {
+        fetch(`http://localhost:8080/${user_id}/friend/${user_id1}/task`)
         .then((response) => {
             response.json.then((data) => {
                 if(response.status === 200){
@@ -67,20 +63,32 @@ const Friends = () => {
     }
 */
     const showUserInfo = () => {
-
+      navigate('/main'); //userInfoPage로 수정필요
     }
     
 
     return (
         <nav>
           <ul>
-            <li><a href="/">My</a></li>
+            <li><a href="/main">My</a></li>
             <li><a>Friends</a></li>
-            {friends.friend.map((fr) => (
-                <li key = {fr.user_id}></li>
+            {friends.map((fr) => (
+                <li key = {fr.user_id}>
+                {fr.user_name}
+                </li>
             ))}
           </ul>
+          <button type='button' onClick={openSearchFr}>+</button>
           <button type='button' onClick={showUserInfo}>내 정보</button>
+          <Modal 
+          isOpen = {searchIsOpen}
+          onRequestClose={closeSearchFr}
+          contentLabel='SearchFriend'
+          >
+            <FriendSearch />
+            <button type='button' onClick={closeSearchFr}>x</button>
+          </Modal>
+          
         </nav>
     );
 };

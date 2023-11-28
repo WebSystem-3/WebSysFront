@@ -18,7 +18,7 @@ const LoginForm = () => {
       account: id,
       password: password,
     };
-    fetch("http://localhost:8080/user/login", {
+    fetch("http://43.201.197.131:8080/user/login", {
       method: "post",
       headers: {
         "content-type": "application/json",

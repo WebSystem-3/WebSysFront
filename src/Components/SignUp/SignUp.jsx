@@ -19,7 +19,7 @@ function SignUp(props) {
         password: password,
         name: name,
       };
-      fetch("http://localhost:8080/user/signup",{
+      fetch("http://43.201.197.131:8080/user/signup",{
         method: "post",
         headers:{
           "content-type": "application/json",
@@ -42,7 +42,7 @@ function SignUp(props) {
       const userData={
       account: id,
       };
-      fetch("http://localhost:8080/user/validation",{
+      fetch("http://43.201.197.131:8080/user/validation",{
         method: "post",
         headers:{
           "content-type": "application/json",

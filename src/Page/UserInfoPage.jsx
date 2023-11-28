@@ -1,17 +1,17 @@
-import { RecoilRoot, useRecoilValue } from 'recoil';
+/*import { RecoilRoot, useRecoilState } from 'recoil';
 import UserInfo from '../Components/UserInfo/UserInfo';
 import { useNavigate } from "react-router-dom";
 
 function userInfo() {
     const navigate = useNavigate();
-    const user_id = useRecoilValue(userState);
+    const [user_id, setUser_id] = useRecoilState(userState);
 
     function toUserEdit(){
         navigate("/");
     }
     function logout(){
         navigate("/");
-        user_id = null;
+        setUser_id = null;
     }
   return (
     <RecoilRoot>
@@ -22,4 +22,4 @@ function userInfo() {
   );
 }
 
-export default userInfo;
+export default userInfo;*/

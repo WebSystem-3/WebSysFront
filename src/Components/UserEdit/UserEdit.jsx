@@ -18,7 +18,7 @@ function UserEdit(props) {
         password: password,
         name: name,
       }; 
-      fetch(`http://localhost:8080/user/${user_id}`,{
+      fetch(`http://43.201.197.131:8080/user/${user_id}`,{
         method: "PATCH",
         headers:{
           "content-type": "application/json",

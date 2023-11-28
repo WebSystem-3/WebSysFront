@@ -10,7 +10,7 @@ function UserInfo() {
   const [user_id, setUser_id] = useRecoilState(userState);
 
   useEffect(() => {
-    fetch(`http://localhost:8080/user/${user_id}`)
+    fetch(`http://43.201.197.131:8080/user/${user_id}`)
     .then((response) => {
       response.json().then((data) => {
         if (response.status === 200){
@@ -25,7 +25,7 @@ function UserInfo() {
   }, []); 
 
   const handleDelete = () => {
-    fetch(`http://localhost:8080/user/${user_id}`,{
+    fetch(`http://43.201.197.131:8080/user/${user_id}`,{
       method: "DELETE",
     })
     .then((response) => {
@@ -56,6 +56,8 @@ const handleLogout = () => {
       )}
       <br />
       <button type='button' onClick={handleDelete}>회원탈퇴</button>
+      <br />
+      
     </div>
   );
 }

@@ -2,6 +2,7 @@ import { RecoilRoot } from 'recoil';
 import Calendar from '../Components/Calendar/Calender';
 import TimerModal from '../Components/Timer/TimerModal';
 import TodoListModule from '../Components/TodoList/TodoListModule';
+import Friends from '../Components/Friends/Friends';
 import { useNavigate } from "react-router-dom";
 
 function Main() {
@@ -15,9 +16,9 @@ function Main() {
       <div className='timerTodoContainer'>
         <TimerModal className='Timer' />
         <TodoListModule className='TodoList' />
-        <button onClick={myInfo}>내정보</button>
       </div>
-      
+      <Friends/>
+      <button onClick={myInfo}>내정보</button>
     </RecoilRoot>
   );
 }
