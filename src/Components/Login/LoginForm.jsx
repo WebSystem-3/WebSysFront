@@ -4,13 +4,14 @@ import "./LoginForm.css";
 import { useRecoilState } from "recoil";
 import { userState } from "../../RecoilState";
 import { GoPerson } from "react-icons/go";
-//import axios from 'axios';
+import { useNavigate } from "react-router-dom";
 
 const LoginForm = () => {
   const [id, setId] = useState("");
   const [password, setPassword] = useState("");
   const [loggedIn, setLoggedIn] = useState(false);
   const [user_id, setUser_id] = useRecoilState(userState);
+  const navigate = useNavigate();
 
   const handleLogin = () => {
     const userData = {
@@ -30,6 +31,7 @@ const LoginForm = () => {
             setLoggedIn(true);
             setUser_id(data.user_id);
             alert(data.message);
+            navigate('/main');
           } else {
             alert(data.errorMessage);
           }
@@ -37,6 +39,7 @@ const LoginForm = () => {
       })
       .catch((error) => console.log(error));
   };
+
 
   return (
     <div>

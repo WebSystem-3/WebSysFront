@@ -1,10 +1,13 @@
 import React from 'react';
 import {useState} from 'react';
+import { useNavigate } from "react-router-dom";
+
 function SignUp(props) {
     const [id, setId] = useState("");
     const [password, setPassword] = useState("");
     const [password2, setPassword2] = useState("");
     const [name, setName] = useState("");
+    const navigate = useNavigate();
 
     const handleSignup = () => {
       if (password !== password2) {
@@ -26,6 +29,7 @@ function SignUp(props) {
         response.json().then((data) => {
           if (response.status === 200){
             alert(data.message);
+            navigate("/");
           } else {
             alert(data.errorMessage);
           }

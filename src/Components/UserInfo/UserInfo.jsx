@@ -15,6 +15,7 @@ function UserInfo() {
       response.json().then((data) => {
         if (response.status === 200){
           setUserData(data);
+          console.log(userData);
         } else {
           alert(data.errorMessage);
         }
@@ -38,9 +39,10 @@ function UserInfo() {
     })
     .catch((error) => console.error(error))
 }
+/*
 const handleLogout = () => {
   setUser_id(null);
-}
+}*/
 
   return (
     <div>
@@ -54,8 +56,6 @@ const handleLogout = () => {
       )}
       <br />
       <button type='button' onClick={handleDelete}>회원탈퇴</button>
-      <br />
-      <button type='button' onClick={handleLogout}>로그아웃</button>
     </div>
   );
 }
