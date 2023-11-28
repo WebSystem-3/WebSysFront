@@ -1,4 +1,6 @@
-import { RecoilRoot } from 'recoil';
+import { useRecoilValue } from 'recoil';
+import { useRecoilState } from 'recoil';
+import { userState } from '../RecoilState';
 import LoginForm from '../Components/Login/LoginForm';
 import { useNavigate } from "react-router-dom";
 
@@ -11,12 +13,11 @@ function Login() {
         navigate("/main");
     }
     
-  return (
-    <RecoilRoot>
-      <LoginForm/>
+  return (   
+    <>      <LoginForm/>
       <button onClick={tosignup}>회원가입</button>
       <button onClick={login}>로그인2</button>
-    </RecoilRoot>
+      </>
   );
 }
 
