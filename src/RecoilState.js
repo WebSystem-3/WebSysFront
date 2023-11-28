@@ -16,3 +16,8 @@ export const timeState = atom({
   key: 'task_time',
   default: null,
 });
+
+export const taskState = atom({
+  key: 'isChecked',
+  default: false,
+});

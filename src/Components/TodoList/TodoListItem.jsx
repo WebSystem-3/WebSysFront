@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import './TodoListItem.css';
 import { MdCheckBox, MdCheckBoxOutlineBlank, MdDelete } from 'react-icons/md';
 import TimerModal from '../Timer/TimerModal';
+import { useRecoilValue } from 'recoil';
+import { taskState } from '../../RecoilState';
 
 const TodoListItem = ({
   task,
@@ -17,6 +19,13 @@ const TodoListItem = ({
     new Date().getMonth() + 1
   }-${new Date().getDate()}`;
 
+  const taksChecked = useRecoilValue(taskState);
+  useEffect(() => {
+    if (taskState === true) {
+      onToggle(task_id, isChecked);
+    }
+  }, [taksChecked]);
+
   useEffect(() => {
     console.log('Task Name', task_name);
     setEditText(task_name);
@@ -26,16 +35,14 @@ const TodoListItem = ({
     setEditText(e.target.value);
   };
 
-
-
   const handleEditSave = () => {
     onEditSave(task_id, editingText);
   };
 
   return (
     <div className={`TodoListItem ${isChecked ? 'checked' : ''}`}>
-      <div className='checkbox' onClick={() => onToggle(task_id)}>
-        {isChecked ? <MdCheckBox /> : <MdCheckBoxOutlineBlank />}
+      <div className='checkbox' onClick={() => onToggle(task_id, isChecked)}>
+        {taksChecked ? <MdCheckBox /> : <MdCheckBoxOutlineBlank />}
       </div>
       {task_date === today ? (
         <>

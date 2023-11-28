@@ -7,6 +7,7 @@ import { useRecoilValue } from 'recoil';
 import { userState } from '../../RecoilState';
 import { dateState } from '../../RecoilState';
 import { timeState } from '../../RecoilState';
+import { taskState } from '../../RecoilState';
 import { useEffect } from 'react';
 
 const TodoListModule = () => {
@@ -20,10 +21,11 @@ const TodoListModule = () => {
   const formattedDate = `${today.getFullYear()}-${
     today.getMonth() + 1
   }-${today.getDate()}`;
+  const isChecked = useRecoilValue(taskState);
 
   useEffect(() => {
     const showTheDateList = () => {
-      fetch(`http://localhost:8080/${user_id}/task/${task_date}`, {}).then(
+      fetch(`http://43.201.197.131:8080/${user_id}/task/${task_date}`, {}).then(
         (response) => {
           response.json().then((data) => {
             if (response.status === 200) {
@@ -54,7 +56,7 @@ const TodoListModule = () => {
       isChecked: false,
     };
 
-    fetch(`http://localhost:8080/${user_id}/task`, {
+    fetch(`http://43.201.197.131:8080/${user_id}/task`, {
       method: 'post',
       headers: {
         'content-type': 'application/json',
@@ -68,9 +70,11 @@ const TodoListModule = () => {
               ...prevTasks,
               { ...data, task_id: data.task_id }, // todo 에서 data로 변경
             ]);
-            alert(data.message);
+            alert('잘 들어감' + data.message);
           } else {
-            alert(data.errorMessage);
+            alert('안들어감' + data.errorMessage);
+            console.log(user_id);
+            console.log(task_date);
           }
         });
       })
@@ -101,7 +105,7 @@ const TodoListModule = () => {
 
   //task 시간수정 이상함
   const EditTime = (task_id) => {
-    fetch(`http://localhost:8080/${user_id}/task/${task_id}/timer`, {
+    fetch(`http://43.201.197.131:8080/${user_id}/task/${task_id}/timer`, {
       method: 'PATCH',
       headers: {
         'content-type': 'application/json',
@@ -126,7 +130,7 @@ const TodoListModule = () => {
     //   setEditingId(null);
 
     (task_id) => {
-      fetch(`http://localhost:8080/${user_id}/task/${task_id}`, {
+      fetch(`http://43.201.197.131:8080/${user_id}/task/${task_id}`, {
         method: 'DELETE',
       })
         .then((response) => {
@@ -145,10 +149,10 @@ const TodoListModule = () => {
       //setTodos((prevTodos) => prevTodos.filter((todo) => todo.task_id !== task_id));
     };
 
-  const onToggle = (task_id) => {
+  const onToggle = (task_id, isChecked) => {
     setTasks((prevTasks) =>
       prevTasks.map((task) =>
-        task.task_id === task_id
+        task.task_id === task_id && isChecked === true
           ? { ...task, isChecked: !task.isChecked }
           : task
       )

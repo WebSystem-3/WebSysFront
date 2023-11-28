@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
 import { useRecoilValue } from 'recoil';
 import { timeState } from '../../RecoilState';
-
+import { useSetRecoilState } from 'recoil';
+import { taskState } from '../../RecoilState';
 import './Timer.css';
 
 const Timer = () => {
@@ -13,6 +14,7 @@ const Timer = () => {
 
   const [editingMin, setEditingMin] = useState(false);
   const [editingSec, setEditingSec] = useState(false);
+  const setTaskState = useSetRecoilState(taskState);
 
   const [handle_time, setHandle_time] = useRecoilValue(timeState);
 
@@ -62,6 +64,7 @@ const Timer = () => {
     setIsActive(false);
     const timeAmount = minutes * 60 + seconds;
     setHandle_time(timeAmount);
+    setTaskState(true);
   };
 
   const resetTimer = () => {
