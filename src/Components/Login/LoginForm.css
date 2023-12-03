@@ -1,7 +1,22 @@
-.inputLogin{
-  background-color: #EDEDED;
+.inputLogin {
+  background-color: #ededed;
   width: 381.23px;
   height: 59.75px;
   border-radius: 13px;
+  padding: 0 0 0 15px;
 }
 
+.loginForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 150px;
+}
+.loginButton {
+  width: 382.713px;
+  height: 58.45px;
+
+  border-radius: 13px;
+  background: #ffcaca;
+}

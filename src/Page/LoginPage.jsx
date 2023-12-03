@@ -2,22 +2,27 @@ import { useRecoilValue } from 'recoil';
 import { useRecoilState } from 'recoil';
 import { userState } from '../RecoilState';
 import LoginForm from '../Components/Login/LoginForm';
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
+import './LoginPage.css';
 
 function Login() {
-    const navigate = useNavigate();
-    function tosignup(){
-        navigate("/signup")
-    }
-    function login(){
-        navigate("/main");
-    }
-    
-  return (   
-    <>      <LoginForm/>
-      <button onClick={tosignup}>회원가입</button>
+  const navigate = useNavigate();
+  function tosignup() {
+    navigate('/signup');
+  }
+  function login() {
+    navigate('/main');
+  }
+
+  return (
+    <>
+      {' '}
+      <LoginForm />
+      <div className='signUp'>
+        <button onClick={tosignup}>회원가입</button>
+      </div>
       <button onClick={login}>로그인2</button>
-      </>
+    </>
   );
 }
 

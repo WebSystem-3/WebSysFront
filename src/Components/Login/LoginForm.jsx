@@ -1,48 +1,44 @@
-import React from "react";
-import { useState, useEffect } from "react";
-import "./LoginForm.css";
-import { useRecoilState } from "recoil";
-import { userState } from "../../RecoilState";
-import { GoPerson } from "react-icons/go";
-import { useNavigate } from "react-router-dom";
+import React from 'react';
+import { useState, useEffect } from 'react';
+import './LoginForm.css';
+import { useRecoilState } from 'recoil';
+import { userState } from '../../RecoilState';
+import { GoPerson } from 'react-icons/go';
+import { useNavigate } from 'react-router-dom';
 
 const LoginForm = () => {
-  const [id, setId] = useState("");
-  const [password, setPassword] = useState("");
+  const [id, setId] = useState('');
+  const [password, setPassword] = useState('');
   const [loggedIn, setLoggedIn] = useState(false);
   const [user_id, setUser_id] = useRecoilState(userState);
   const navigate = useNavigate();
-  
+
   const handleLogin = async () => {
     const userData = {
       account: id,
       password: password,
     };
-    await fetch("http://43.201.197.131:8080/user/login", {
-      method: "post",
+    await fetch('http://43.201.197.131:8080/user/login', {
+      method: 'post',
       headers: {
-        "content-type": "application/json",
+        'content-type': 'application/json',
       },
       body: JSON.stringify(userData),
     })
       .then((response) => {
         response.json().then((data) => {
-          if (response.status === 200){
+          if (response.status === 200) {
             setLoggedIn(true);
             setUser_id(data.user_id);
             alert(data.message);
             navigate('/main');
-            
           } else {
             alert(data.errorMessage);
           }
-        }); 
+        });
       })
       .catch((error) => console.log(error));
-      
   };
-
-  
 
   return (
     <div>
@@ -52,30 +48,33 @@ const LoginForm = () => {
         </div>
       ) : (
         <form>
-          <p>
-            <GoPerson />
-            <input
-              class="inputLogin"
-              type="text"
-              name="username"
-              placeholder="ID"
-              onChange={(event) => setId(event.target.value)}
-            />
-          </p>
-          <p>
-          <GoPerson />
-            <input
-              class="inputLogin"
-              type="password"
-              name="pwd"
-              placeholder="비밀번호"
-              onChange={(event) => setPassword(event.target.value)}
-            />
-          </p>
-          <br />
-          <button type="button" onClick={handleLogin}>
-            로그인
-          </button>
+          <div className='loginForm'>
+            <h2 className='login'>로그인</h2>
+            <p className='Idform'>
+              <GoPerson />
+              <input
+                class='inputLogin'
+                type='text'
+                name='username'
+                placeholder='ID'
+                onChange={(event) => setId(event.target.value)}
+              />
+            </p>
+            <p className='Passwdform'>
+              <GoPerson />
+              <input
+                class='inputLogin'
+                type='password'
+                name='pwd'
+                placeholder='비밀번호'
+                onChange={(event) => setPassword(event.target.value)}
+              />
+            </p>
+            <br />
+            <button className='loginButton' type='button' onClick={handleLogin}>
+              로그인
+            </button>
+          </div>
         </form>
       )}
     </div>

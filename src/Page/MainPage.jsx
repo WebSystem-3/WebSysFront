@@ -5,6 +5,7 @@ import TimerModal from '../Components/Timer/TimerModal';
 import TodoListModule from '../Components/TodoList/TodoListModule';
 import Friends from '../Components/Friends/Friends';
 import { useNavigate } from 'react-router-dom';
+import './MainPage.css';
 
 function Main() {
   const user_id = useRecoilValue(userState);
@@ -14,15 +15,20 @@ function Main() {
     navigate('/userInfo');
   }
   return (
-    <>
-      <Calendar className='calendar' />
+    <div className='mainContainer'>
+      <div className='calendarContainer'>
+        <p>나의 기록</p>
+        <Calendar className='calendar' />
+      </div>
       <div className='timerTodoContainer'>
-        <TimerModal className='Timer' />
+        <p>To-do List</p>
+
         <TodoListModule className='TodoList' />
       </div>
-    </>
+    </div>
   );
 }
+//<TimerModal className='Timer' />
 
 /* <Friends/>
 <button onClick={myInfo}>내정보</button> */

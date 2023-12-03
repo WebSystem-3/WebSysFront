@@ -9,6 +9,7 @@ import { dateState } from '../../RecoilState';
 import { timeState } from '../../RecoilState';
 import { taskState } from '../../RecoilState';
 import { useEffect } from 'react';
+import './TodoListModule.css';
 
 const TodoListModule = () => {
   const [tasks, setTasks] = useState([]);
@@ -165,7 +166,7 @@ const TodoListModule = () => {
 
   return (
     <>
-      <div className='show-time'>{task_date}</div>
+      <div className='show-date'>{task_date}</div>
       <TodoTemplate className='TodoTemp'>
         <TodoList
           tasks={tasks}
