@@ -10,18 +10,19 @@ import { useNavigate } from "react-router-dom";
 const LoginForm = () => {
   const [id, setId] = useState("");
   const [password, setPassword] = useState("");
+
   const [user_id, setUser_id] = useRecoilState(userState);
   const navigate = useNavigate();
-  
+
   const handleLogin = async () => {
     const userData = {
       account: id,
       password: password,
     };
-    await fetch("http://43.201.197.131:8080/user/login", {
-      method: "post",
+    await fetch('http://43.201.197.131:8080/user/login', {
+      method: 'post',
       headers: {
-        "content-type": "application/json",
+        'content-type': 'application/json',
       },
       body: JSON.stringify(userData),
     })
@@ -33,7 +34,7 @@ const LoginForm = () => {
           } else {
             alert(data.errorMessage);
           }
-        }); 
+        });
       })
       .catch((error) => console.log(error));
   };

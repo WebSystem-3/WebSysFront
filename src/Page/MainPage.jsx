@@ -21,19 +21,29 @@ function Main() {
     /*
       */
     
+
   return (
-    <>
-      <Calendar className='calendar' />
+    <div className='mainContainer'>
+      <div className='calendarContainer'>
+        <p>나의 기록</p>
+        <Calendar className='calendar' />
+      </div>
       <div className='timerTodoContainer'>
-        <TimerModal className='Timer' />
+        <p>To-do List</p>
+
         <TodoListModule className='TodoList' />
+
       </div> 
       <Friends onFriendClicked={handleFriendClick} />
       {friendId && <TodoListModule user_id1={friendId}/>}
       
       <FaUser onClick={myInfo} size="30"/>
-    </>
+    </div>
   );
 }
+//<TimerModal className='Timer' />
+
+/* <Friends/>
+<button onClick={myInfo}>내정보</button> */
 
 export default Main;

@@ -9,6 +9,7 @@ import { dateState } from '../../RecoilState';
 import { timeState } from '../../RecoilState';
 import { taskState } from '../../RecoilState';
 import { useEffect } from 'react';
+import './TodoListModule.css';
 
 const TodoListModule = ({user_id1}) => {
   console.log(user_id1);//친구아이디 가져오는지 확인
@@ -183,7 +184,7 @@ const TodoListModule = ({user_id1}) => {
 
   return (
     <>
-      <div className='show-time'>{task_date}</div>
+      <div className='show-date'>{task_date}</div>
       <TodoTemplate className='TodoTemp'>
         <TodoList
           tasks={tasks}
