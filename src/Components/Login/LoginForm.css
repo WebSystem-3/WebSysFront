@@ -2,6 +2,25 @@
   background-color: #EDEDED;
   width: 381.23px;
   height: 59.75px;
+  border: none;
   border-radius: 13px;
+}
+
+.loginBt{
+    position:absolute;
+    width: 300px;
+    height: 50px;
+    background-color: #FFCACA;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.signUpBt{
+  position:absolute;
+  color: gray;
+  background-color: rgba(0,0,0,0);
+  border: none;
+  cursor: pointer;
 }
 

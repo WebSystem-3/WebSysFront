@@ -1,13 +1,18 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-import { useRecoilState } from 'recoil';
-import { useRecoilValue } from 'recoil';
+import { useRecoilState, useResetRecoilState } from 'recoil';
 import { userState } from '../../RecoilState';
-//버튼 누르면 화면 옮기기 추가해야함
+import { useNavigate } from "react-router-dom";
+import { TiUserDelete, TiHome } from "react-icons/ti";
+import { FaUserEdit } from "react-icons/fa";
+import { FiLogOut } from "react-icons/fi";
+import './UserInfo.css';
 
 function UserInfo() {
   const [userData, setUserData] = useState(null);
   const [user_id, setUser_id] = useRecoilState(userState);
+  const navigate = useNavigate();
+  const resetUser = useResetRecoilState(userState);
 
   useEffect(() => {
     fetch(`http://43.201.197.131:8080/user/${user_id}`)
@@ -39,10 +44,17 @@ function UserInfo() {
     })
     .catch((error) => console.error(error))
 }
-/*
-const handleLogout = () => {
-  setUser_id(null);
-}*/
+  function toUserEdit(){
+    navigate("/userEdit");
+  }
+  
+  function logout(){
+    navigate("/");
+    resetUser();
+  }
+  function toMain(){
+    navigate("/main");
+  }
 
   return (
     <div>
@@ -55,7 +67,11 @@ const handleLogout = () => {
         <p>로딩중</p>
       )}
       <br />
-      <button type='button' onClick={handleDelete}>회원탈퇴</button>
+      <p><TiUserDelete /><button className='userInfoBt' onClick={handleDelete}>회원탈퇴</button></p>
+      <p><FaUserEdit /><button className='userInfoBt' onClick={toUserEdit}>정보수정</button></p>
+      <p><FiLogOut /><button className='userInfoBt' onClick={logout}>로그아웃</button></p>
+      <br />
+      <TiHome onClick={toMain} size ="30"/>
       <br />
       
     </div>

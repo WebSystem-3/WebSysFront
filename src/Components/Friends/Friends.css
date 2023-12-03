@@ -1,0 +1,13 @@
+.modalCloseBt{
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  cursor: pointer;
+}
+.modalIDinput{
+    font-size: 17px;
+    border: none;
+    border-bottom: 1px solid #000;
+    box-shadow: 0 1px 0 0 #000;
+    width: 400px;
+}

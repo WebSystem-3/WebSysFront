@@ -1,8 +1,9 @@
 import React from 'react';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import "./SignUp.css";
 
-function SignUp(props) {
+function SignUp() {
   const [id, setId] = useState('');
   const [password, setPassword] = useState('');
   const [password2, setPassword2] = useState('');
@@ -39,10 +40,6 @@ function SignUp(props) {
   };
 
   const handleSignup = async () => {
-    // if (password !== password2) {
-    //   alert('비밀번호가 일치하지 않습니다.');
-    //   return;
-    // }
     const userData = {
       account: id,
       password: password,
@@ -73,27 +70,27 @@ function SignUp(props) {
     <div>
       <h>회원가입</h>
       <br />
-      <label>
+      <label>ID
         <input
           type='text'
-          placeholder='ID'
+          className='inputSignUp'
           onChange={(event) => setId(event.target.value)}
         />
       </label>
-      <button type='button' onClick={handleValidation}>
+      <button type='button' className = 'valBt' onClick={handleValidation}>
         중복확인
       </button>
-      <p>
+      <p>비밀번호
         <input
           type='password'
-          placeholder='비밀번호'
+          className='inputSignUp'
           onChange={(event) => setPassword(event.target.value)}
         />
       </p>
-      <p>
+      <p>비밀번호 확인
         <input
           type='password'
-          placeholder='비밀번호 확인'
+          className='inputSignUp'
           onChange={(event) => setPassword2(event.target.value)}
         />
         <div>
@@ -105,15 +102,15 @@ function SignUp(props) {
           )}
         </div>
       </p>
-      <p>
+      <p>이름
         <input
           type='text'
-          placeholder='이름'
+          className='inputSignUp'
           onChange={(event) => setName(event.target.value)}
         />
       </p>
       <br />
-      <button type='button' onClick={handleSignup} disabled={!isIdValid}>
+      <button type='button' className="loginBt" onClick={handleSignup} disabled={!isIdValid}>
         회원가입
       </button>
     </div>

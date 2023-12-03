@@ -4,6 +4,7 @@ import LoginPage from './Page/LoginPage';
 import SignUpPage from './Page/SignUpPage';
 import MainPage from './Page/MainPage';
 import UserInfoPage from './Page/UserInfoPage';
+import UserEditPage from './Page/UserEditPage';
 //import Friends from './Components/Friends/Friends';
 
 function App() {
@@ -32,9 +33,9 @@ function App() {
         <Route path={"/signup"} element={<SignUpPage />}></Route>
         <Route path={"/main"} element={<MainPage />}></Route>
         <Route path={"/userInfo"} element={<UserInfoPage />}></Route>
+        <Route path={"/userEdit"} element={<UserEditPage />}></Route>
       </Routes>
     </BrowserRouter>
-    
     </RecoilRoot>
   );
 }
