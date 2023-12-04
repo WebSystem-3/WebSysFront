@@ -27,7 +27,7 @@ const LoginForm = () => {
     })
       .then((response) => {
         response.json().then((data) => {
-          if (response.status === 200){
+          if (response.status === 200) {
             setUser_id(data.user_id);
             alert(data.message);
           } else {
@@ -38,40 +38,57 @@ const LoginForm = () => {
       .catch((error) => console.log(error));
   };
 
-  function tosignup(){
-    navigate("/signup")
-}
+  function tosignup() {
+    navigate('/signup');
+  }
 
   return (
-    <div>
-      <p>로그인</p>
-      <p>
-        <GoPerson size="25"/>
+    <div className='LoginForm'>
+      <p className='pagetitle'>로그인</p>
+      <div
+        style={{
+          position: 'relative',
+          display: 'flex',
+          flexDirection: 'row',
+          alignItems: 'center',
+        }}
+      >
+        <GoPerson size='25' style={{ position: 'absolute', left: '-30px' }} />
         <input
-          className="inputLogin"
-          type="text"
-          name="username"
-          placeholder="ID"
+          className='inputLogin'
+          type='text'
+          name='username'
+          placeholder='ID'
           onChange={(event) => setId(event.target.value)}
         />
-      </p>
-      <p>
-      <FaKey size="25"/>
+      </div>
+      <div
+        style={{
+          position: 'relative',
+          display: 'flex',
+          flexDirection: 'row',
+          alignItems: 'center',
+          marginTop: '20px',
+        }}
+      >
+        <FaKey size='25' style={{ position: 'absolute', left: '-30px' }} />
         <input
-          className="inputLogin"
-          type="password"
-          name="pwd"
-          placeholder="비밀번호"
+          className='inputLogin'
+          type='password'
+          name='pwd'
+          placeholder='비밀번호'
           onChange={(event) => setPassword(event.target.value)}
         />
-      </p>
       {failMsg?(<p>아이디 또는 비밀번호를 확인하세요.</p>):(<p></p>)}
+      </div>
       <br />
-      <button className="loginBt" onClick={handleLogin}>로그인</button>
-      <br />
-      <br />
-      <br />
-      <button className="signUpBt" onClick={tosignup}>회원가입</button>
+      <button className='loginBt' onClick={handleLogin}>
+        로그인
+      </button>
+
+      <button className='signUpBt' onClick={tosignup}>
+        회원가입
+      </button>
     </div>
   );
 };

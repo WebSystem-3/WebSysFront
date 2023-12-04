@@ -19,13 +19,13 @@ const TodoListItem = ({
     new Date().getMonth() + 1
   }-${new Date().getDate()}`;
 
-  const taskChecked = useRecoilValue(taskState);
+  const task_State = useRecoilValue(taskState);
 
   useEffect(() => {
-    if (taskState === true) {
-      onToggle(task_id, isChecked);
+    if (task_State.taskId === task_id && task_State.isChecked !== isChecked) {
+      onToggle(task_id, task_State.isChecked);
     }
-  }, [task_id, isChecked]);
+  }, [task_State]);
 
   useEffect(() => {
     console.log('Task Name', task_name);
@@ -67,7 +67,7 @@ const TodoListItem = ({
                 >
                   수정
                 </button>
-                <TimerModal className='SetTimer' />
+                <TimerModal taskId={task_id} className='SetTimer' />
                 <div className='remove' onClick={() => onRemove(task_id)}>
                   <MdDelete className='deleteBtn' />
                 </div>

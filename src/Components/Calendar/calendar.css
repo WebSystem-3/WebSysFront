@@ -70,8 +70,8 @@
   padding: 10px;
   cursor: pointer;
   border: 1px solid #0074b4;
-  background-color: #0074b4;
-  color: white;
+  background-color: #ffcaca;
+  color: black;
 }
 
 .col-cell-not-valid {
