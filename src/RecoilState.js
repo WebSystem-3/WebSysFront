@@ -14,10 +14,10 @@ export const dateState = atom({
 
 export const timeState = atom({
   key: 'task_time',
-  default: null,
+  default: {},
 });
 
 export const taskState = atom({
   key: 'isChecked',
-  default: false,
+  default: { taskId: null, isChecked: false },
 });

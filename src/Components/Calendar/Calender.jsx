@@ -3,9 +3,10 @@ import { format, addMonths, subMonths } from 'date-fns';
 import { startOfMonth, endOfMonth, startOfWeek, endOfWeek } from 'date-fns';
 import { isSameMonth, isSameDay, addDays, parse } from 'date-fns';
 import colorDiff from '../Utils/colorDiff';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import { dateState } from '../../RecoilState';
 import './calendar.css';
+import { timeState } from '../../RecoilState';
 
 const RenderHeader = ({ currentMonth, prevMonth, nextMonth }) => {
   return (
@@ -44,6 +45,7 @@ const RenderCells = ({ currentMonth, selectedDate, onDateClick }) => {
   const endMonth = endOfMonth(startMonth);
   const startDate = startOfWeek(startMonth);
   const endDate = endOfWeek(endMonth);
+  const timeValue = useRecoilValue(timeState);
 
   const rows = [];
   let days = [];
@@ -72,6 +74,13 @@ const RenderCells = ({ currentMonth, selectedDate, onDateClick }) => {
             //onDateClick(parse(cloneDay, 'yyyy-MM-dd', new Date()));
             //cloneDays.push(cloneDay);
             //console.log(`${cloneDay.getFullYear()}-${cloneDay.getMonth()+1}-${cloneDay.getDate()}`);
+          }}
+          style={{
+            backgroundColor: timeValue[format(day, 'yyyy-MM-dd')]
+              ? colorDiff(timeValue[format(day, 'yyyy-MM-dd')])
+              : isSameDay(day, selectedDate)
+              ? null
+              : 'white',
           }}
         >
           <span

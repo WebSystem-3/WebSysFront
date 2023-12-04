@@ -11,8 +11,8 @@ import { taskState } from '../../RecoilState';
 import { useEffect } from 'react';
 import './TodoListModule.css';
 
-const TodoListModule = ({user_id1}) => {
-  console.log(user_id1);//친구아이디 가져오는지 확인
+const TodoListModule = ({ user_id1 }) => {
+  console.log(user_id1); //친구아이디 가져오는지 확인
   const [tasks, setTasks] = useState([]);
   const [editingId, setEditingId] = useState(-1);
   //const nextId = useRef(0);
@@ -47,10 +47,10 @@ const TodoListModule = ({user_id1}) => {
       );
     };
     showTheDateList();
-  }, [user_id, task_date, setTasks]);
+  }, [user_id, task_date]);
   //캘린더에서 handle_date 가져오기
-  
-/*
+
+  /*
   const showFrTask = () => {
     fetch(`http://43.201.197.131:8080/${user_id}/friend/${user_id1}/task`)
     .then((response) => {

@@ -3,7 +3,7 @@ import Modal from 'react-modal';
 import Timer from './Timer';
 import './TimerModal.css';
 
-const TimerModal = () => {
+const TimerModal = ({ taskId }) => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
   const openModal = () => {
@@ -25,7 +25,7 @@ const TimerModal = () => {
         onRequestClose={closeModal}
         contentLabel='Timer Modal'
       >
-        <Timer />
+        <Timer taskId={taskId} />
         <button onClick={closeModal} className='openbtn'>
           Close Timer
         </button>

@@ -6,7 +6,7 @@ import { useSetRecoilState } from 'recoil';
 import { taskState } from '../../RecoilState';
 import './Timer.css';
 
-const Timer = () => {
+const Timer = ({ taskId }) => {
   const [minutes, setMinutes] = useState(0);
   const [seconds, setSeconds] = useState(0);
   const [isActive, setIsActive] = useState(false);
@@ -14,6 +14,7 @@ const Timer = () => {
 
   const [editingMin, setEditingMin] = useState(false);
   const [editingSec, setEditingSec] = useState(false);
+
   const setTaskState = useSetRecoilState(taskState);
 
   const [handle_time, setHandle_time] = useRecoilValue(timeState);
@@ -64,7 +65,7 @@ const Timer = () => {
     setIsActive(false);
     const timeAmount = minutes * 60 + seconds;
     setHandle_time(timeAmount);
-    setTaskState(true);
+    setTaskState({ taskId, isChecked: true });
   };
 
   const resetTimer = () => {
