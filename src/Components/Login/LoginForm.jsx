@@ -1,16 +1,15 @@
-import React from "react";
-import { useState, useEffect } from "react";
-import "./LoginForm.css";
+import React, { useState } from "react";
 import { useRecoilState } from "recoil";
 import { userState } from "../../RecoilState";
 import { GoPerson } from "react-icons/go";
 import { FaKey } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
+import "./LoginForm.css";
 
 const LoginForm = () => {
   const [id, setId] = useState("");
   const [password, setPassword] = useState("");
-
+  const [failMsg, setFailMsg] = useState(false);
   const [user_id, setUser_id] = useRecoilState(userState);
   const navigate = useNavigate();
 
@@ -32,12 +31,13 @@ const LoginForm = () => {
             setUser_id(data.user_id);
             alert(data.message);
           } else {
-            alert(data.errorMessage);
+            setFailMsg(true);
           }
         });
       })
       .catch((error) => console.log(error));
   };
+
   function tosignup(){
     navigate("/signup")
 }
@@ -65,6 +65,7 @@ const LoginForm = () => {
           onChange={(event) => setPassword(event.target.value)}
         />
       </p>
+      {failMsg?(<p>아이디 또는 비밀번호를 확인하세요.</p>):(<p></p>)}
       <br />
       <button className="loginBt" onClick={handleLogin}>로그인</button>
       <br />

@@ -50,6 +50,7 @@ function UserEdit(props) {
             onChange={(event) => setPassword(event.target.value)}
             />
         </p>
+        {password == '' || password.length>=9 ? (<p></p>):(<p>비밀번호는 8자~16자이어야 합니다.</p>)}
         <p>비밀번호 확인
             <input 
             className='inputSignUp'

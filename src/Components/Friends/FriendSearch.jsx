@@ -12,6 +12,7 @@ const FriendSearch = ({onUpdate}) => {
 
 
     const handleSearchFr = async() => {
+      console.log('clicked');
       const account = user_id1;
       await fetch("http://43.201.197.131:8080/user", {
         body: JSON.stringify(account),

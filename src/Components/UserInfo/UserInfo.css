@@ -1,6 +1,20 @@
 .userInfoBt{
-    position:absolute;
-    background-color: rgba(0,0,0,0);
-    border: none;
-    cursor: pointer;
+  position:absolute;
+  background-color: rgba(0,0,0,0);
+  border: none;
+  cursor: pointer;
   }
+.modalYesBt{
+  width: 80px;
+  height: 50px;
+  border-radius: '30px';
+  border-color: red;
+  cursor: pointer;
+}
+.modalNoBt{
+  width: 80px;
+  height: 50px;
+  border-radius: '10px';
+  border: none;
+  cursor: pointer;
+}
