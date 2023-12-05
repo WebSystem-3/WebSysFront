@@ -40,7 +40,7 @@ const TodoListModule = ({ user_id1 }) => {
                 }))
               );
             } else {
-              alert(data.errorMessage);
+              alert(data.message);
             }
           });
         }
@@ -91,7 +91,7 @@ const TodoListModule = ({ user_id1 }) => {
             ]);
             alert('잘 들어감' + data.message);
           } else {
-            alert('안들어감' + data.errorMessage);
+            alert('안들어감' + data.message);
             console.log(user_id);
             console.log(task_date);
           }
@@ -136,7 +136,7 @@ const TodoListModule = ({ user_id1 }) => {
           if (response.status === 200) {
             alert(data.message);
           } else {
-            alert(data.errorMessage);
+            alert(data.message);
           }
         });
       })
@@ -160,7 +160,7 @@ const TodoListModule = ({ user_id1 }) => {
                 prevTasks.filter((todo) => todo.task_id !== task_id)
               );
             } else {
-              alert(data.errorMessage);
+              alert(data.message);
             }
           });
         })

@@ -23,11 +23,25 @@
   flex-shrink: 1;
   align-items: center;
 }
-.template {
+.todolist-template {
+  width: 300px;
+  height: 60px;
+  border-radius: 13px;
+  background: #ffcaca;
+  text-align: center;
+  font-size: 20px;
+  line-height: 60px;
+  align-self: flex-start;
+  margin-left: 115px;
+}
+.calendar-template {
   width: 300px;
   height: 40px;
   border-radius: 13px;
   background: #ffcaca;
   text-align: center;
-  font-size: 30px;
+  font-size: 20px;
+  line-height: 40px;
+  align-self: flex-start;
+  margin: 0 0 50px 180px;
 }

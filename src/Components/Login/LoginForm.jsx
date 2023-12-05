@@ -43,51 +43,58 @@ const LoginForm = () => {
   }
 
   return (
-    <div className='LoginForm'>
-      <p className='pagetitle'>로그인</p>
-      <div
-        style={{
-          position: 'relative',
-          display: 'flex',
-          flexDirection: 'row',
-          alignItems: 'center',
-        }}
-      >
-        <GoPerson size='25' style={{ position: 'absolute', left: '-30px' }} />
-        <input
-          className='inputLogin'
-          type='text'
-          name='username'
-          placeholder='ID'
-          onChange={(event) => setId(event.target.value)}
-        />
-      </div>
-      <div
-        style={{
-          position: 'relative',
-          display: 'flex',
-          flexDirection: 'row',
-          alignItems: 'center',
-          marginTop: '20px',
-        }}
-      >
-        <FaKey size='25' style={{ position: 'absolute', left: '-30px' }} />
-        <input
-          className='inputLogin'
-          type='password'
-          name='pwd'
-          placeholder='비밀번호'
-          onChange={(event) => setPassword(event.target.value)}
-        />
-      </div>
-      <br />
-      <button className='loginBt' onClick={handleLogin}>
-        로그인
-      </button>
+    <div className='LoginContainer'>
+      <div className='LoginForm'>
+        <p className='pagetitle'>로그인</p>
+        <form>
+          <div
+            style={{
+              position: 'relative',
+              display: 'flex',
+              flexDirection: 'row',
+              alignItems: 'center',
+            }}
+          >
+            <GoPerson
+              size='25'
+              style={{ position: 'absolute', left: '-30px' }}
+            />
+            <input
+              className='inputLogin'
+              type='text'
+              name='username'
+              placeholder='ID'
+              onChange={(event) => setId(event.target.value)}
+            />
+          </div>
+          <div
+            style={{
+              position: 'relative',
+              display: 'flex',
+              flexDirection: 'row',
+              alignItems: 'center',
+              marginTop: '20px',
+            }}
+          >
+            <FaKey size='25' style={{ position: 'absolute', left: '-30px' }} />
+            <input
+              className='inputLogin'
+              type='password'
+              name='pwd'
+              placeholder='비밀번호'
+              onChange={(event) => setPassword(event.target.value)}
+            />
+          </div>
+          <br />
+          <button className='loginBt' onClick={handleLogin}>
+            로그인
+          </button>
+        </form>
 
-      <button className='signUpBt' onClick={tosignup}>
-        회원가입
-      </button>
+        <button className='signUpBt' onClick={tosignup}>
+          회원가입
+        </button>
+      </div>
     </div>
   );
 };

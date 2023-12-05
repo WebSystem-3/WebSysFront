@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
-import { useRecoilValue } from 'recoil';
+import { useRecoilValue, useRecoilState, useSetRecoilState } from 'recoil';
 import { timeState } from '../../RecoilState';
-import { useSetRecoilState } from 'recoil';
+
 import { taskState } from '../../RecoilState';
 import './Timer.css';
 
@@ -17,7 +17,7 @@ const Timer = ({ taskId }) => {
 
   const setTaskState = useSetRecoilState(taskState);
 
-  const [handle_time, setHandle_time] = useRecoilValue(timeState);
+  const [handle_time, setHandle_time] = useRecoilState(timeState);
 
   useEffect(() => {
     let timer;

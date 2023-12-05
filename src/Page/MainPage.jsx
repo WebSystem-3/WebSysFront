@@ -14,14 +14,25 @@ function Main() {
   function myInfo() {
     navigate('/userInfo');
   }
+  // function whoIam() {
+  //   let User = '';
+  //   if (user_id == myuserId) {
+  //     User = '나';
+  //   } else {
+  //     User = '친구';
+  //   }
+  //   return User;
+  // }
+
   return (
     <div className='mainContainer'>
       <div className='calendarContainer'>
-        <p className='template'>나의 기록</p>
+        <p className='calendar-template'>나의 기록</p>
         <Calendar className='calendar' />
       </div>
       <div className='timerTodoContainer'>
-        <p className='template'>To-do List</p>
+        <TimerModal />
+        <p className='todolist-template'>To-do List</p>
 
         <TodoListModule className='TodoList' />
       </div>

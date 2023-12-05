@@ -68,7 +68,7 @@
   margin: 10px;
   border: none;
   border-radius: 5px;
-  background-color: #007bff;
+  background-color: #ffcaca;
   color: #fff;
   cursor: pointer;
   transition: background-color 0.3s;
@@ -76,7 +76,7 @@
 }
 .timer-display-toggle:hover,
 .timer-controller button:hover {
-  background-color: #0056b3;
+  background-color: #ff5675;
 }
 
 /* 추가: 편집 상태일 때 form의 스타일 */

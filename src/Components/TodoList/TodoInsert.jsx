@@ -3,20 +3,20 @@ import { CgAdd } from 'react-icons/cg';
 import './TodoInsert.css';
 
 const TodoInsert = ({ onInsert }) => {
-  const [value, setValue] = useState('');
+  const [task, setTask] = useState('');
 
   const onChange = useCallback((e) => {
-    setValue(e.target.value);
+    setTask(e.target.value);
   }, []);
 
   const onSubmit = useCallback(
     (e) => {
-      onInsert(value);
-      setValue('');
+      onInsert(task);
+      setTask('');
 
       e.preventDefault();
     },
-    [onInsert, value]
+    [onInsert, task]
   );
 
   return (
@@ -24,7 +24,7 @@ const TodoInsert = ({ onInsert }) => {
       <input
         className='writeTodo'
         placeholder='할 일을 입력하세요'
-        value={value}
+        value={task}
         onChange={onChange}
       />
       <CgAdd className='addbox' onClick={onSubmit} />
