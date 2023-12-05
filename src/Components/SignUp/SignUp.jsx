@@ -1,15 +1,12 @@
-import React from 'react';
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
 import "./SignUp.css";
 
-function SignUp() {
-  const [id, setId] = useState('');
+function SignUp({props}) {
+  const [id, setId] = useState('');//회원가입성공하면 네비게이트 페이지에서 구현
   const [password, setPassword] = useState('');
   const [password2, setPassword2] = useState('');
   const [name, setName] = useState('');
   const [isIdValid, setIdValid] = useState(false);
-  const navigate = useNavigate();
 
   const handleValidation = async () => {
     const userData = {
@@ -57,7 +54,7 @@ function SignUp() {
           if (response.status === 200) {
             alert(data.message);
             console.log('');
-            navigate('/');
+            props.getSuccess(true);
           } else {
             alert(data.Message);
           }
@@ -80,6 +77,7 @@ function SignUp() {
       <button type='button' className = 'valBt' onClick={handleValidation}>
         중복확인
       </button>
+      {id == '' || id.length>=9 ? (<p></p>):(<p>id는 8자 이상이어야 합니다.</p>)}
       <p>비밀번호
         <input
           type='password'
@@ -87,6 +85,7 @@ function SignUp() {
           onChange={(event) => setPassword(event.target.value)}
         />
       </p>
+      {password == '' || password.length>=9 ? (<p></p>):(<p>비밀번호는 8자~16자이어야 합니다.</p>)}
       <p>비밀번호 확인
         <input
           type='password'

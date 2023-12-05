@@ -13,7 +13,7 @@ const Friends = ({onFriendClicked}) => {
     const user_id = useRecoilValue(userState);
     const [searchIsOpen, setSearchIsOpen] = useState(false);
     const [deleteMode, setdeleteMode] = useState(false);
-    const[isHovering, setIsHovering] = useState(false);
+    const [isHovering, setIsHovering] = useState(false);
 
     useEffect(() => {
         getFriends();
