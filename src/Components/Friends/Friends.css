@@ -1,13 +1,66 @@
 .modalCloseBt{
+  color: gray;
   position: absolute;
   top: 15px;
   right: 15px;
   cursor: pointer;
 }
-.modalIDinput{
-    font-size: 17px;
-    border: none;
-    border-bottom: 1px solid #000;
-    box-shadow: 0 1px 0 0 #000;
-    width: 400px;
+.friendsForm{
+  width: 110px;
+  height: 92vh;
+  margin-left: 10px;
+  background-color: #ffcaca;
+  border-radius: 20px;
+}
+.myTodoBtn{
+  width: 100px;
+  height: 70px;
+  font-size: 20px;
+  font-weight: 3px;
+  background-color: white;
+  margin-top: 10px;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+}
+.friendtitle{
+  font-weight: 500;
+  font-size: 20px;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}  
+.xBtn{
+  width: 50px;
+  height: 50px;
+  font-size: 20px;
+  background-color: #D1D1D1;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+}
+.friendList{
+  margin: 0;
+  padding-inline-start: 1.5em;
+  list-style-type: none;
+}
+.addFrBtn{
+  margin-left: 30px;
+  width: 50px;
+  height: 50px;
+  font-size: 20px;
+  background-color: #FFE1E1;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+}
+.editBtn{
+  margin-left: 20px;
+  cursor: pointer;
+}
+.editcompleteBtn{
+  margin-left: 20px;
+  cursor: pointer;
+  color: gray;
+  background-color: rgba(0, 0, 0, 0);
+  border: none;
 }

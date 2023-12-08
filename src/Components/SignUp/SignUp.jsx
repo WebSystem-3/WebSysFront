@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import "./SignUp.css";
 
-function SignUp({props}) {
+function SignUp({}) {
   const [id, setId] = useState('');//회원가입성공하면 네비게이트 페이지에서 구현
   const [password, setPassword] = useState('');
   const [password2, setPassword2] = useState('');
   const [name, setName] = useState('');
   const [isIdValid, setIdValid] = useState(false);
+  const [isValCalled, setValCalled] = useState(false);//이미 존재하는 ID입니다 수정필요
+  const navigate = useNavigate();
 
   const handleValidation = async () => {
     const userData = {
@@ -20,6 +23,7 @@ function SignUp({props}) {
       body: JSON.stringify(userData),
     })
       .then((response) => {
+        setValCalled(true);
         response.json().then((data) => {
           console.log(data.message);
           if (response.status === 200) {
@@ -51,12 +55,12 @@ function SignUp({props}) {
     })
       .then((response) => {
         response.json().then((data) => {
-          if (response.status === 200) {
-            alert(data.message);
+          if (response.status === 201) {
+            alert('가입성공: '+data.message);
             console.log('');
-            props.getSuccess(true);
+            navigate('/');
           } else {
-            alert(data.Message);
+            alert('가입실패: '+data.message);
           }
         });
       })
@@ -64,52 +68,56 @@ function SignUp({props}) {
   };
 
   return (
-    <div>
-      <h>회원가입</h>
-      <br />
-      <label>ID
-        <input
+    <div className='signUpForm'>
+      <p className='pagetitle'>회원가입</p>
+      <div className='signupContainer'>
+      <div className='texts'>
+        <p>ID</p>
+        <p>비밀번호</p>
+        <p>비밀번호 확인</p>
+        <p>이름</p>
+      </div>
+      <div className='inputs'>
+      <p><input
           type='text'
           className='inputSignUp'
           onChange={(event) => setId(event.target.value)}
         />
-      </label>
-      <button type='button' className = 'valBt' onClick={handleValidation}>
+        <button type='button' className = 'valBt' onClick={handleValidation}>
         중복확인
-      </button>
-      {id == '' || id.length>=9 ? (<p></p>):(<p>id는 8자 이상이어야 합니다.</p>)}
-      <p>비밀번호
+        </button></p>
+      {id === '' || id.length>=8 ? (<></>):(<div className='warning'>ID는 8자 이상이어야 합니다.</div>)}
+      {!isIdValid ? (isValCalled ? (<div className='warning'>이미 존재하는 ID입니다.</div>):(<></>)):(<></>)}
+      
         <input
           type='password'
           className='inputSignUp'
           onChange={(event) => setPassword(event.target.value)}
         />
-      </p>
-      {password == '' || password.length>=9 ? (<p></p>):(<p>비밀번호는 8자~16자이어야 합니다.</p>)}
-      <p>비밀번호 확인
+      {password === '' || password.length>=8 && password.length<=16 ? (<></>):(<div className='warning'>비밀번호는 8자~16자이어야 합니다.</div>)}
+      
         <input
           type='password'
           className='inputSignUp'
           onChange={(event) => setPassword2(event.target.value)}
         />
         <div>
-          {password !== '' && password === password2 ? (
-            <div>비밀번호가 일치합니다</div>
+          {password !== '' && password === password2 ? (<></>
           ) : (
             password !== '' &&
-            password2 !== '' && <div>비밀번호가 일치하지 않습니다</div>
+            password2 !== '' && <div className='warning'>비밀번호가 일치하지 않습니다</div>
           )}
         </div>
-      </p>
-      <p>이름
+      
         <input
           type='text'
           className='inputSignUp'
           onChange={(event) => setName(event.target.value)}
         />
-      </p>
-      <br />
-      <button type='button' className="loginBt" onClick={handleSignup} disabled={!isIdValid}>
+      
+      </div>
+    </div>
+    <button type='button' className="signUpBt2" onClick={handleSignup} disabled={!isIdValid}>
         회원가입
       </button>
     </div>

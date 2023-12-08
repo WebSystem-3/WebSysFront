@@ -28,7 +28,7 @@ const TodoListItem = ({
   }, [task_State]);
 
   useEffect(() => {
-    console.log('Task Name', task_name);
+    console.log('Task Name', task);
     setEditText(task_name);
   }, [editing, task_id, task_name]);
 

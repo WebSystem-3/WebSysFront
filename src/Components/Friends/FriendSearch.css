@@ -1,0 +1,16 @@
+.searchBtn{
+    margin-left: 10px;
+    cursor: pointer;
+}
+.addBtn{
+    cursor: pointer;
+}
+.modalIDinput{
+    font-size: 17px;
+    margin-left: 30px;
+    margin-top: 20px;
+    border-radius: 6px;
+    border: white;
+    width: 600px;
+    height: 35px;
+  }

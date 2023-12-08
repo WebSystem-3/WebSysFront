@@ -1,6 +1,12 @@
+.logo{
+  margin-top: 10px;
+  margin-left: 15px;
+  margin-bottom: 5px;
+  width: 120px;
+  cursor: pointer;
+}
 .mainContainer {
   display: flex;
-  margin-top: 50px;
 }
 
 .calendarContainer {
@@ -22,6 +28,13 @@
   flex-grow: 1;
   flex-shrink: 1;
   align-items: center;
+}
+
+.toMyInfo {
+  float:right;
+  margin-top: 20px;
+  margin-right: 60px;
+  cursor: pointer;
 }
 .template {
   width: 300px;

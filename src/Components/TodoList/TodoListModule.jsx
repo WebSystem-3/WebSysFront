@@ -70,7 +70,7 @@ const TodoListModule = ({ user_id1 }) => {
   const onInsert = (task_name) => {
     const task = {
       // task_id: nextId.current,
-      task_name,
+      task_name:task_name,  
       task_date: formattedDate,
       isChecked: false,
     };
@@ -91,9 +91,10 @@ const TodoListModule = ({ user_id1 }) => {
             ]);
             alert('잘 들어감' + data.message);
           } else {
-            alert('안들어감' + data.errorMessage);
+            alert('안들어감' + data.message);
             console.log(user_id);
             console.log(task_date);
+            console.log(task);
           }
         });
       })

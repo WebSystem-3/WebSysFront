@@ -5,7 +5,9 @@ import TimerModal from '../Components/Timer/TimerModal';
 import TodoListModule from '../Components/TodoList/TodoListModule';
 import Friends from '../Components/Friends/Friends';
 import { useNavigate } from 'react-router-dom';
+import { FaUser } from "react-icons/fa";
 import './MainPage.css';
+import logo from './logo2.png';
 
 function Main() {
   const user_id = useRecoilValue(userState);
@@ -14,8 +16,17 @@ function Main() {
   function myInfo() {
     navigate('/userInfo');
   }
+  function toMain() {
+    navigate('/main')
+  }
   return (
+    <>
+    <header>
+      <img className='logo' onClick={toMain} src={logo} alt='로고이미지'/> 
+      <FaUser className='toMyInfo' onClick={myInfo} size="40"/>
+    </header>
     <div className='mainContainer'>
+    <Friends/>
       <div className='calendarContainer'>
         <p className='template'>나의 기록</p>
         <Calendar className='calendar' />
@@ -25,12 +36,14 @@ function Main() {
 
         <TodoListModule className='TodoList' />
       </div>
+      
     </div>
+    </> 
   );
 }
 //<TimerModal className='Timer' />
 
-/* <Friends/>
-<button onClick={myInfo}>내정보</button> */
+/* <Friends/>*/
+
 
 export default Main;
