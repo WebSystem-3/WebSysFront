@@ -12,10 +12,6 @@ function UserEdit(props) {
     const navigate = useNavigate();
 
     const handleEdit = () => {
-      /*if (password !== password2) {
-        alert("비밀번호가 일치하지 않습니다.");
-        return;
-      }*/
       const userData={
         password: password,
         name: name,
@@ -41,8 +37,8 @@ function UserEdit(props) {
     }
 
     return(
-        <div>
-        <p>회원 정보 수정</p>
+        <div className='signUpForm'>
+        <p className='pagetitle'>회원 정보 수정</p>
         <p>비밀번호
             <input
             className='inputSignUp'
@@ -50,7 +46,7 @@ function UserEdit(props) {
             onChange={(event) => setPassword(event.target.value)}
             />
         </p>
-        {password == '' || password.length>=9 ? (<p></p>):(<p>비밀번호는 8자~16자이어야 합니다.</p>)}
+        {password === '' || password.length>=9 ? (<></>):(<div className='warning'>비밀번호는 8자~16자이어야 합니다.</div>)}
         <p>비밀번호 확인
             <input 
             className='inputSignUp'
@@ -59,11 +55,10 @@ function UserEdit(props) {
             />
         </p>
         <div>
-          {password !== '' && password === password2 ? (
-            <div>비밀번호가 일치합니다</div>
+          {password !== '' && password === password2 ? (<></>
           ) : (
             password !== '' &&
-            password2 !== '' && <div>비밀번호가 일치하지 않습니다</div>
+            password2 !== '' && <div className='warning'>비밀번호가 일치하지 않습니다</div>
           )}
         </div>
         <p>이름
@@ -75,7 +70,7 @@ function UserEdit(props) {
         </p>
         <br />
         <button
-        className='loginBt'
+        className='signUpBt2'
         type='button' 
         onClick={handleEdit}>수정하기</button>
         </div>

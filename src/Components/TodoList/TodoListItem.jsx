@@ -29,6 +29,10 @@ const TodoListItem = ({
   }, [task_State]);
 
   useEffect(() => {
+<<<<<<< HEAD
+=======
+    console.log('Task Name', task);
+>>>>>>> 904601b74be911715e962de1949608369a7b7a11
     setEditText(task_name);
   }, [editing, task_id, task_name]);
 

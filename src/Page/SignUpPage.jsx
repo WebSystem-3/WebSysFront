@@ -1,18 +1,16 @@
 import SignUp from '../Components/SignUp/SignUp';
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
+import logo from './logo2.png';
 
 function Signup() {    
-  const [isSuccess, setSuccess] = useState(false);
   const navigate = useNavigate();
-  const getSuccess = (isSuccess) =>{
-    if (isSuccess==true) 
-      navigate('/main');
+  function toLogin(){
+    navigate('/');
   }
-
   return (
     <>
-      <SignUp isSuccess={isSuccess} getSuccess={getSuccess}/>
+      <img className='logo' onClick={toLogin} src={logo} alt='로고이미지'/>  
+      <SignUp/>
     </>
   );
 }
