@@ -77,7 +77,7 @@ function SignUp({props}) {
       <button type='button' className = 'valBt' onClick={handleValidation}>
         중복확인
       </button>
-      {id == '' || id.length>=9 ? (<p></p>):(<p>id는 8자 이상이어야 합니다.</p>)}
+      {id == '' || id.length>=8 ? (<p></p>):(<p>id는 8자 이상이어야 합니다.</p>)}
       <p>비밀번호
         <input
           type='password'

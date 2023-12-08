@@ -13,24 +13,29 @@ const TodoListItem = ({
   onRemove,
   onToggle,
 }) => {
+  const pad = (n) => (n < 10 ? '0' + n : n);
   const { task_id, task_name, isChecked, task_date } = task;
   const [editingText, setEditText] = useState(task_name);
-  const today = `${new Date().getFullYear()}-${
+  const today = `${new Date().getFullYear()}-${pad(
     new Date().getMonth() + 1
-  }-${new Date().getDate()}`;
+  )}-${pad(new Date().getDate())}`;
 
   const task_State = useRecoilValue(taskState);
 
   useEffect(() => {
-    if (task_State.taskId === task_id && task_State.isChecked !== isChecked) {
+    if (task_State.task_id === task_id && task_State.isChecked !== isChecked) {
       onToggle(task_id, task_State.isChecked);
     }
   }, [task_State]);
 
   useEffect(() => {
-    console.log('Task Name', task_name);
     setEditText(task_name);
   }, [editing, task_id, task_name]);
+
+  useEffect(() => {
+    console.log(task_date);
+    console.log(today);
+  }, [task_date]);
 
   const handleChange = (e) => {
     setEditText(e.target.value);
@@ -46,7 +51,7 @@ const TodoListItem = ({
         {isChecked ? <MdCheckBox /> : <MdCheckBoxOutlineBlank />}
       </div>
       {task_date === today ? (
-        <>
+        <div className='itemsector'>
           {editing ? (
             <input type='text' value={editingText} onChange={handleChange} />
           ) : (
@@ -58,7 +63,7 @@ const TodoListItem = ({
                 저장
               </button>
             ) : (
-              <>
+              <div className='editingForm'>
                 <button
                   className='editTask'
                   onClick={() => {
@@ -67,18 +72,20 @@ const TodoListItem = ({
                 >
                   수정
                 </button>
-                <TimerModal taskId={task_id} className='SetTimer' />
+                <TimerModal
+                  task_id={task_id}
+                  onToggle={onToggle}
+                  className='SetTimer'
+                />
                 <div className='remove' onClick={() => onRemove(task_id)}>
                   <MdDelete className='deleteBtn' />
                 </div>
-              </>
+              </div>
             )}
           </div>
-        </>
+        </div>
       ) : (
-        <>
-          <div className='text'>{task_name}</div>
-        </>
+        <div className='text'>{task_name}</div>
       )}
     </div>
   );

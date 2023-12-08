@@ -1,18 +1,15 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import TodoTemplate from './TodoTemplate';
 import TodoInsert from './TodoInsert';
 import TodoList from './TodoList';
-import { useRecoilState } from 'recoil';
-import { useRecoilValue } from 'recoil';
-import { userState } from '../../RecoilState';
-import { dateState } from '../../RecoilState';
-import { timeState } from '../../RecoilState';
-import { taskState } from '../../RecoilState';
-import { useEffect } from 'react';
+import { useRecoilState, useRecoilValue } from 'recoil';
+
+import { userState, dateState, timeState, taskState } from '../../RecoilState';
+
 import './TodoListModule.css';
 
-const TodoListModule = ({ user_id1 }) => {
-  console.log(user_id1); //친구아이디 가져오는지 확인
+const TodoListModule = () => {
+  //console.log(user_id1); //친구아이디 가져오는지 확인
   const [tasks, setTasks] = useState([]);
   const [editingId, setEditingId] = useState(-1);
   //const nextId = useRef(0);
@@ -23,6 +20,7 @@ const TodoListModule = ({ user_id1 }) => {
   const formattedDate = `${today.getFullYear()}-${
     today.getMonth() + 1
   }-${today.getDate()}`;
+
   const isChecked = useRecoilValue(taskState);
 
   useEffect(() => {
@@ -30,15 +28,14 @@ const TodoListModule = ({ user_id1 }) => {
       fetch(`http://43.201.197.131:8080/${user_id}/task/${task_date}`, {}).then(
         (response) => {
           response.json().then((data) => {
-            if (response.status === 200) {
-              setTasks(
-                data.map((task) => ({
-                  task_id: task.task_id,
-                  task_name: task.task_name,
-                  task_date: task.task_date,
-                  isChecked: task.isChecked || false,
-                }))
-              );
+            if (response.status) {
+              const receivedTask = data.map((task) => ({
+                task_id: task.task_id,
+                task_name: task.task_name,
+                task_date: task.task_date,
+                isChecked: task.isChecked || false,
+              }));
+              setTasks(receivedTask);
             } else {
               alert(data.message);
             }
@@ -66,17 +63,18 @@ const TodoListModule = ({ user_id1 }) => {
       });
     });
   }*/
+  useEffect(() => {
+    console.log('task 추가됨', tasks);
+  }, [tasks]);
 
-  const onInsert = (task_name) => {
+  const onInsert = async (task_name) => {
     const task = {
-      // task_id: nextId.current,
-      task_name,
+      task_name: task_name,
       task_date: formattedDate,
       isChecked: false,
     };
-
-    fetch(`http://43.201.197.131:8080/${user_id}/task`, {
-      method: 'post',
+    await fetch(`http://43.201.197.131:8080/${user_id}/task`, {
+      method: 'POST',
       headers: {
         'content-type': 'application/json',
       },
@@ -87,19 +85,17 @@ const TodoListModule = ({ user_id1 }) => {
           if (response.status === 200) {
             setTasks((prevTasks) => [
               ...prevTasks,
-              { ...data, task_id: data.task_id }, // todo 에서 data로 변경
+              { ...data },
+              // { ...data, task_id: data.task_id }, // todo 에서 data로 변경
             ]);
             alert('잘 들어감' + data.message);
+            console.log('Taskname', task);
           } else {
             alert('안들어감' + data.message);
-            console.log(user_id);
-            console.log(task_date);
           }
         });
       })
       .catch((error) => console.log(error));
-    //setTodos((prevTodos) => [...prevTodos, todo]);
-    //nextId.current += 1;
   };
 
   const onEditStart = (task_id) => {
@@ -114,34 +110,53 @@ const TodoListModule = ({ user_id1 }) => {
   // );
 
   const onEditSave = (task_id, newTask) => {
-    setTasks((prevTasks) =>
-      prevTasks.map((task) =>
-        task.task_id === task_id ? { ...task, task_name: newTask } : task
-      )
-    );
-    setEditingId(null);
-  };
-
-  //task 시간수정 이상함
-  const EditTime = (task_id) => {
-    fetch(`http://43.201.197.131:8080/${user_id}/task/${task_id}/timer`, {
+    fetch(`http://43.201.197.131:8080/${user_id}/task/${task_id}`, {
       method: 'PATCH',
       headers: {
-        'content-type': 'application/json',
+        'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ task_time: handle_time }),
+      body: JSON.stringify({
+        task_name: newTask,
+      }),
     })
       .then((response) => {
-        response.json().then((data) => {
-          if (response.status === 200) {
-            alert(data.message);
-          } else {
-            alert(data.message);
-          }
-        });
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
       })
-      .catch((error) => console.log(error));
+      .then((data) => {
+        setTasks((prevTasks) =>
+          prevTasks.map((task) =>
+            task.task_id === task_id ? { ...task, task_name: newTask } : task
+          )
+        );
+        setEditingId(null);
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
   };
+
+  // const EditTime = (task_id) => {
+  //   fetch(`http://43.201.197.131:8080/${user_id}/task/${task_id}/timer`, {
+  //     method: 'PATCH',
+  //     headers: {
+  //       'content-type': 'application/json',
+  //     },
+  //     body: JSON.stringify({ task_time: handle_time }),
+  //   })
+  //     .then((response) => {
+  //       response.json().then((data) => {
+  //         if (response.status === 200) {
+  //           alert(data.message);
+  //         } else {
+  //           alert(data.message);
+  //         }
+  //       });
+  //     })
+  //     .catch((error) => console.log(error));
+  // };
 
   const onRemove =
     // (id) => {
@@ -169,21 +184,57 @@ const TodoListModule = ({ user_id1 }) => {
     };
 
   const onToggle = (task_id, isChecked) => {
-    setTasks((prevTasks) =>
-      prevTasks.map((task) =>
-        task.task_id === task_id && isChecked === true
-          ? { ...task, isChecked: !task.isChecked }
-          : task
-      )
-    );
+    const time = `${Math.floor(handle_time / 60)}:${
+      handle_time % 60 < 10 ? '0' + (handle_time % 60) : handle_time % 60
+    }`; // 분:초 형태로 변환
+
+    fetch(`http://localhost:8080/${user_id}/task/${task_id}/timer`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        isChecked: true, // isChecked 를 true로 설정
+        task_time: time, // task_time 설정
+      }),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then((data) => {
+        console.log(data);
+        setTasks((prevTasks) =>
+          prevTasks.map((task) =>
+            task.task_id === task_id
+              ? { ...task, isChecked: true } // isChecked 를 true로 설정
+              : task
+          )
+        );
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
   };
+
+  // const onToggle = (task_id, isChecked) => {
+  //   setTasks((prevTasks) =>
+  //     prevTasks.map((task) =>
+  //       task.task_id === task_id && isChecked === true
+  //         ? { ...task, isChecked: !task.isChecked }
+  //         : task
+  //     )
+  //   );
+  // };
 
   // useEffect(() => {
   //   console.log('수정된거: ' + editingId);
   // }, [editingId]);
 
   return (
-    <>
+    <div>
       <div className='show-date'>{task_date}</div>
       <TodoTemplate className='TodoTemp'>
         <TodoList
@@ -196,7 +247,7 @@ const TodoListModule = ({ user_id1 }) => {
         />
       </TodoTemplate>
       <TodoInsert className='TodoInsert' onInsert={onInsert} />
-    </>
+    </div>
   );
 };
 

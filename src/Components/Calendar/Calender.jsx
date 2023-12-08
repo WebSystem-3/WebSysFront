@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { format, addMonths, subMonths } from 'date-fns';
 import { startOfMonth, endOfMonth, startOfWeek, endOfWeek } from 'date-fns';
-import { isSameMonth, isSameDay, addDays, parse } from 'date-fns';
+import { isSameMonth, isSameDay, addDays } from 'date-fns';
 import colorDiff from '../Utils/colorDiff';
 import { useRecoilState, useRecoilValue } from 'recoil';
-import { dateState } from '../../RecoilState';
+import { userState, dateState, timeState } from '../../RecoilState';
+
 import './calendar.css';
-import { timeState } from '../../RecoilState';
 
 const RenderHeader = ({ currentMonth, prevMonth, nextMonth }) => {
   return (
@@ -110,6 +110,10 @@ const Calendar = () => {
   const [currentMonth, setCurrentMonth] = useState(new Date());
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [handle_date, setHandle_date] = useRecoilState(dateState);
+  const [timeValue, setTimeValue] = useRecoilState(timeState);
+
+  const myUserId = useRecoilState(userState);
+  const user_id = myUserId.user_id;
 
   const prevMonth = () => {
     setCurrentMonth(subMonths(currentMonth, 1));
@@ -127,6 +131,30 @@ const Calendar = () => {
     //console.log(handle_date);
     //console.log(setSelectedDate);
   };
+
+  useEffect(() => {
+    const start_date = format(startOfMonth(currentMonth), 'yyyy-MM-dd');
+    const end_date = format(endOfMonth(currentMonth), 'yyyy-MM-dd');
+
+    fetch(`http://localhost:8080/${user_id}/task/${start_date}/${end_date}`)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then((data) => {
+        const taskTimes = data.reduce((acc, cur) => {
+          acc[cur.task_date] = cur.total_task_time;
+          return acc;
+        }, {});
+        setTimeValue(taskTimes);
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
+  }, [currentMonth, user_id]);
+
   useEffect(() => {
     // console.log(handle_date);
   }, [handle_date]);
