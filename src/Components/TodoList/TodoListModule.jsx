@@ -10,7 +10,7 @@ import './TodoListModule.css';
 const TodoListModule = () => {
   const [tasks, setTasks] = useState([]);
   const [editingId, setEditingId] = useState(-1);
-  const [user_id, setUser_id] = useRecoilState(userState);
+  const user_id = useRecoilState(userState);
   const task_date = useRecoilValue(dateState);
   const handle_time = useRecoilValue(timeState);
   const selectedFriendID= useRecoilValue(selectedFriendState);
@@ -23,11 +23,12 @@ const TodoListModule = () => {
 
   useEffect(() => {
     const showTheDateList = () => {
+      let user_id2 = user_id;
       if (selectedFriendID!==null){
-        user_id = selectedFriendID;
+        user_id2 = selectedFriendID;
         console.log('친구선택됨');
       }
-      fetch(`http://43.201.197.131:8080/${user_id}/task/${task_date}`, {}).then(
+      fetch(`http://43.201.197.131:8080/${user_id2}/task/${task_date}`, {}).then(
         (response) => {
           response.json().then((data) => {
             if (response.status) {
@@ -46,7 +47,7 @@ const TodoListModule = () => {
       );
     };
     showTheDateList();
-  }, [user_id, task_date]);
+  }, [selectedFriendID, task_date]);
   //캘린더에서 handle_date 가져오기
 
   const onInsert = async (task_name) => {
