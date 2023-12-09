@@ -21,7 +21,7 @@ const LoginForm = () => {
     };
     await fetch('http://43.201.197.131:8080/user/login', {
       method: 'post',
-      //credentials:'include',
+      credentials:'include',
       headers: {
         'content-type': 'application/json',
       },
@@ -51,8 +51,8 @@ const LoginForm = () => {
     },{"Content-Type": "application/json", withCredentials:true},)
       .then((response)=>{console.log(response);})
       .catch((error) => console.log(error));
-  };
-*/
+  };*/
+
   function tosignup() {
     navigate('/signup');
   }

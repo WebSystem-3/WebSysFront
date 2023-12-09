@@ -69,12 +69,8 @@ const TodoListModule = () => {
 
   const onInsert = async (task_name) => {
     const task = {
-<<<<<<< HEAD
-      task_name: task_name,
-=======
       // task_id: nextId.current,
       task_name:task_name,  
->>>>>>> 904601b74be911715e962de1949608369a7b7a11
       task_date: formattedDate,
       isChecked: false,
     };
@@ -97,12 +93,9 @@ const TodoListModule = () => {
             console.log('Taskname', task);
           } else {
             alert('안들어감' + data.message);
-<<<<<<< HEAD
-=======
             console.log(user_id);
             console.log(task_date);
             console.log(task);
->>>>>>> 904601b74be911715e962de1949608369a7b7a11
           }
         });
       })

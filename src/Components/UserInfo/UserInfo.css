@@ -5,7 +5,7 @@
 .userInfoForm{
   flex: 9;
   flex-direction: column;
-  margin-top: 400px;
+  margin-top: 200px;
   text-align: center;
 }
 .toMain{
@@ -18,11 +18,12 @@
   flex-direction: row;
 }
 .usertext{
-  flex:1;
+  margin-top: 50px;
+  width: 50%
 }
 .imgcss{
-  flex:1;
-  width: 100px;
+  width: 200px;
+  height: 200px;
 }
 .userInfoBtsContainer{
   width: 300px;

@@ -64,24 +64,24 @@ const FriendSearch = ({onUpdate}) => {
     }
 
     return (
-        <div>
-            <input 
-            type="text" 
-            placeholder="   ID 검색"
-            className='modalIDinput'
-            onChange={(event) => setUser_id2(event.target.value)}
-            />
-            <IoSearch className='searchBtn' size='25' onClick={handleSearchFr}/>
-            {isSearched ? (
-                <div>
-                <p>{searchedUser.account}</p>
-                <p>{searchedUser.name}</p>
-                <IoAdd className='addBtn'onClick={handleAddFr}/>
-                </div>
-            ):(
-                <></>
-            )}
-        </div>
+      <div>
+          <input 
+          type="text" 
+          placeholder="   ID 검색"
+          className='modalIDinput'
+          onChange={(event) => setUser_id2(event.target.value)}
+          />
+          <IoSearch className='searchBtn' size='25' onClick={handleSearchFr}/>
+          {isSearched ? (
+              <div className='searchedFrContainer'>
+              <div className='searchedFrName'>{searchedUser.name} </div>
+              <div className='searchedFrID'>{searchedUser.account} </div>
+              <IoAdd className='addBtn'onClick={handleAddFr} size='20'/>
+              </div>
+          ):(
+              <></>
+          )}
+      </div>
     );
 }
 

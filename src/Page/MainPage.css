@@ -29,7 +29,6 @@
   flex-shrink: 1;
   align-items: center;
 }
-<<<<<<< HEAD
 .todolist-template {
   width: 300px;
   height: 60px;
@@ -41,8 +40,6 @@
   align-self: flex-start;
   margin-left: 115px;
 }
-.calendar-template {
-=======
 
 .toMyInfo {
   float:right;
@@ -51,7 +48,6 @@
   cursor: pointer;
 }
 .template {
->>>>>>> 904601b74be911715e962de1949608369a7b7a11
   width: 300px;
   height: 40px;
   border-radius: 13px;

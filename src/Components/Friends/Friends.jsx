@@ -14,12 +14,31 @@ const Friends = ({onFriendClicked}) => {
     const [searchIsOpen, setSearchIsOpen] = useState(false);
     const [deleteMode, setdeleteMode] = useState(false);
     const [isHovering, setIsHovering] = useState(false);
-
+    
+    const handleModalUpdate = () => {
+      console.log('Friends updated');
+    }
+    const handleDeleteFr = (user_id2) => {
+      fetch(`http://43.201.197.131:8080/${user_id1}/friend/${user_id2}`,{
+    method: "DELETE",
+  })
+  .then((response) => {
+    response.json().then((data) => {
+      if (response.status === 200){
+        alert(data.message);
+      } else {
+        alert(data.errorMessage);
+      }
+    }); 
+  })
+  .catch((error) => console.error(error));
+  }
     useEffect(() => {
-      
+        console.log('친구데이터 불러오기성공');
         getFriends();
-    },[]);//handleDeleteFr추가
+    },[handleModalUpdate, handleDeleteFr]);
 
+    
     const getFriends = () => {
       fetch(`http://43.201.197.131:8080/${user_id1}/friend`)
         .then((response) => {
@@ -38,9 +57,6 @@ const Friends = ({onFriendClicked}) => {
     const closeSearchFr = () =>{
       setSearchIsOpen(false);
     }
-    const handleModalUpdate = (handleAddFr) => {
-      setFriends(handleAddFr);
-    }
     const modalStyle = {
       content: {
         width:'700px',
@@ -55,29 +71,15 @@ const Friends = ({onFriendClicked}) => {
       }
     }
     const setFr = (user_id2) => {
-      onFriendClicked(user_id2);
+      onFriendClicked(user_id2); //todomodule에 친구아이디 전달하기 mainpage도 함께 수정필요
     }
     const toggleDeleteMode = () =>{
       setdeleteMode(!deleteMode);
     }
     
-/*
-    const handleDeleteFr = (user_id1) => {
-        fetch(`http://43.201.197.131:8080/${user_id1}/friend/${user_id2}`,{
-      method: "DELETE",
-    })
-    .then((response) => {
-      response.json().then((data) => {
-        if (response.status === 200){
-          alert(data.message);
-        } else {
-          alert(data.errorMessage);
-        }
-      }); 
-    })
-    .catch((error) => console.error(error));
-    }
-    onClick={()=>handleDeleteFr(fr.user_id)}*/
+
+    
+    
 
 /*
     <ul>
@@ -100,11 +102,13 @@ const Friends = ({onFriendClicked}) => {
             <li><button className='myTodoBtn'>my</button></li>
             <li className='friendtitle'>Friends</li>
             {friends.map((fr) => (
-                <li key={fr.user_id}  onClick={() => setFr(fr.user_id)}
+                <li key={fr.user_id}  
                 onMouseOver={()=>setIsHovering(true)}
                 onMouseOut={()=>setIsHovering(false)}
                 >
-                {deleteMode && isHovering?(<button className='xBtn'>x</button>):(<div>{fr.user_name}</div> )}
+                {deleteMode && isHovering?
+                (<div className='xBtn' onClick={()=>handleDeleteFr(fr.user_id)}>x</div>):
+                (<div className='friendName' onClick={() => setFr(fr.user_id)} >{fr.name.length<4? fr.name : fr.name.slice(0,3)+'...'}</div> )}
                 </li>
             ))}
             </ul>
@@ -115,9 +119,8 @@ const Friends = ({onFriendClicked}) => {
           style={modalStyle}
           isOpen = {searchIsOpen}
           onRequestClose={closeSearchFr}
-          onUpdate = {handleModalUpdate}
           >
-            <FriendSearch />
+            <FriendSearch onUpdate={handleModalUpdate}/>
             <MdClose className='modalCloseBt' size='30' onClick={closeSearchFr} />
           </Modal>
           

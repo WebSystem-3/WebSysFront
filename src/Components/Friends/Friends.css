@@ -30,13 +30,28 @@
   margin-bottom: 10px;
 }  
 .xBtn{
-  width: 50px;
-  height: 50px;
+  width: 60px;
+  height: 60px;
   font-size: 20px;
   background-color: #D1D1D1;
   border: none;
   border-radius: 50px;
+  margin-top: 30px;
   cursor: pointer;
+  
+  text-align: center;
+}
+.friendName{
+  width: 60px;
+  height: 60px;
+  font-size: 15px;
+  background-color: white;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  margin-top: 30px;
+  text-align: center;
+  top:50%
 }
 .friendList{
   margin: 0;
@@ -44,14 +59,15 @@
   list-style-type: none;
 }
 .addFrBtn{
-  margin-left: 30px;
-  width: 50px;
-  height: 50px;
+  margin-left: 23px;
+  width: 60px;
+  height: 60px;
   font-size: 20px;
   background-color: #FFE1E1;
   border: none;
   border-radius: 50px;
   cursor: pointer;
+  margin-top: 30px;
 }
 .editBtn{
   margin-left: 20px;
