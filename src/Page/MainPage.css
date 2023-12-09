@@ -5,10 +5,23 @@
   width: 120px;
   cursor: pointer;
 }
+.toMyInfo {
+  float: right;
+  margin-top: 20px;
+  margin-right: 60px;
+  cursor: pointer;
+}
 .mainContainer {
   display: flex;
+  flex-direction: row;
+  width: 100%;
 }
-
+.Components {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  flex-grow: 1;
+}
 .calendarContainer {
   display: flex;
   flex-direction: column;
@@ -16,7 +29,18 @@
   justify-content: center;
   flex-grow: 1;
   flex-shrink: 1;
-  align-items: center;
+  align-items: start;
+}
+.calendar-template {
+  width: 300px;
+  height: 40px;
+  border-radius: 13px;
+  background: #ffcaca;
+  text-align: center;
+  font-size: 20px;
+  line-height: 40px;
+  align-self: flex-start;
+  margin-bottom: 50px;
 }
 
 .timerTodoContainer {
@@ -27,9 +51,8 @@
   justify-content: center;
   flex-grow: 1;
   flex-shrink: 1;
-  align-items: center;
+  align-items: start;
 }
-
 .todolist-template {
   width: 300px;
   height: 60px;
@@ -39,23 +62,31 @@
   font-size: 20px;
   line-height: 60px;
   align-self: flex-start;
-  margin-left: 115px;
 }
 
-.toMyInfo {
-  float: right;
-  margin-top: 20px;
-  margin-right: 60px;
-  cursor: pointer;
-}
-.template {
-  width: 300px;
-  height: 40px;
-  border-radius: 13px;
-  background: #ffcaca;
-  text-align: center;
-  font-size: 20px;
-  line-height: 40px;
+.showTime {
+  flex-start: 1;
+  margin-top: 30px;
+  display: flex;
+  flex-direction: row;
+  boxing-size: border-box;
   align-self: flex-start;
-  margin: 0 0 50px 180px;
+}
+.zeroplus {
+  background-color: white;
+}
+.fourplus {
+  background-color: lightpink;
+}
+.sevenplus {
+  background-color: pink;
+}
+.tenplus {
+  background-color: deeppink;
+}
+
+.leftbox .rightbox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }

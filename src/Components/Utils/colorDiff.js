@@ -1,15 +1,13 @@
 const colorDiff = (timeAmount) => {
   let backgroundColor = '';
-
-  if (timeAmount >= 2000) {
-    //셀 색깔 연 분 lightpink
-    backgroundColor = 'lightpink';
-  } else if (timeAmount >= 1800) {
-    //셀 색깔 분 pink
-    backgroundColor = 'pink';
-  } else {
-    //셀 색깔 찐 분 deeppink
+  if (timeAmount >= 600) {
     backgroundColor = 'deeppink';
+  } else if (timeAmount >= 420) {
+    backgroundColor = 'pink';
+  } else if (timeAmount >= 240) {
+    backgroundColor = 'lightpink';
+  } else {
+    backgroundColor = 'white';
   }
   return backgroundColor;
 };

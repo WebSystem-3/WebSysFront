@@ -4,6 +4,10 @@
   align-items: center;
   justify-content: start;
 }
+.checkedbox {
+  width: 20px;
+  height: 100%;
+}
 
 .editingForm {
   display: flex;

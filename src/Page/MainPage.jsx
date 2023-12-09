@@ -5,7 +5,7 @@ import TimerModal from '../Components/Timer/TimerModal';
 import TodoListModule from '../Components/TodoList/TodoListModule';
 import Friends from '../Components/Friends/Friends';
 import { useNavigate } from 'react-router-dom';
-import { FaUser } from "react-icons/fa";
+import { FaUser } from 'react-icons/fa';
 
 import logo from './logo2.png';
 import './MainPage.css';
@@ -28,13 +28,25 @@ function Main() {
       </header>
       <div className='mainContainer'>
         <Friends />
-        <div className='calendarContainer'>
-          <p className='calendar-template'>나의 기록</p>
-          <Calendar className='calendar' />
-        </div>
-        <div className='timerTodoContainer'>
-          <p className='todolist-template'>To-do List</p>
-          <TodoListModule className='TodoList' />
+        <div className='Components'>
+          <div className='leftbox'>
+            <div className='calendarContainer'>
+              <p className='calendar-template'>나의 기록</p>
+              <Calendar className='calendar' />
+              <div className='showTime'>
+                <p className='zeroplus'>0+</p>
+                <p className='fourplus'>4+</p>
+                <p className='sevenplus'>7+</p>
+                <p className='tenplus'>10+</p>
+              </div>
+            </div>
+          </div>
+          <div className='rightbox'>
+            <div className='timerTodoContainer'>
+              <p className='todolist-template'>To-do List</p>
+              <TodoListModule className='TodoList' />
+            </div>
+          </div>
         </div>
       </div>
     </>

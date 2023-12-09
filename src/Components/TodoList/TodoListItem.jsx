@@ -46,52 +46,13 @@ const TodoListItem = ({
   };
 
   return (
-    //   <div className={`TodoListItem ${isChecked ? 'checked' : ''}`}>
-    //     <div className='checkbox'>
-    //       {isChecked ? <MdCheckBox /> : <MdCheckBoxOutlineBlank />}
-    //     </div>
-    //     {task_date === today ? (
-    //       <div className='itemsector'>
-    //         {editing ? (
-    //           <input type='text' value={editingText} onChange={handleChange} />
-    //         ) : (
-    //           <div className='text'>{task_name}</div>
-    //         )}
-    //         <div>
-    //           {editing ? (
-    //             <button className='saveTask' onClick={handleEditSave}>
-    //               저장
-    //             </button>
-    //           ) : (
-    //             <div className='editingForm'>
-    //               <button
-    //                 className='editTask'
-    //                 onClick={() => {
-    //                   onEditStart(task_id);
-    //                 }}
-    //               >
-    //                 수정
-    //               </button>
-    //               <TimerModal
-    //                 task_id={task_id}
-    //                 onToggle={onToggle}
-    //                 className='SetTimer'
-    //               />
-    //               <div className='remove' onClick={() => onRemove(task_id)}>
-    //                 <MdDelete className='deleteBtn' />
-    //               </div>
-    //             </div>
-    //           )}
-    //         </div>
-    //       </div>
-    //     ) : (
-    //       <div className='text'>{task_name}</div>
-    //     )}
-    //   </div>
-    // );
     <div className={`TodoListItem ${isChecked ? 'checked' : ''}`}>
       <div className='checkbox'>
-        {isChecked ? <MdCheckBox /> : <MdCheckBoxOutlineBlank />}
+        {isChecked ? (
+          <MdCheckBox className='checkedbox' />
+        ) : (
+          <MdCheckBoxOutlineBlank className='checkedbox' />
+        )}
       </div>
       {task_date === today ? (
         <div className='itemsector'>

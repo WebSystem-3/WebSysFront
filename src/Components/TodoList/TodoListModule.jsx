@@ -79,13 +79,6 @@ const TodoListModule = () => {
         response.json().then((data) => {
           if (response.status === 200) {
             setTasks(data.result);
-            // setTasks((prevTasks) => [
-            //   ...prevTasks,
-            //   { ...data },
-            //   //   // { ...data, task_id: data.task_id }, // todo 에서 data로 변경
-            // ]);
-            // alert('잘 들어감' + data.message);
-
             console.log(data);
             console.log('Taskname', task);
           } else {

@@ -1,9 +1,10 @@
 .show-date {
   font-size: 20px;
-
+  width: 200px;
   padding: 20px;
   border: 2px dashed;
+  box-sizing: border-box;
   border-radius: 20px;
-  align-self: flex-start;
-  margin: 0 0 20px 115px;
+  text-align: center;
+  margin-bottom: 20px;
 }
