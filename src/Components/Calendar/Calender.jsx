@@ -5,7 +5,6 @@ import { isSameMonth, isSameDay, addDays } from 'date-fns';
 import colorDiff from '../Utils/colorDiff';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { userState, dateState, timeState } from '../../RecoilState';
-
 import './calendar.css';
 
 const RenderHeader = ({ currentMonth, prevMonth, nextMonth }) => {
@@ -111,9 +110,7 @@ const Calendar = () => {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [handle_date, setHandle_date] = useRecoilState(dateState);
   const [timeValue, setTimeValue] = useRecoilState(timeState);
-
-  const myUserId = useRecoilState(userState);
-  const user_id = myUserId.user_id;
+  const [user_id] = useRecoilState(userState);
 
   const prevMonth = () => {
     setCurrentMonth(subMonths(currentMonth, 1));
@@ -135,8 +132,11 @@ const Calendar = () => {
   useEffect(() => {
     const start_date = format(startOfMonth(currentMonth), 'yyyy-MM-dd');
     const end_date = format(endOfMonth(currentMonth), 'yyyy-MM-dd');
+    console.log('내 아이디', user_id);
 
-    fetch(`http://localhost:8080/${user_id}/task/${start_date}/${end_date}`)
+    fetch(
+      `http://43.201.197.131:8080/${user_id}/task/${start_date}/${end_date}`
+    )
       .then((response) => {
         if (!response.ok) {
           throw new Error('Network response was not ok');

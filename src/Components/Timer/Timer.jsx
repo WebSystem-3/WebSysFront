@@ -5,7 +5,7 @@ import { timeState } from '../../RecoilState';
 import { taskState } from '../../RecoilState';
 import './Timer.css';
 
-const Timer = ({ task_id, onToggle }) => {
+const Timer = ({ task_id, onTimerEnd }) => {
   const [minutes, setMinutes] = useState(0);
   const [seconds, setSeconds] = useState(0);
   const [isActive, setIsActive] = useState(false);
@@ -29,6 +29,7 @@ const Timer = ({ task_id, onToggle }) => {
             setIsActive(false);
             alert('timer done');
             stopTimer();
+            onTimerEnd();
           } else {
             setMinutes(minutes - 1);
             setSeconds(59);
@@ -50,22 +51,22 @@ const Timer = ({ task_id, onToggle }) => {
 
     setMinutes(num1);
     setSeconds(num2);
-    //const timeAmount = num1 * 60 + num2;
-    //setHandle_time(timeAmount);
-    //console.log(handle_time);
+
     toggleEditing();
   };
 
   const startTimer = () => {
     setIsActive(true);
+    const timeAmount = minutes * 60 + seconds;
+    setHandle_time(timeAmount);
+    console.log(timeAmount);
+    console.log('잘 전달됨', handle_time);
   };
 
   const stopTimer = () => {
     setIsActive(false);
-    const timeAmount = minutes * 60 + seconds;
-    setHandle_time(timeAmount);
-    console.log(handle_time);
-    onToggle(task_id, true);
+
+    //onToggle(task_id, true);
     setTaskState({ task_id, isChecked: true });
   };
 

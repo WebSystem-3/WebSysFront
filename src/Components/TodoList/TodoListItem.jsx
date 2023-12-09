@@ -29,14 +29,17 @@ const TodoListItem = ({
   }, [task_State]);
 
   useEffect(() => {
+<<<<<<< HEAD
+=======
     console.log('Task Name', task);
+>>>>>>> 904601b74be911715e962de1949608369a7b7a11
     setEditText(task_name);
   }, [editing, task_id, task_name]);
 
-  useEffect(() => {
-    console.log(task_date);
-    console.log(today);
-  }, [task_date]);
+  // useEffect(() => {
+  //   console.log(task_date);
+  //   console.log(today);
+  // }, [task_date]);
 
   const handleChange = (e) => {
     setEditText(e.target.value);
@@ -47,8 +50,51 @@ const TodoListItem = ({
   };
 
   return (
+    //   <div className={`TodoListItem ${isChecked ? 'checked' : ''}`}>
+    //     <div className='checkbox'>
+    //       {isChecked ? <MdCheckBox /> : <MdCheckBoxOutlineBlank />}
+    //     </div>
+    //     {task_date === today ? (
+    //       <div className='itemsector'>
+    //         {editing ? (
+    //           <input type='text' value={editingText} onChange={handleChange} />
+    //         ) : (
+    //           <div className='text'>{task_name}</div>
+    //         )}
+    //         <div>
+    //           {editing ? (
+    //             <button className='saveTask' onClick={handleEditSave}>
+    //               저장
+    //             </button>
+    //           ) : (
+    //             <div className='editingForm'>
+    //               <button
+    //                 className='editTask'
+    //                 onClick={() => {
+    //                   onEditStart(task_id);
+    //                 }}
+    //               >
+    //                 수정
+    //               </button>
+    //               <TimerModal
+    //                 task_id={task_id}
+    //                 onToggle={onToggle}
+    //                 className='SetTimer'
+    //               />
+    //               <div className='remove' onClick={() => onRemove(task_id)}>
+    //                 <MdDelete className='deleteBtn' />
+    //               </div>
+    //             </div>
+    //           )}
+    //         </div>
+    //       </div>
+    //     ) : (
+    //       <div className='text'>{task_name}</div>
+    //     )}
+    //   </div>
+    // );
     <div className={`TodoListItem ${isChecked ? 'checked' : ''}`}>
-      <div className='checkbox' onClick={() => onToggle(task_id, isChecked)}>
+      <div className='checkbox'>
         {isChecked ? <MdCheckBox /> : <MdCheckBoxOutlineBlank />}
       </div>
       {task_date === today ? (
@@ -64,24 +110,26 @@ const TodoListItem = ({
                 저장
               </button>
             ) : (
-              <div className='editingForm'>
-                <button
-                  className='editTask'
-                  onClick={() => {
-                    onEditStart(task_id);
-                  }}
-                >
-                  수정
-                </button>
-                <TimerModal
-                  task_id={task_id}
-                  onToggle={onToggle}
-                  className='SetTimer'
-                />
-                <div className='remove' onClick={() => onRemove(task_id)}>
-                  <MdDelete className='deleteBtn' />
+              !isChecked && (
+                <div className='editingForm'>
+                  <button
+                    className='editTask'
+                    onClick={() => {
+                      onEditStart(task_id);
+                    }}
+                  >
+                    수정
+                  </button>
+                  <TimerModal
+                    task_id={task_id}
+                    onToggle={onToggle}
+                    className='SetTimer'
+                  />
+                  <div className='remove' onClick={() => onRemove(task_id)}>
+                    <MdDelete className='deleteBtn' />
+                  </div>
                 </div>
-              </div>
+              )
             )}
           </div>
         </div>

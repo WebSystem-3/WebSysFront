@@ -27,7 +27,7 @@ const TimerModal = ({ task_id }) => {
         onRequestClose={closeModal}
         contentLabel='Timer Modal'
       >
-        <Timer task_id={task_id} />
+        <Timer task_id={task_id} onTimerEnd={closeModal} />
         <button onClick={closeModal} className='openbtn'>
           Close Timer
         </button>

@@ -3,7 +3,6 @@ import TodoTemplate from './TodoTemplate';
 import TodoInsert from './TodoInsert';
 import TodoList from './TodoList';
 import { useRecoilState, useRecoilValue } from 'recoil';
-
 import { userState, dateState, timeState, taskState } from '../../RecoilState';
 
 import './TodoListModule.css';
@@ -63,14 +62,14 @@ const TodoListModule = () => {
       });
     });
   }*/
-  useEffect(() => {
-    console.log('task 추가됨', tasks);
-  }, [tasks]);
-
   const onInsert = async (task_name) => {
     const task = {
+<<<<<<< HEAD
+      task_name: task_name,
+=======
       // task_id: nextId.current,
       task_name:task_name,  
+>>>>>>> 904601b74be911715e962de1949608369a7b7a11
       task_date: formattedDate,
       isChecked: false,
     };
@@ -84,28 +83,33 @@ const TodoListModule = () => {
       .then((response) => {
         response.json().then((data) => {
           if (response.status === 200) {
-            setTasks((prevTasks) => [
-              ...prevTasks,
-              { ...data },
-              // { ...data, task_id: data.task_id }, // todo 에서 data로 변경
-            ]);
-            alert('잘 들어감' + data.message);
+            setTasks(data.result);
+            // setTasks((prevTasks) => [
+            //   ...prevTasks,
+            //   { ...data },
+            //   //   // { ...data, task_id: data.task_id }, // todo 에서 data로 변경
+            // ]);
+            // alert('잘 들어감' + data.message);
+
+            console.log(data);
             console.log('Taskname', task);
           } else {
             alert('안들어감' + data.message);
-            console.log(user_id);
-            console.log(task_date);
-            console.log(task);
           }
         });
       })
       .catch((error) => console.log(error));
   };
 
+  useEffect(() => {
+    console.log('task 추가됨', tasks);
+  }, [tasks]);
+
   const onEditStart = (task_id) => {
     setEditingId(task_id);
     //console.log('수정: ' + task_id);
   };
+
   // const onEditStart = useCallback(
   //   (id) => {
   //     setEditingId(id);
@@ -192,7 +196,7 @@ const TodoListModule = () => {
       handle_time % 60 < 10 ? '0' + (handle_time % 60) : handle_time % 60
     }`; // 분:초 형태로 변환
 
-    fetch(`http://localhost:8080/${user_id}/task/${task_id}/timer`, {
+    fetch(`http://43.201.197.131:8080/${user_id}/task/${task_id}/timer`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
