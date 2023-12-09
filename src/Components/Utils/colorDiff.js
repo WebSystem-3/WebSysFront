@@ -1,15 +1,15 @@
 const colorDiff = (timeAmount) => {
   let backgroundColor = '';
 
-  if (timeAmount >= 3 * 60) {
-    //셀 색깔 찐 분 deeppink
-    backgroundColor = 'deeppink';
-  } else if (timeAmount >= 2 * 60) {
+  if (timeAmount >= 2000) {
+    //셀 색깔 연 분 lightpink
+    backgroundColor = 'lightpink';
+  } else if (timeAmount >= 1800) {
     //셀 색깔 분 pink
     backgroundColor = 'pink';
   } else {
-    //셀 색깔 연분 lightpink
-    backgroundColor = 'lightpink';
+    //셀 색깔 찐 분 deeppink
+    backgroundColor = 'deeppink';
   }
   return backgroundColor;
 };
