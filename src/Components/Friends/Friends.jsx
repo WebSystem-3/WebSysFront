@@ -14,7 +14,7 @@ const Friends = ({onFriendClicked}) => {
     const [searchIsOpen, setSearchIsOpen] = useState(false);
     const [deleteMode, setdeleteMode] = useState(false);
     const [isHovering, setIsHovering] = useState(false);
-    
+
     const handleModalUpdate = () => {
       console.log('Friends updated');
     }
@@ -33,6 +33,7 @@ const Friends = ({onFriendClicked}) => {
   })
   .catch((error) => console.error(error));
   }
+  
     useEffect(() => {
         console.log('친구데이터 불러오기성공');
         getFriends();
