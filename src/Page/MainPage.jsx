@@ -1,5 +1,5 @@
 import { useRecoilValue } from 'recoil';
-import { userState } from '../RecoilState';
+import { dateState, userState } from '../RecoilState';
 import Calendar from '../Components/Calendar/Calender';
 import TimerModal from '../Components/Timer/TimerModal';
 import TodoListModule from '../Components/TodoList/TodoListModule';
@@ -12,6 +12,7 @@ import './MainPage.css';
 
 function Main() {
   const user_id = useRecoilValue(userState);
+  const task_date = useRecoilValue(dateState);
   console.log(user_id);
   const navigate = useNavigate();
   function myInfo() {
@@ -43,7 +44,10 @@ function Main() {
           </div>
           <div className='rightbox'>
             <div className='timerTodoContainer'>
-              <p className='todolist-template'>To-do List</p>
+              <div className='todotitle'>
+                <p className='todolist-template'>To-do List</p>
+                <div className='show-date'>{task_date}</div>
+              </div>
               <TodoListModule className='TodoList' />
             </div>
           </div>

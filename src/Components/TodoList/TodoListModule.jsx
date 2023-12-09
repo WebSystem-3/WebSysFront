@@ -218,7 +218,6 @@ const TodoListModule = () => {
 
   return (
     <div>
-      <div className='show-date'>{task_date}</div>
       <TodoTemplate className='TodoTemp'>
         <TodoList
           tasks={tasks}

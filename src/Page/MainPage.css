@@ -72,21 +72,43 @@
   boxing-size: border-box;
   align-self: flex-start;
 }
+
 .zeroplus {
   background-color: white;
+  font-size: 20px;
 }
 .fourplus {
   background-color: lightpink;
+  font-size: 20px;
 }
 .sevenplus {
   background-color: pink;
+  font-size: 20px;
 }
 .tenplus {
   background-color: deeppink;
+  font-size: 20px;
 }
 
 .leftbox .rightbox {
   display: flex;
   flex-direction: column;
+  align-items: center;
+}
+.show-date {
+  font-size: 20px;
+  height: 100%;
+  width: 200px;
+  padding: 20px;
+  border: 2px dashed;
+  box-sizing: border-box;
+  border-radius: 20px;
+  text-align: center;
+  margin-left: 10px;
+}
+
+.todotitle {
+  display: flex;
+  flex-direction: row;
   align-items: center;
 }
