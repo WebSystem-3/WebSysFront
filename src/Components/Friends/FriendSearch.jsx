@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { useRecoilValue } from "recoil";
-import { userState } from "../../RecoilState";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { userState, friendUpdatedState } from "../../RecoilState";
 import { IoSearch, IoAdd } from "react-icons/io5";
 import './FriendSearch.css';
 
-const FriendSearch = ({onUpdate}) => {
+const FriendSearch = ({}) => {
     const user_id1 = useRecoilValue(userState);
+    const [friendUpdated,setFriendUpdated] = useRecoilState(friendUpdatedState);
     const [user_id2, setUser_id2] = useState("");
     const [isSearched, setIsSearched] = useState(false);
     const [searchedUser, setSearchedUser] = useState(null);
-
 
     const handleSearchFr = async() => {
       const account = user_id2;
@@ -52,7 +52,7 @@ const FriendSearch = ({onUpdate}) => {
               response.json().then((data) => {
                 console.log(data);
                 if (response.status === 200){
-                  onUpdate();
+                  setFriendUpdated((prev) => prev + 1);
                   //정보받아서 friend배열에 추가된 것 useEffect에 업데이트
                   alert(data.message);
                 } else {
