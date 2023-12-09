@@ -3,18 +3,17 @@ import TodoTemplate from './TodoTemplate';
 import TodoInsert from './TodoInsert';
 import TodoList from './TodoList';
 import { useRecoilState, useRecoilValue } from 'recoil';
-import { userState, dateState, timeState, taskState } from '../../RecoilState';
+import { userState, dateState, timeState, taskState, selectedFriendState } from '../../RecoilState';
 
 import './TodoListModule.css';
 
 const TodoListModule = () => {
-  //console.log(user_id1); //친구아이디 가져오는지 확인
   const [tasks, setTasks] = useState([]);
   const [editingId, setEditingId] = useState(-1);
-  //const nextId = useRef(0);
-  const [user_id, setUser_id] = useRecoilState(userState);
+  const user_id = useRecoilState(userState);
   const task_date = useRecoilValue(dateState);
   const handle_time = useRecoilValue(timeState);
+  const selectedFriendID= useRecoilValue(selectedFriendState);
   const today = new Date();
   const formattedDate = `${today.getFullYear()}-${
     today.getMonth() + 1
@@ -24,7 +23,12 @@ const TodoListModule = () => {
 
   useEffect(() => {
     const showTheDateList = () => {
-      fetch(`http://43.201.197.131:8080/${user_id}/task/${task_date}`, {}).then(
+      let user_id2 = user_id;
+      if (selectedFriendID!==null){
+        user_id2 = selectedFriendID;
+        console.log('친구선택됨');
+      }
+      fetch(`http://43.201.197.131:8080/${user_id2}/task/${task_date}`, {}).then(
         (response) => {
           response.json().then((data) => {
             if (response.status) {
@@ -43,25 +47,9 @@ const TodoListModule = () => {
       );
     };
     showTheDateList();
-  }, [user_id, task_date]);
+  }, [selectedFriendID, task_date]);
   //캘린더에서 handle_date 가져오기
 
-  /*
-  const showFrTask = () => {
-    fetch(`http://43.201.197.131:8080/${user_id}/friend/${user_id1}/task`)
-    .then((response) => {
-      response.json.then((data) => {
-        if(response.status === 200) {
-          setFrTodo(data.map((task) => ({
-                task_id: task.task_id,
-                task_name: task.task_name,
-                task_date: task.task_date,
-                isChecked: task.isChecked,
-              })));
-        } else {alert(data.errorMessage);}
-      });
-    });
-  }*/
   const onInsert = async (task_name) => {
     const task = {
       task_name: task_name,

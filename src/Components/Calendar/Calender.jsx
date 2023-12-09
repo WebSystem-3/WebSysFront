@@ -4,7 +4,7 @@ import { startOfMonth, endOfMonth, startOfWeek, endOfWeek } from 'date-fns';
 import { isSameMonth, isSameDay, addDays } from 'date-fns';
 import colorDiff from '../Utils/colorDiff';
 import { useRecoilState, useRecoilValue } from 'recoil';
-import { userState, dateState, timeState } from '../../RecoilState';
+import { userState, dateState, timeState, selectedFriendState } from '../../RecoilState';
 import './calendar.css';
 
 const RenderHeader = ({ currentMonth, prevMonth, nextMonth }) => {
@@ -111,6 +111,7 @@ const Calendar = () => {
   const [handle_date, setHandle_date] = useRecoilState(dateState);
   const [timeValue, setTimeValue] = useRecoilState(timeState);
   const [user_id] = useRecoilState(userState);
+  const selectedFriendID= useRecoilValue(selectedFriendState);
 
   const prevMonth = () => {
     setCurrentMonth(subMonths(currentMonth, 1));
@@ -130,12 +131,17 @@ const Calendar = () => {
   };
 
   useEffect(() => {
+    console.log('선택된친구아이디'+selectedFriendID);
     const start_date = format(startOfMonth(currentMonth), 'yyyy-MM-dd');
     const end_date = format(endOfMonth(currentMonth), 'yyyy-MM-dd');
     console.log('내 아이디', user_id);
-
+    let user_id2 = user_id;
+    if (selectedFriendID!==null){
+      user_id2 = selectedFriendID;
+      console.log('cal친구아이디: ', user_id2);
+    }
     fetch(
-      `http://43.201.197.131:8080/${user_id}/task/${start_date}/${end_date}`
+      `http://43.201.197.131:8080/${user_id2}/task/${start_date}/${end_date}`
     )
       .then((response) => {
         if (!response.ok) {
@@ -153,7 +159,7 @@ const Calendar = () => {
       .catch((error) => {
         console.error('Error:', error);
       });
-  }, [currentMonth, user_id]);
+  }, [currentMonth, selectedFriendID]);
 
   useEffect(() => {
     // console.log(handle_date);

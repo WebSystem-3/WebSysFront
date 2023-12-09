@@ -21,3 +21,13 @@ export const taskState = atom({
   key: 'isChecked',
   default: { task_id: null, isChecked: false },
 });
+
+export const friendUpdatedState = atom({
+  key: 'friendUpdatedState',
+  default: 0, 
+});
+
+export const selectedFriendState = atom({
+  key: 'selectedFriendState',
+  default: null,
+});
