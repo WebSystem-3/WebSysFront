@@ -50,7 +50,7 @@ function UserInfo() {
     navigate("/userEdit");
   }
   function logout(){
-    /*fetch(`http://43.201.197.131:8080/user/${user_id}/logout`)
+    fetch(`http://43.201.197.131:8080/user/${user_id}/logout`)
     .then((response) => {
       response.json().then((data) => {
         if (response.status === 200){
@@ -60,7 +60,7 @@ function UserInfo() {
         }
       }); 
     })
-    .catch((error) => console.error(error));*/
+    .catch((error) => console.error(error));
     navigate("/");
     resetUser();
   }

@@ -3,12 +3,12 @@ import { useNavigate } from 'react-router-dom';
 import './SignUp.css';
 
 function SignUp({}) {
-  const [id, setId] = useState(''); //회원가입성공하면 네비게이트 페이지에서 구현
+  const [id, setId] = useState(''); 
   const [password, setPassword] = useState('');
   const [password2, setPassword2] = useState('');
   const [name, setName] = useState('');
   const [isIdValid, setIdValid] = useState(false);
-  const [isValCalled, setValCalled] = useState(false); //이미 존재하는 ID입니다 수정필요
+  const [isValCalled, setValCalled] = useState(false); //이미 존재하는 ID입니다 수정필요 안되면 그냥 지우기
   const navigate = useNavigate();
 
   const handleValidation = async () => {
@@ -71,18 +71,13 @@ function SignUp({}) {
     <div className='signUpForm'>
       <p className='pagetitle'>회원가입</p>
       <div className='signupContainer'>
-        <div className='texts'>
-          <p>ID</p>
-          <p>비밀번호</p>
-          <p>비밀번호 확인</p>
-          <p>이름</p>
-        </div>
       <div className='inputs'>
+        <p>ID
         <input
             type='text'
             className='inputSignUp'
             onChange={(event) => setId(event.target.value)}
-          />
+          /></p>
         {id === '' || id.length>=8 ? (
           <></>
         ) : (
@@ -96,34 +91,36 @@ function SignUp({}) {
             )
           ) : (
             <></>
-          )}
+          )}<p>비밀번호
           <input
             type='password'
             className='inputSignUp'
             onChange={(event) => setPassword(event.target.value)}
-          />
+          /></p>
         {password === '' || (password.length>=8 && password.length<=16) ? (
           <></>
         ) : (
           <div className='warning'>비밀번호는 8자~16자이어야 합니다.</div>
-        )}
+        )}<p>비밀번호 확인
           <input
             type='password'
             className='inputSignUp'
             onChange={(event) => setPassword2(event.target.value)}
-          />
+          /></p>
           {password !== '' && password === password2 ? (
             <></>
           ) : (
             password !== '' &&
             password2 !== '' && <div className='warning'>비밀번호가 일치하지 않습니다</div>
-          )}
+          )}<p>이름
           <input
             type='text'
             className='inputSignUp'
             onChange={(event) => setName(event.target.value)}
-          />
+          /></p>
       </div>
+      <br/>
+      <br/>
       <button className = 'valBt' onClick={handleValidation}>중복확인</button>
     </div>
       <button type='button' className="signUpBt2" onClick={handleSignup} disabled={!isIdValid}>

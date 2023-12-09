@@ -21,36 +21,36 @@ const Friends = ({onFriendClicked}) => {
     const handleDeleteFr = (user_id2) => {
       fetch(`http://43.201.197.131:8080/${user_id1}/friend/${user_id2}`,{
     method: "DELETE",
-  })
-  .then((response) => {
-    response.json().then((data) => {
-      if (response.status === 200){
-        alert(data.message);
-      } else {
-        alert(data.errorMessage);
-      }
-    }); 
-  })
-  .catch((error) => console.error(error));
-  }
-  
+    })
+    .then((response) => {
+      response.json().then((data) => {
+        if (response.status === 200){
+          alert(data.message);
+        } else {
+          alert(data.errorMessage);
+        }
+      }); 
+    })
+    .catch((error) => console.error(error));
+    }
+
     useEffect(() => {
-        console.log('친구데이터 불러오기성공');
-        getFriends();
+      console.log('친구데이터 불러오기성공');
+      getFriends();
     },[handleModalUpdate, handleDeleteFr]);
 
     
-    const getFriends = () => {
-      fetch(`http://43.201.197.131:8080/${user_id1}/friend`)
-        .then((response) => {
-            response.json().then((data) => {
-              console.log(data);
-                if(response.status === 200){
-                    setFriends(data);
-                } 
-            })
-        })
-    }
+  const getFriends = () => {
+    fetch(`http://43.201.197.131:8080/${user_id1}/friend`)
+      .then((response) => {
+          response.json().then((data) => {
+            console.log(data);
+              if(response.status === 200){
+                  setFriends(data);
+              } 
+          })
+      })
+  }
 
     const openSearchFr = () =>{
       setSearchIsOpen(true);
