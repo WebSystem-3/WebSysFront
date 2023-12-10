@@ -1,5 +1,5 @@
 import { useRecoilValue } from 'recoil';
-import { dateState, userState, selectedNameState} from '../RecoilState';
+import { dateState, userState, selectedNameState } from '../RecoilState';
 import Calendar from '../Components/Calendar/Calender';
 import TimerModal from '../Components/Timer/TimerModal';
 import TodoListModule from '../Components/TodoList/TodoListModule';
@@ -14,7 +14,7 @@ function Main() {
   const user_id = useRecoilValue(userState);
   const task_date = useRecoilValue(dateState);
   const nameUpdated = useRecoilValue(selectedNameState);
-  console.log(user_id);
+
   const navigate = useNavigate();
   function myInfo() {
     navigate('/userInfo');
@@ -57,8 +57,5 @@ function Main() {
     </>
   );
 }
-//<TimerModal className='Timer' />
-
-/* <Friends/>*/
 
 export default Main;

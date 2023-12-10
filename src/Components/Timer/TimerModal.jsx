@@ -17,11 +17,11 @@ const TimerModal = ({ task_id }) => {
     console.log(task_id);
   };
   const handleTimerStart = () => {
-    setTimerRunning(true); // 타이머 시작 시 timerRunning 상태를 true로 변경
+    setTimerRunning(true);
   };
 
   const handleTimerEnd = () => {
-    setTimerRunning(false); // 타이머 종료 시 timerRunning 상태를 false로 변경
+    setTimerRunning(false);
     closeModal();
   };
 

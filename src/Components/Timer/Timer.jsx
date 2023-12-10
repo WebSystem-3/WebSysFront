@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
-import { useRecoilValue, useRecoilState, useSetRecoilState } from 'recoil';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 import { timeState } from '../../RecoilState';
 import { taskState } from '../../RecoilState';
 import './Timer.css';
@@ -69,12 +69,6 @@ const Timer = ({ task_id, onTimerEnd, onTimerStart }) => {
 
     //onToggle(task_id, true);
     setTaskState({ task_id, isChecked: true });
-  };
-
-  const resetTimer = () => {
-    setIsActive(false);
-    setMinutes(0);
-    setSeconds(0);
   };
 
   const handleMinuteChange = (e) => {

@@ -64,8 +64,6 @@ const Friends = () => {
       .catch((error) => console.error(error));
   };
   const refreshClicked = () => {
-    console.log('새로고침눌림');
-    console.log('친구목록: '+friends);
     setFriendUpdated((prev) => prev + 1);
   };
 
@@ -114,20 +112,31 @@ const Friends = () => {
                 onClick={() => {
                   setSelectedFriendID(fr.user_id);
                   setNameUpdated(fr.name);
-                  }} >{fr.name.length<4? fr.name : fr.name.slice(0,3)+'...'}</button> )}
-                </li>
-            ))}
-          </ul>
-          <FriendSearchModal friends={friends}/>
-          <p>{deleteMode?
-          (<button className='editcompleteBtn' onClick={toggleDeleteMode}>수정완료</button>):
-          (<CiEdit className='editBtn' size='20' onClick={toggleDeleteMode}/>)}
-          <IoMdRefresh className='refreshBtn' size='20' onClick={refreshClicked}/>
-          </p>
-          
-        </div>
-    );
-
+                }}
+              >
+                {fr.name.length < 4 ? fr.name : fr.name.slice(0, 3) + '...'}
+              </button>
+            )}
+          </li>
+        ))}
+      </ul>
+      <FriendSearchModal friends={friends} />
+      <p>
+        {deleteMode ? (
+          <button className='editcompleteBtn' onClick={toggleDeleteMode}>
+            수정완료
+          </button>
+        ) : (
+          <CiEdit className='editBtn' size='20' onClick={toggleDeleteMode} />
+        )}
+        <IoMdRefresh
+          className='refreshBtn'
+          size='20'
+          onClick={refreshClicked}
+        />
+      </p>
+    </div>
+  );
 };
 
 export default Friends;
