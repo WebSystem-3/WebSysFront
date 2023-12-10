@@ -59,15 +59,11 @@ const Timer = ({ task_id, onTimerEnd, onTimerStart }) => {
     setIsActive(true);
     const timeAmount = minutes * 60 + seconds;
     setHandle_time(timeAmount);
-    console.log(timeAmount);
-    console.log('잘 전달됨', handle_time);
     onTimerStart();
   };
 
   const stopTimer = () => {
     setIsActive(false);
-
-    //onToggle(task_id, true);
     setTaskState({ task_id, isChecked: true });
   };
 

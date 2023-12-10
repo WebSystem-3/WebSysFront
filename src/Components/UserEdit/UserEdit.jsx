@@ -4,7 +4,7 @@ import { useRecoilValue } from 'recoil';
 import { userState } from '../../RecoilState';
 import { useNavigate } from "react-router-dom";
 
-function UserEdit(props) {
+function UserEdit() {
     const [password, setPassword] = useState("");
     const [password2, setPassword2] = useState("");
     const [name, setName] = useState("");

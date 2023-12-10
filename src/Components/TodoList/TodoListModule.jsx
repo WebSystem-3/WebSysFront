@@ -73,8 +73,6 @@ const TodoListModule = () => {
         response.json().then((data) => {
           if (response.status === 200) {
             setTasks(data.result);
-            console.log(data);
-            console.log('Taskname', task);
           } else {
             alert('안들어감' + data.message);
           }
@@ -161,7 +159,6 @@ const TodoListModule = () => {
         return response.json();
       })
       .then((data) => {
-        console.log(data);
         setTasks((prevTasks) =>
           prevTasks.map((task) =>
             task.task_id === task_id ? { ...task, isChecked: true } : task

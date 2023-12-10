@@ -57,27 +57,17 @@ const Friends = () => {
     await fetch(`http://43.201.197.131:8080/${user_id1}/friend/${user_id2}`, {
       method: 'DELETE',
     })
-      .then((response) => {
-        response.json().then((data) => {
-          if (response.status === 200) {
-            alert(data.message);
-            setFriendUpdated((prev) => prev + 1);
-          } else {
-            alert(data.message);
-          }
-        });
-      })
-      .then((response) => {
-        response.json().then((data) => {
-          if (response.status === 200) {
-            alert(data.message);
-            setFriendUpdated((prev) => prev + 1);
-          } else {
-            alert(data.message);
-          }
-        });
-      })
-      .catch((error) => console.error(error));
+    .then((response) => {
+      response.json().then((data) => {
+        if (response.status === 200) {
+          alert(data.message);
+          setFriendUpdated((prev) => prev + 1);
+        } else {
+          alert(data.message);
+        }
+      });
+    })
+    .catch((error) => console.error(error));
   };
   const getFriendUpdated = () => {
     setFriendUpdated((prev) => prev + 1);
