@@ -88,3 +88,8 @@
   width: 50px;
   font-size: 30px;
 }
+
+.timer-display-toggle:disabled {
+  cursor: not-allowed;
+  background-color: red;
+}
