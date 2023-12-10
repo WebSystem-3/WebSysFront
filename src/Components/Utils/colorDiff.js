@@ -1,11 +1,13 @@
 const colorDiff = (timeAmount) => {
   let backgroundColor = '';
   if (timeAmount >= 600) {
-    backgroundColor = 'deeppink';
+    backgroundColor = '#FF7272';
   } else if (timeAmount >= 420) {
-    backgroundColor = 'pink';
+    backgroundColor = '#FF8F8F';
   } else if (timeAmount >= 240) {
-    backgroundColor = 'lightpink';
+    backgroundColor = '#FFCACA';
+  } else if (timeAmount > 0) {
+    backgroundColor = '#FFE1E1';
   } else {
     backgroundColor = 'white';
   }

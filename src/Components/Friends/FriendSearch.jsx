@@ -1,19 +1,35 @@
 import React, { useState } from 'react';
-import { useRecoilValue } from "recoil";
-import { userState } from "../../RecoilState";
-import { IoSearch, IoAdd } from "react-icons/io5";
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { userState, friendUpdatedState } from '../../RecoilState';
+import { IoSearch, IoAdd } from 'react-icons/io5';
 import './FriendSearch.css';
 
-const FriendSearch = ({onUpdate}) => {
-    const user_id1 = useRecoilValue(userState);
-    const [account, setAccount] = useState("");
-    const [isSearched, setIsSearched] = useState(false);
-    const [searchedUser, setSearchedUser] = useState(null);
+const FriendSearch = ({ onUpdate }) => {
+  const user_id1 = useRecoilValue(userState);
+  const [friendUpdated, setFriendUpdated] = useRecoilState(friendUpdatedState);
+  const [account, setAccount] = useState('');
+  const [isSearched, setIsSearched] = useState(false);
+  const [searchedUser, setSearchedUser] = useState(null);
 
-    const handleSearchFr = async() => {
-      await fetch(`http://43.201.197.131:8080/${user_id1}/search/${account}`, {
-        headers: {
-          "content-type": "application/json"},
+  const handleSearchFr = async () => {
+    await fetch(`http://43.201.197.131:8080/${user_id1}/search/${account}`, {
+      headers: {
+        'content-type': 'application/json',
+      },
+    })
+      .then((response) => {
+        console.log(response);
+        response.json().then((data) => {
+          console.log(data);
+          if (response.status === 200) {
+            console.log('받은데이터:' + data);
+            setIsSearched(true);
+            setSearchedUser(data);
+            console.log('검색성공' + searchedUser);
+          } else {
+            alert(data.message);
+          }
+        });
       })
         .then((response) => {
           response.json().then((data) => {
