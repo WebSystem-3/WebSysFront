@@ -4,6 +4,7 @@ import { useRecoilState, useRecoilValue } from "recoil";
 import { userState, friendUpdatedState, selectedFriendState, selectedNameState } from "../../RecoilState";
 import { CiEdit } from "react-icons/ci";
 import { IoMdRefresh } from "react-icons/io";
+
 import './Friends.css';
 import FriendSearchModal from "./FriendSearchModal";
 
@@ -16,21 +17,34 @@ const Friends = () => {
     const [deleteMode, setdeleteMode] = useState(false);
     const [isHovering, setIsHovering] = useState(false);
 
-    const getFriends = async() => {
-      try {
-        const response = await fetch(`http://43.201.197.131:8080/${user_id1}/friend`);
-        const data = await response.json();
-        if (response.status === 200) {
-          setFriends(data);
-        }
-      } catch (error) {
-        console.error(error);
-      }
-    };
 
-    const handleDeleteFr = async(user_id2) => {
-      await fetch(`http://43.201.197.131:8080/${user_id1}/friend/${user_id2}`, {
-        method: "DELETE",
+  const getFriends = async () => {
+    try {
+      const response = await fetch(
+        `http://43.201.197.131:8080/${user_id1}/friend`
+      );
+      const data = await response.json();
+      if (response.status === 200) {
+        setFriends(data);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const handleDeleteFr = async (user_id2) => {
+    await fetch(`http://43.201.197.131:8080/${user_id1}/friend/${user_id2}`, {
+      method: 'DELETE',
+    })
+      .then((response) => {
+        response.json().then((data) => {
+          if (response.status === 200) {
+            alert(data.message);
+            setFriendUpdated((prev) => prev + 1);
+          } else {
+            alert(data.message);
+          }
+        });
       })
         .then((response) => {
           response.json().then((data) => {
@@ -92,7 +106,7 @@ const Friends = () => {
           </p>
           
         </div>
-    );
+    );d
 };
 
 export default Friends;

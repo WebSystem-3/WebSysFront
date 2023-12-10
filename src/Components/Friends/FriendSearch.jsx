@@ -76,6 +76,5 @@ const FriendSearch = ({onUpdate}) => {
           )}
       </div>
     );
-}
-
+};
 export default FriendSearch;
