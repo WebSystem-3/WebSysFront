@@ -79,7 +79,6 @@
   background-color: #ff5675;
 }
 
-/* 추가: 편집 상태일 때 form의 스타일 */
 .timer-controller .editingMin,
 .editingSec {
   background-color: #f0f0f0;
