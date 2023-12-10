@@ -78,10 +78,6 @@
 .timer-controller button:hover {
   background-color: #ff5675;
 }
-<<<<<<< HEAD
-
-=======
->>>>>>> 4024fe5c7beff1124600d35ff046c9101c35c5c4
 .timer-controller .editingMin,
 .editingSec {
   background-color: #f0f0f0;
@@ -91,4 +87,9 @@
   height: 50px;
   width: 50px;
   font-size: 30px;
+}
+
+.timer-display-toggle:disabled {
+  cursor: not-allowed;
+  background-color: red;
 }

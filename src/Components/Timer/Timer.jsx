@@ -27,7 +27,7 @@ const Timer = ({ task_id, onTimerEnd, onTimerStart }) => {
           if (minutes === 0) {
             clearInterval(timer);
             setIsActive(false);
-            alert('timer done');
+            alert('태스크가 완료되었습니다');
             stopTimer();
             onTimerEnd();
           } else {
@@ -59,8 +59,6 @@ const Timer = ({ task_id, onTimerEnd, onTimerStart }) => {
     setIsActive(true);
     const timeAmount = minutes * 60 + seconds;
     setHandle_time(timeAmount);
-    console.log(timeAmount);
-    console.log('잘 전달됨', handle_time);
     onTimerStart();
   };
 
@@ -199,7 +197,11 @@ const Timer = ({ task_id, onTimerEnd, onTimerStart }) => {
         <div className='timer-display'>
           {minutes < 10 ? '0' + minutes : minutes} :{' '}
           {seconds < 10 ? '0' + seconds : seconds}
-          <button className='timer-display-toggle' onClick={toggleEditing}>
+          <button
+            className='timer-display-toggle'
+            onClick={toggleEditing}
+            disabled={isActive}
+          >
             Set time
           </button>
         </div>
