@@ -64,8 +64,6 @@ const Timer = ({ task_id, onTimerEnd, onTimerStart }) => {
 
   const stopTimer = () => {
     setIsActive(false);
-
-    //onToggle(task_id, true);
     setTaskState({ task_id, isChecked: true });
   };
 
