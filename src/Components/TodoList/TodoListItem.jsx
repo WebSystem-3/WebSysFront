@@ -3,7 +3,7 @@ import './TodoListItem.css';
 import { MdCheckBox, MdCheckBoxOutlineBlank, MdDelete } from 'react-icons/md';
 import TimerModal from '../Timer/TimerModal';
 import { useRecoilValue } from 'recoil';
-import { selectedFriendState, taskState, userState } from '../../RecoilState';
+import { selectedFriendState, taskState } from '../../RecoilState';
 
 const TodoListItem = ({
   task,
@@ -20,7 +20,6 @@ const TodoListItem = ({
     new Date().getMonth() + 1
   )}-${pad(new Date().getDate())}`;
   const friendId = useRecoilValue(selectedFriendState);
-  const user_id = useRecoilValue(userState);
 
   const task_State = useRecoilValue(taskState);
 
@@ -33,11 +32,6 @@ const TodoListItem = ({
   useEffect(() => {
     setEditText(task_name);
   }, [editing, task_id, task_name]);
-
-  // useEffect(() => {
-  //   console.log(task_date);
-  //   console.log(today);
-  // }, [task_date]);
 
   const handleChange = (e) => {
     setEditText(e.target.value);

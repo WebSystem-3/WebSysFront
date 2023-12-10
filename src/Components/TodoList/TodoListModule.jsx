@@ -14,7 +14,6 @@ import {
 import './TodoListModule.css';
 
 const TodoListModule = () => {
-  //console.log(user_id1); //친구아이디 가져오는지 확인
   const [tasks, setTasks] = useState([]);
   const [editingId, setEditingId] = useState(-1);
   const [user_id, setUser_id] = useRecoilState(userState);
@@ -30,13 +29,10 @@ const TodoListModule = () => {
   const isChecked = useRecoilValue(taskState);
 
   useEffect(() => {
-    console.log('내아이디', user_id);
-    console.log('친구 아이디', friendId);
     const showTheDateList = () => {
       let user_id2 = user_id;
       if (selectedFriendID !== null) {
         user_id2 = selectedFriendID;
-        console.log('친구선택됨');
       }
       fetch(
         `http://43.201.197.131:8080/${user_id2}/task/${task_date}`,
@@ -58,8 +54,7 @@ const TodoListModule = () => {
       });
     };
     showTheDateList();
-  }, [user_id, task_date, selectedFriendID]);
-  //캘린더에서 handle_date 가져오기
+  }, [user_id, task_date, selectedFriendID, isChecked]);
 
   const onInsert = async (task_name) => {
     const task = {
@@ -88,21 +83,9 @@ const TodoListModule = () => {
       .catch((error) => console.log(error));
   };
 
-  useEffect(() => {
-    console.log('task 추가됨', tasks);
-  }, [tasks, user_id]);
-
   const onEditStart = (task_id) => {
     setEditingId(task_id);
-    //console.log('수정: ' + task_id);
   };
-
-  // const onEditStart = useCallback(
-  //   (id) => {
-  //     setEditingId(id);
-  //   },
-  //   [setEditingId]
-  // );
 
   const onEditSave = (task_id, newTask) => {
     fetch(`http://43.201.197.131:8080/${user_id}/task/${task_id}`, {
@@ -116,7 +99,7 @@ const TodoListModule = () => {
     })
       .then((response) => {
         if (!response.ok) {
-          throw new Error('Network response was not ok');
+          throw new Error('Network response error');
         }
         return response.json();
       })
@@ -133,49 +116,24 @@ const TodoListModule = () => {
       });
   };
 
-  // const EditTime = (task_id) => {
-  //   fetch(`http://43.201.197.131:8080/${user_id}/task/${task_id}/timer`, {
-  //     method: 'PATCH',
-  //     headers: {
-  //       'content-type': 'application/json',
-  //     },
-  //     body: JSON.stringify({ task_time: handle_time }),
-  //   })
-  //     .then((response) => {
-  //       response.json().then((data) => {
-  //         if (response.status === 200) {
-  //           alert(data.message);
-  //         } else {
-  //           alert(data.message);
-  //         }
-  //       });
-  //     })
-  //     .catch((error) => console.log(error));
-  // };
-
-  const onRemove =
-    // (id) => {
-    //   setTodos((prevTodos) => prevTodos.filter((todo) => todo.id !== id));
-    //   setEditingId(null);
-
-    (task_id) => {
-      fetch(`http://43.201.197.131:8080/${user_id}/task/${task_id}`, {
-        method: 'DELETE',
+  const onRemove = (task_id) => {
+    fetch(`http://43.201.197.131:8080/${user_id}/task/${task_id}`, {
+      method: 'DELETE',
+    })
+      .then((response) => {
+        response.json().then((data) => {
+          if (response.status === 200) {
+            alert(data.message);
+            setTasks((prevTasks) =>
+              prevTasks.filter((todo) => todo.task_id !== task_id)
+            );
+          } else {
+            alert(data.message);
+          }
+        });
       })
-        .then((response) => {
-          response.json().then((data) => {
-            if (response.status === 200) {
-              alert(data.message);
-              setTasks((prevTasks) =>
-                prevTasks.filter((todo) => todo.task_id !== task_id)
-              );
-            } else {
-              alert(data.message);
-            }
-          });
-        })
-        .catch((error) => console.error(error));
-    };
+      .catch((error) => console.error(error));
+  };
 
   const onToggle = (task_id, isChecked) => {
     const hours = Math.floor(handle_time / 3600);
@@ -192,13 +150,13 @@ const TodoListModule = () => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        isChecked: true, // isChecked 를 true로 설정
-        task_time: time, // task_time 설정
+        isChecked: true,
+        task_time: time,
       }),
     })
       .then((response) => {
         if (!response.ok) {
-          throw new Error('Network response was not ok');
+          throw new Error('Network response error');
         }
         return response.json();
       })
@@ -206,9 +164,7 @@ const TodoListModule = () => {
         console.log(data);
         setTasks((prevTasks) =>
           prevTasks.map((task) =>
-            task.task_id === task_id
-              ? { ...task, isChecked: true } // isChecked 를 true로 설정
-              : task
+            task.task_id === task_id ? { ...task, isChecked: true } : task
           )
         );
       })
@@ -229,7 +185,7 @@ const TodoListModule = () => {
           onEditSave={onEditSave}
         />
       </TodoTemplate>
-      {selectedFriendID === null && (
+      {selectedFriendID === null && formattedDate === task_date && (
         <TodoInsert className='TodoInsert' onInsert={onInsert} />
       )}
     </div>

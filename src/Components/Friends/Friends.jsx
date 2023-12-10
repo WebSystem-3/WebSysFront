@@ -79,7 +79,6 @@ const Friends = () => {
       })
       .catch((error) => console.error(error));
   };
-
   const getFriendUpdated = () => {
     setFriendUpdated((prev) => prev + 1);
   };
@@ -144,7 +143,6 @@ const Friends = () => {
           </p>
         </div>
     );
-
 };
 
 export default Friends;
