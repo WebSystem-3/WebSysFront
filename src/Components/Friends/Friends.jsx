@@ -60,6 +60,7 @@ const Friends = () => {
   }
   const refreshClicked = () => {
     console.log('새로고침눌림');
+    console.log('친구목록: '+friends);
     setFriendUpdated((prev) => prev + 1);
   };
 
@@ -106,7 +107,7 @@ const Friends = () => {
           </p>
           
         </div>
-    );d
+    );
 };
 
 export default Friends;

@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
-import { useRecoilState, useRecoilValue } from "recoil";
-import { userState, friendUpdatedState } from "../../RecoilState";
+import { useRecoilValue } from "recoil";
+import { userState } from "../../RecoilState";
 import { IoSearch, IoAdd } from "react-icons/io5";
 import './FriendSearch.css';
 
 const FriendSearch = ({onUpdate}) => {
     const user_id1 = useRecoilValue(userState);
-    const [friendUpdated,setFriendUpdated] = useRecoilState(friendUpdatedState);
     const [account, setAccount] = useState("");
     const [isSearched, setIsSearched] = useState(false);
     const [searchedUser, setSearchedUser] = useState(null);
