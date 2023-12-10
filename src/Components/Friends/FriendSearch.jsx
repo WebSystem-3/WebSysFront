@@ -17,9 +17,7 @@ const FriendSearch = ({onUpdate}) => {
           "content-type": "application/json"},
       })
         .then((response) => {
-          console.log(response);  
           response.json().then((data) => {
-            console.log(data);
             if (response.status === 200){
               console.log('받은데이터:'+data);
               setIsSearched(true);
@@ -34,7 +32,6 @@ const FriendSearch = ({onUpdate}) => {
     }
     
     const handleAddFr = async() => {
-      console.log(searchedUser.user_id);
       const body = {
         user_id2 : searchedUser.user_id
       }

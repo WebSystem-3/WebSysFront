@@ -31,3 +31,8 @@ export const selectedFriendState = atom({
   key: 'selectedFriendState',
   default: null,
 });
+
+export const selectedNameState = atom({
+  key: 'selectedNameState',
+  default: '나',
+})
