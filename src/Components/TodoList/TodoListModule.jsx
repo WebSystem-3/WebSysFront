@@ -3,32 +3,34 @@ import TodoTemplate from './TodoTemplate';
 import TodoInsert from './TodoInsert';
 import TodoList from './TodoList';
 import { useRecoilState, useRecoilValue } from 'recoil';
-import { userState, dateState, timeState, taskState, selectedFriendState } from '../../RecoilState';
+import {
+  userState,
+  dateState,
+  timeState,
+  taskState,
+  selectedFriendState,
+} from '../../RecoilState';
 
 import './TodoListModule.css';
 
 const TodoListModule = () => {
+  //console.log(user_id1); //친구아이디 가져오는지 확인
   const [tasks, setTasks] = useState([]);
   const [editingId, setEditingId] = useState(-1);
-  const user_id = useRecoilState(userState);
+  const [user_id, setUser_id] = useRecoilState(userState);
   const task_date = useRecoilValue(dateState);
   const handle_time = useRecoilValue(timeState);
-  const selectedFriendID= useRecoilValue(selectedFriendState);
   const today = new Date();
   const formattedDate = `${today.getFullYear()}-${
     today.getMonth() + 1
   }-${today.getDate()}`;
+  const friendId = useRecoilValue(selectedFriendState);
 
   const isChecked = useRecoilValue(taskState);
 
   useEffect(() => {
     const showTheDateList = () => {
-      let user_id2 = user_id;
-      if (selectedFriendID!==null){
-        user_id2 = selectedFriendID;
-        console.log('친구선택됨');
-      }
-      fetch(`http://43.201.197.131:8080/${user_id2}/task/${task_date}`, {}).then(
+      fetch(`http://43.201.197.131:8080/${user_id}/task/${task_date}`, {}).then(
         (response) => {
           response.json().then((data) => {
             if (response.status) {
@@ -47,7 +49,7 @@ const TodoListModule = () => {
       );
     };
     showTheDateList();
-  }, [selectedFriendID, task_date]);
+  }, [user_id, task_date]);
   //캘린더에서 handle_date 가져오기
 
   const onInsert = async (task_name) => {
@@ -164,13 +166,16 @@ const TodoListModule = () => {
           });
         })
         .catch((error) => console.error(error));
-      //setTodos((prevTodos) => prevTodos.filter((todo) => todo.task_id !== task_id));
     };
 
   const onToggle = (task_id, isChecked) => {
-    const time = `${Math.floor(handle_time / 60)}:${
-      handle_time % 60 < 10 ? '0' + (handle_time % 60) : handle_time % 60
-    }`; // 분:초 형태로 변환
+    const hours = Math.floor(handle_time / 3600);
+    const minutes = Math.floor((handle_time % 3600) / 60);
+    const seconds = handle_time % 60;
+
+    const time = `${hours}:${minutes < 10 ? '0' + minutes : minutes}:${
+      seconds < 10 ? '0' + seconds : seconds
+    }`;
 
     fetch(`http://43.201.197.131:8080/${user_id}/task/${task_id}/timer`, {
       method: 'PATCH',
@@ -203,20 +208,6 @@ const TodoListModule = () => {
       });
   };
 
-  // const onToggle = (task_id, isChecked) => {
-  //   setTasks((prevTasks) =>
-  //     prevTasks.map((task) =>
-  //       task.task_id === task_id && isChecked === true
-  //         ? { ...task, isChecked: !task.isChecked }
-  //         : task
-  //     )
-  //   );
-  // };
-
-  // useEffect(() => {
-  //   console.log('수정된거: ' + editingId);
-  // }, [editingId]);
-
   return (
     <div>
       <TodoTemplate className='TodoTemp'>
@@ -229,7 +220,9 @@ const TodoListModule = () => {
           onEditSave={onEditSave}
         />
       </TodoTemplate>
-      <TodoInsert className='TodoInsert' onInsert={onInsert} />
+      {user_id !== friendId && (
+        <TodoInsert className='TodoInsert' onInsert={onInsert} />
+      )}
     </div>
   );
 };

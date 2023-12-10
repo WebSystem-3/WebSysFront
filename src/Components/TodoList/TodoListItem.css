@@ -1,5 +1,5 @@
 .TodoListItem {
-  padding: 1rem;
+  padding: 8px;
   display: flex;
   align-items: center;
   justify-content: start;
@@ -38,6 +38,7 @@
   display: flex;
   border-radius: 50px;
   background-color: lightpink;
+  border: none;
 }
 
 .checked .text {
@@ -46,7 +47,7 @@
 }
 .deleteBtn {
   cursor: pointer;
-  background-color: white;
+
   margin: 0 1rem;
 }
 .remove {
