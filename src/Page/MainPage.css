@@ -32,8 +32,9 @@
   align-items: start;
 }
 .calendar-template {
+  font-weight: bold;
   width: 300px;
-  height: 40px;
+  height: 60px;
   border-radius: 13px;
   background: #ffcaca;
   text-align: center;
@@ -41,6 +42,7 @@
   line-height: 40px;
   align-self: flex-start;
   margin-bottom: 50px;
+  line-height: 60px;
 }
 
 .timerTodoContainer {
@@ -54,6 +56,7 @@
   align-items: start;
 }
 .todolist-template {
+  font-weight: bold;
   width: 300px;
   height: 60px;
   border-radius: 13px;
@@ -97,18 +100,21 @@
 }
 .show-date {
   font-size: 20px;
-  height: 100%;
+  height: 60px;
   width: 200px;
   padding: 20px;
-  border: 2px dashed;
+  border: 2px ;
   box-sizing: border-box;
+  font-weight: bold;
   border-radius: 20px;
   text-align: center;
   margin-left: 10px;
+  line-height: 15px;
 }
 
 .todotitle {
   display: flex;
   flex-direction: row;
   align-items: center;
+  margin-bottom: 28px;
 }

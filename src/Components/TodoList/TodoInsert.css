@@ -12,5 +12,11 @@
 }
 .addbox {
   width: 36px;
-  height: 100%;
+  height: 36px;
+  cursor: pointer;
+  font-size: 30px;
+  margin-left: 5px;
+  background-color: #ffcaca;
+  border: none;
+  border-radius: 30px;
 }

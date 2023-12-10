@@ -1,5 +1,4 @@
 import React, { useState, useCallback } from 'react';
-import { CgAdd } from 'react-icons/cg';
 import './TodoInsert.css';
 
 const TodoInsert = ({ onInsert }) => {
@@ -27,7 +26,8 @@ const TodoInsert = ({ onInsert }) => {
         value={task}
         onChange={onChange}
       />
-      <CgAdd className='addbox' onClick={onSubmit} />
+      <button className='addbox' onClick={onSubmit}>+</button>
+
     </form>
   );
 };

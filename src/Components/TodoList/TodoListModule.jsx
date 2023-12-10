@@ -74,7 +74,7 @@ const TodoListModule = () => {
           if (response.status === 200) {
             setTasks(data.result);
           } else {
-            alert('안들어감' + data.message);
+            alert(data.message);
           }
         });
       })

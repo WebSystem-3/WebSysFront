@@ -1,7 +1,8 @@
 .TodoTemplate {
   width: 512px;
-  border-radius: 4px;
+  border-radius: 10px;
   overflow: hidden;
+  box-shadow: initial;
 }
 
 .title {
