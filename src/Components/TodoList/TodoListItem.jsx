@@ -3,7 +3,7 @@ import './TodoListItem.css';
 import { MdCheckBox, MdCheckBoxOutlineBlank, MdDelete } from 'react-icons/md';
 import TimerModal from '../Timer/TimerModal';
 import { useRecoilValue } from 'recoil';
-import { taskState } from '../../RecoilState';
+import { selectedFriendState, taskState, userState } from '../../RecoilState';
 
 const TodoListItem = ({
   task,
@@ -19,6 +19,8 @@ const TodoListItem = ({
   const today = `${new Date().getFullYear()}-${pad(
     new Date().getMonth() + 1
   )}-${pad(new Date().getDate())}`;
+  const friendId = useRecoilValue(selectedFriendState);
+  const user_id = useRecoilValue(userState);
 
   const task_State = useRecoilValue(taskState);
 
@@ -61,13 +63,14 @@ const TodoListItem = ({
           ) : (
             <div className='text'>{task_name}</div>
           )}
-          <div>
+          <div className='taskComponents'>
             {editing ? (
               <button className='saveTask' onClick={handleEditSave}>
                 저장
               </button>
             ) : (
-              !isChecked && (
+              !isChecked &&
+              friendId === null && (
                 <div className='editingForm'>
                   <button
                     className='editTask'
@@ -77,14 +80,14 @@ const TodoListItem = ({
                   >
                     수정
                   </button>
+                  <div className='remove' onClick={() => onRemove(task_id)}>
+                    <MdDelete className='deleteBtn' />
+                  </div>
                   <TimerModal
                     task_id={task_id}
                     onToggle={onToggle}
                     className='SetTimer'
                   />
-                  <div className='remove' onClick={() => onRemove(task_id)}>
-                    <MdDelete className='deleteBtn' />
-                  </div>
                 </div>
               )
             )}
