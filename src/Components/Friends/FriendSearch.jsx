@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // import React, { useState, useEffect } from 'react';
 // import { useRecoilValue } from "recoil";
 // import { userState } from "../../RecoilState";
@@ -48,6 +49,8 @@
 //           })
 //             .then((response) => {
 
+=======
+>>>>>>> f6d7d5d480f1df48f04eecb6680b567a203b2b81
 import React, { useState } from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { userState, friendUpdatedState } from '../../RecoilState';
@@ -81,6 +84,7 @@ const FriendSearch = ({ onUpdate }) => {
           }
         });
       })
+<<<<<<< HEAD
       .catch((error) => console.log(error));
   };
 
@@ -169,3 +173,67 @@ const FriendSearch = ({ onUpdate }) => {
 // }
 
 export default FriendSearch;
+=======
+        .then((response) => {
+          response.json().then((data) => {
+            if (response.status === 200){
+              console.log('받은데이터:'+data);
+              setIsSearched(true);
+              setSearchedUser(data);
+              console.log('검색성공'+searchedUser);              
+            } else {
+              alert(data.message);
+            }
+          }); 
+        })
+        .catch((error) => console.log(error));
+    }
+    
+    const handleAddFr = async() => {
+      const body = {
+        user_id2 : searchedUser.user_id
+      }
+      await fetch(`http://43.201.197.131:8080/${user_id1}/friend`, {
+          method: "post",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(body),
+        })
+        .then((response) => {
+          response.json().then((data) => {
+            console.log(data);
+            if (response.status === 200){
+              onUpdate();
+              alert(data.message);
+            } else {
+              alert(data.message);
+            }
+          }); 
+        })
+        .catch((error) => console.log(error));
+    }
+
+    return (
+      <div>
+          <input 
+          type="text" 
+          placeholder="   ID 검색"
+          className='modalIDinput'
+          onChange={(event) => setAccount(event.target.value)}
+          />
+          <IoSearch className='searchBtn' size='25' onClick={handleSearchFr}/>
+          {isSearched ? (
+              <div className='searchedFrContainer'>
+              <p className='searchedFrName'>{searchedUser.name} </p>
+              <p className='searchedFrID'>{searchedUser.account} </p>
+              <IoAdd className='addBtn'onClick={handleAddFr} size='20'/>
+              </div>
+          ):(
+              <></>
+          )}
+      </div>
+    );
+};
+export default FriendSearch;
+>>>>>>> f6d7d5d480f1df48f04eecb6680b567a203b2b81
