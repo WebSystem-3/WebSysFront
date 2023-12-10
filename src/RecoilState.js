@@ -1,8 +1,10 @@
 import { atom } from 'recoil';
+import { sessionStorageEffect } from './Components/Utils/sessionStorage';
 
 export const userState = atom({
   key: 'userState',
   default: null,
+  effects: [sessionStorageEffect('id')],
 });
 
 export const dateState = atom({

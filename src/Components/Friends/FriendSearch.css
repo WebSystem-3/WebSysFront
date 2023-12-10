@@ -12,20 +12,27 @@
     height: 35px;
   }
   .searchedFrContainer{
-    margin-top: 30px;
+    margin-top: 15px;
     display: flex;
     flex-direction: row;
+    align-items: center;
   }
   .searchedFrName{
+    flex:1;
     margin-left: 30px;
     font-size: 20px;
   }
   .searchedFrID{
-    margin-left: 30px;
+    flex:2;
     font-size: 15px;
   }
   .addBtn{
-    flex:1;
+    float: right;
+    margin-right: 35px;
     margin-top: 10px;
     cursor: pointer;
+}
+.underline{
+    width: 640px;
+    border-bottom: 1.5px solid #747474;
 }

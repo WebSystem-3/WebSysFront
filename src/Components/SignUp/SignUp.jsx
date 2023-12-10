@@ -8,7 +8,6 @@ function SignUp({}) {
   const [password2, setPassword2] = useState('');
   const [name, setName] = useState('');
   const [isIdValid, setIdValid] = useState(false);
-  const [isValCalled, setValCalled] = useState(false); //이미 존재하는 ID입니다 수정필요 안되면 그냥 지우기
   const navigate = useNavigate();
 
   const handleValidation = async () => {
@@ -23,7 +22,6 @@ function SignUp({}) {
       body: JSON.stringify(userData),
     })
       .then((response) => {
-        setValCalled(true);
         response.json().then((data) => {
           console.log(data.message);
           if (response.status === 200) {
@@ -83,15 +81,7 @@ function SignUp({}) {
         ) : (
           <div className='warning'>ID는 8자 이상이어야 합니다.</div>
         )}
-        {!isIdValid ? (
-          isValCalled ? (
-            <div className='warning'>이미 존재하는 ID입니다.</div>
-          ) : (
-            <></>
-            )
-          ) : (
-            <></>
-          )}<p>비밀번호
+        <p>비밀번호
           <input
             type='password'
             className='inputSignUp'

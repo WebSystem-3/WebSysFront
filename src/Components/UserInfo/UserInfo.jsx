@@ -38,6 +38,7 @@ function UserInfo() {
       response.json().then((data) => {
         if (response.status === 200){
           alert(data.message);
+          resetUser();
           navigate('/');
         } else {
           alert(data.message);
@@ -55,6 +56,7 @@ function UserInfo() {
       response.json().then((data) => {
         if (response.status === 200){
           alert(data.message);
+          sessionStorage.removeItem('userState');
         } else {
           alert(data.message);
         }
@@ -88,7 +90,7 @@ function UserInfo() {
     }
   }
   return (
-    <div container className='container'>
+    <div className='container'>
     <div className='userInfoForm'>
       {userData ? (
         <div className='usercontainer'>

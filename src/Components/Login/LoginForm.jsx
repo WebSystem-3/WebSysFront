@@ -5,7 +5,6 @@ import { GoPerson } from 'react-icons/go';
 import { FaKey } from 'react-icons/fa6';
 import { useNavigate } from 'react-router-dom';
 import './LoginForm.css';
-import axios from 'axios';
 
 const LoginForm = () => {
   const [id, setId] = useState('');
@@ -38,19 +37,6 @@ const LoginForm = () => {
       })
       .catch((error) => console.log(error));
   };
-  /*
-  const handleLogin = async () => {
-    const userData = {
-      account: id,
-      password: password,
-    };
-    await axios.post('http://43.201.197.131:8080/user/login', {
-      account: id,
-      password: password
-    },{"Content-Type": "application/json", withCredentials:true},)
-      .then((response)=>{console.log(response);})
-      .catch((error) => console.log(error));
-  };*/
 
   function tosignup() {
     navigate('/signup');

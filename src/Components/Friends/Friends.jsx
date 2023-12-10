@@ -65,7 +65,7 @@ const Friends = () => {
   };
 
     useEffect(() => {
-      console.log('친구데이터 불러오기성공');
+      console.log('친구데이터 불러오기성공'+friends);
       console.log('useEffect:'+friendUpdated);
       console.log(selectedFriendID);
       getFriends();
@@ -99,7 +99,7 @@ const Friends = () => {
                 </li>
             ))}
           </ul>
-          <FriendSearchModal/>
+          <FriendSearchModal friends={friends}/>
           <p>{deleteMode?
           (<button className='editcompleteBtn' onClick={toggleDeleteMode}>수정완료</button>):
           (<CiEdit className='editBtn' size='20' onClick={toggleDeleteMode}/>)}

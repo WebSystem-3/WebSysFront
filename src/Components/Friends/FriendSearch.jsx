@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilValue } from 'recoil';
 import { userState, friendUpdatedState } from '../../RecoilState';
 import { IoSearch, IoAdd } from 'react-icons/io5';
 import './FriendSearch.css';
 
-const FriendSearch = ({ onUpdate }) => {
+const FriendSearch = (props) => {  
   const user_id1 = useRecoilValue(userState);
-  const [friendUpdated, setFriendUpdated] = useRecoilState(friendUpdatedState);
   const [account, setAccount] = useState('');
   const [isSearched, setIsSearched] = useState(false);
   const [searchedUser, setSearchedUser] = useState(null);
@@ -47,6 +46,10 @@ const FriendSearch = ({ onUpdate }) => {
     }
     
     const handleAddFr = async() => {
+      props.friends.map((fr)=>{
+        if (fr.user_id === searchedUser.user_id)
+          alert('이미 친구목록에 존재하는 친구입니다.');
+      });
       const body = {
         user_id2 : searchedUser.user_id
       }
@@ -61,10 +64,9 @@ const FriendSearch = ({ onUpdate }) => {
           response.json().then((data) => {
             console.log(data);
             if (response.status === 200){
-              onUpdate();
               alert(data.message);
             } else {
-              alert(data.message);
+              //alert(data.message);
             }
           }); 
         })
@@ -89,6 +91,7 @@ const FriendSearch = ({ onUpdate }) => {
           ):(
               <></>
           )}
+          <hr className='underline'/>
       </div>
     );
 };

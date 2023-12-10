@@ -3,7 +3,7 @@ import Modal from 'react-modal';
 import FriendSearch from './FriendSearch';
 import { MdClose } from "react-icons/md";
 
-const FriendSearchModal = () => {
+const FriendSearchModal = (props) => {
   const [searchIsOpen, setSearchIsOpen] = useState(false);
 
   const openSearchFr = () => {
@@ -17,7 +17,7 @@ const FriendSearchModal = () => {
   const modalStyle = {
     content: {
       width:'700px',
-      height: '150px',
+      height: '160px',
       top:'80%',
       left:'50%',
       right:'auto',
@@ -35,7 +35,7 @@ const FriendSearchModal = () => {
         isOpen = {searchIsOpen}
         onRequestClose={closeSearchFr}
       >
-        <FriendSearch /> 
+        <FriendSearch friends={props.friends}/> 
         <MdClose className='modalCloseBt' size='30' onClick={closeSearchFr} />
       </Modal>
     </div>
