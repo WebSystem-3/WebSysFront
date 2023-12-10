@@ -20,6 +20,7 @@ const TodoListModule = () => {
   const [user_id, setUser_id] = useRecoilState(userState);
   const task_date = useRecoilValue(dateState);
   const handle_time = useRecoilValue(timeState);
+  const selectedFriendID = useRecoilValue(selectedFriendState);
   const today = new Date();
   const formattedDate = `${today.getFullYear()}-${
     today.getMonth() + 1
@@ -29,27 +30,35 @@ const TodoListModule = () => {
   const isChecked = useRecoilValue(taskState);
 
   useEffect(() => {
+    console.log('내아이디', user_id);
+    console.log('친구 아이디', friendId);
     const showTheDateList = () => {
-      fetch(`http://43.201.197.131:8080/${user_id}/task/${task_date}`, {}).then(
-        (response) => {
-          response.json().then((data) => {
-            if (response.status) {
-              const receivedTask = data.map((task) => ({
-                task_id: task.task_id,
-                task_name: task.task_name,
-                task_date: task.task_date,
-                isChecked: task.isChecked || false,
-              }));
-              setTasks(receivedTask);
-            } else {
-              alert(data.message);
-            }
-          });
-        }
-      );
+      let user_id2 = user_id;
+      if (selectedFriendID !== null) {
+        user_id2 = selectedFriendID;
+        console.log('친구선택됨');
+      }
+      fetch(
+        `http://43.201.197.131:8080/${user_id2}/task/${task_date}`,
+        {}
+      ).then((response) => {
+        response.json().then((data) => {
+          if (response.status) {
+            const receivedTask = data.map((task) => ({
+              task_id: task.task_id,
+              task_name: task.task_name,
+              task_date: task.task_date,
+              isChecked: task.isChecked || false,
+            }));
+            setTasks(receivedTask);
+          } else {
+            alert(data.message);
+          }
+        });
+      });
     };
     showTheDateList();
-  }, [user_id, task_date]);
+  }, [user_id, task_date, selectedFriendID]);
   //캘린더에서 handle_date 가져오기
 
   const onInsert = async (task_name) => {
@@ -81,7 +90,7 @@ const TodoListModule = () => {
 
   useEffect(() => {
     console.log('task 추가됨', tasks);
-  }, [tasks]);
+  }, [tasks, user_id]);
 
   const onEditStart = (task_id) => {
     setEditingId(task_id);
@@ -220,7 +229,7 @@ const TodoListModule = () => {
           onEditSave={onEditSave}
         />
       </TodoTemplate>
-      {user_id !== friendId && (
+      {selectedFriendID === null && (
         <TodoInsert className='TodoInsert' onInsert={onInsert} />
       )}
     </div>

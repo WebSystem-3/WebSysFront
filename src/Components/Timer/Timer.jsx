@@ -5,7 +5,7 @@ import { timeState } from '../../RecoilState';
 import { taskState } from '../../RecoilState';
 import './Timer.css';
 
-const Timer = ({ task_id, onTimerEnd }) => {
+const Timer = ({ task_id, onTimerEnd, onTimerStart }) => {
   const [minutes, setMinutes] = useState(0);
   const [seconds, setSeconds] = useState(0);
   const [isActive, setIsActive] = useState(false);
@@ -61,6 +61,7 @@ const Timer = ({ task_id, onTimerEnd }) => {
     setHandle_time(timeAmount);
     console.log(timeAmount);
     console.log('잘 전달됨', handle_time);
+    onTimerStart();
   };
 
   const stopTimer = () => {
@@ -103,14 +104,22 @@ const Timer = ({ task_id, onTimerEnd }) => {
   };
 
   const toggleEditing = () => {
-    setEditing(!editing);
+    if (!isActive) {
+      setEditing(!editing);
+    }
   };
 
-  const toggleEditingMin = () => {
-    setEditingMin(!editingMin);
+  const toggleEditingMin = (e) => {
+    e.stopPropagation();
+    if (!isActive) {
+      setEditingMin(!editingMin);
+    }
   };
-  const toggleEditingSec = () => {
-    setEditingSec(!editingSec);
+  const toggleEditingSec = (e) => {
+    e.stopPropagation();
+    if (!isActive) {
+      setEditingSec(!editingSec);
+    }
   };
 
   return (
