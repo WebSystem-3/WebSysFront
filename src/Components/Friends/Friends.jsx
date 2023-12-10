@@ -1,17 +1,11 @@
-import React, { useEffect } from 'react';
-import { useState } from 'react';
+import React, { useEffect,useState } from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';
-import {
-  userState,
-  friendUpdatedState,
-  selectedFriendState,
-  selectedNameState,
-} from '../../RecoilState';
+import {  userState,  friendUpdatedState,  selectedFriendState,  selectedNameState } from '../../RecoilState';
 import { CiEdit } from 'react-icons/ci';
-import { IoMdRefresh } from 'react-icons/io';
-
+import Modal from 'react-modal';
+import FriendSearch from './FriendSearch';
+import { MdClose } from "react-icons/md";
 import './Friends.css';
-import FriendSearchModal from './FriendSearchModal';
 
 const Friends = () => {
   const user_id1 = useRecoilValue(userState);
@@ -22,6 +16,15 @@ const Friends = () => {
   const [friends, setFriends] = useState([]);
   const [deleteMode, setdeleteMode] = useState(false);
   const [isHovering, setIsHovering] = useState(false);
+  const [searchIsOpen, setSearchIsOpen] = useState(false);
+
+  const openSearchFr = () => {
+    setSearchIsOpen(true);
+  };
+
+  const closeSearchFr = () => {
+    setSearchIsOpen(false);
+  };
 
   const getFriends = async () => {
     try {
@@ -36,6 +39,19 @@ const Friends = () => {
       console.error(error);
     }
   };
+  const modalStyle = {
+    content: {
+      width:'700px',
+      height: '160px',
+      top:'80%',
+      left:'50%',
+      right:'auto',
+      bottom:'auto',
+      transform:'translate(-50%,-50%)',
+      borderRadius: '10px',
+      backgroundColor:'#D9D9D9',
+    }
+  }
 
   const handleDeleteFr = async (user_id2) => {
     await fetch(`http://43.201.197.131:8080/${user_id1}/friend/${user_id2}`, {
@@ -63,14 +79,10 @@ const Friends = () => {
       })
       .catch((error) => console.error(error));
   };
-  const refreshClicked = () => {
+  const getFriendUpdated = () => {
     setFriendUpdated((prev) => prev + 1);
   };
-
   useEffect(() => {
-    console.log('친구데이터 불러오기성공');
-    console.log('useEffect:' + friendUpdated);
-    console.log(selectedFriendID);
     getFriends();
   }, [friendUpdated]);
 
@@ -112,31 +124,25 @@ const Friends = () => {
                 onClick={() => {
                   setSelectedFriendID(fr.user_id);
                   setNameUpdated(fr.name);
-                }}
-              >
-                {fr.name.length < 4 ? fr.name : fr.name.slice(0, 3) + '...'}
-              </button>
-            )}
-          </li>
-        ))}
-      </ul>
-      <FriendSearchModal friends={friends} />
-      <p>
-        {deleteMode ? (
-          <button className='editcompleteBtn' onClick={toggleDeleteMode}>
-            수정완료
-          </button>
-        ) : (
-          <CiEdit className='editBtn' size='20' onClick={toggleDeleteMode} />
-        )}
-        <IoMdRefresh
-          className='refreshBtn'
-          size='20'
-          onClick={refreshClicked}
-        />
-      </p>
-    </div>
-  );
+                  }} >{fr.name.length<4? fr.name : fr.name.slice(0,3)+'...'}</button> )}
+                </li>
+            ))}
+          </ul>
+          <button className='addFrBtn' onClick={openSearchFr}>+</button>
+          <Modal 
+          style={modalStyle}
+          isOpen = {searchIsOpen}
+          onRequestClose={closeSearchFr}
+          >
+          <FriendSearch friends={friends} getFriendUpdated={getFriendUpdated}/>
+          <MdClose className='modalCloseBt' size='30' onClick={closeSearchFr} />
+          </Modal>
+          <p>{deleteMode?
+          (<button className='editcompleteBtn' onClick={toggleDeleteMode}>수정완료</button>):
+          (<CiEdit className='editBtn' size='20' onClick={toggleDeleteMode}/>)}
+          </p>
+        </div>
+    );
 };
 
 export default Friends;

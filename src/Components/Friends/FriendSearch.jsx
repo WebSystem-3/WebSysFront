@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { useRecoilValue } from 'recoil';
-import { userState, friendUpdatedState } from '../../RecoilState';
+import { userState } from '../../RecoilState';
 import { IoSearch, IoAdd } from 'react-icons/io5';
 import './FriendSearch.css';
 
-const FriendSearch = (props) => {  
+const FriendSearch = (props, {getFriendUpdated}) => { 
   const user_id1 = useRecoilValue(userState);
   const [account, setAccount] = useState('');
   const [isSearched, setIsSearched] = useState(false);
@@ -17,32 +17,16 @@ const FriendSearch = (props) => {
       },
     })
       .then((response) => {
-        console.log(response);
         response.json().then((data) => {
-          console.log(data);
           if (response.status === 200) {
-            console.log('받은데이터:' + data);
             setIsSearched(true);
             setSearchedUser(data);
-            console.log('검색성공' + searchedUser);
           } else {
             alert(data.message);
           }
         });
       })
-        .then((response) => {
-          response.json().then((data) => {
-            if (response.status === 200){
-              console.log('받은데이터:'+data);
-              setIsSearched(true);
-              setSearchedUser(data);
-              console.log('검색성공'+searchedUser);              
-            } else {
-              alert(data.message);
-            }
-          }); 
-        })
-        .catch((error) => console.log(error));
+      .catch((error) => console.log(error));
     }
     
     const handleAddFr = async() => {
@@ -62,12 +46,10 @@ const FriendSearch = (props) => {
         })
         .then((response) => {
           response.json().then((data) => {
-            console.log(data);
-            if (response.status === 200){
+            if (response.ok){
               alert(data.message);
-            } else {
-              //alert(data.message);
-            }
+              props.getFriendUpdated();
+            } 
           }); 
         })
         .catch((error) => console.log(error));
