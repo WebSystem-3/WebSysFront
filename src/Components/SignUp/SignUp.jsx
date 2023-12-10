@@ -23,14 +23,11 @@ function SignUp({}) {
     })
       .then((response) => {
         response.json().then((data) => {
-          console.log(data.message);
           if (response.status === 200) {
             alert(data.message);
             setIdValid(true);
-            console.log('사용가능한 아이디입니다');
           } else {
             alert(data.message);
-            console.log('중복된 아이디 입니다');
             setIdValid(false);
           }
         });
@@ -54,11 +51,10 @@ function SignUp({}) {
       .then((response) => {
         response.json().then((data) => {
           if (response.status === 201) {
-            alert('가입성공: ' + data.message);
-            console.log('');
+            alert(data.message);
             navigate('/');
           } else {
-            alert('가입실패: ' + data.message);
+            alert(data.message);
           }
         });
       })

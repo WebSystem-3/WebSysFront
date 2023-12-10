@@ -1,17 +1,14 @@
 import { useRecoilValue } from 'recoil';
 import { dateState, userState, selectedNameState } from '../RecoilState';
 import Calendar from '../Components/Calendar/Calender';
-import TimerModal from '../Components/Timer/TimerModal';
 import TodoListModule from '../Components/TodoList/TodoListModule';
 import Friends from '../Components/Friends/Friends';
 import { useNavigate } from 'react-router-dom';
 import { FaUser } from 'react-icons/fa';
-
 import logo from './logo2.png';
 import './MainPage.css';
 
 function Main() {
-  const user_id = useRecoilValue(userState);
   const task_date = useRecoilValue(dateState);
   const nameUpdated = useRecoilValue(selectedNameState);
 

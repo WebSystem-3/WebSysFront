@@ -9,12 +9,10 @@ const TimerModal = ({ task_id }) => {
 
   const openModal = () => {
     setModalIsOpen(true);
-    console.log(task_id);
   };
 
   const closeModal = () => {
     setModalIsOpen(false);
-    console.log(task_id);
   };
   const handleTimerStart = () => {
     setTimerRunning(true);
